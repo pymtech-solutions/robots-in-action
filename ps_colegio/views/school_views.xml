@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Institute Setup -->
+    <record id="school_form_view_inherit" model="ir.ui.view">
+        <field name="name">view.company.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[1]/group[1]" position="inside">
+                <field name="is_school"/>
+            </xpath>
+            <!-- Ocultar página de Contacts & Addresses -->
+            <xpath expr="//page[@name='contact_addresses']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <!-- Ocultar página de Sales & Purchase -->
+            <xpath expr="//page[@name='sales_purchases']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <!-- Ocultar página de Internal Notes -->
+            <xpath expr="//page[@name='internal_notes']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//notebook" position="inside">
+                <page string="Cursos" invisible="not is_school">
+                    <field name="course_line_ids" context="{'active_test': False}">
+                        <list>
+                            <field name="course_id" string="Grupo"/>
+                            <field name="program_id"/>
+                            <field name="teacher_ids" widget="many2many_tags"/>
+                            <field name="schedule_ids" widget="many2many_tags"/>
+                            <field name="start_date"/>
+                            <field name="student_ids" string="N Alumnos"/>
+                            <field name="end_date"/>
+                            <field name="academic_period"/>
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!--School search view-->
+    <record id="view_company_search_form" model="ir.ui.view">
+        <field name="name">company.search.form</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <search string="Timetable">
+                <field name="name" string="Company"/>
+                <filter string="Institutes" name="institutes" domain="[('is_school', '=', True)]"/>
+            </search>
+        </field>
+    </record>
+
+    <!--School action-->
+    <record id="action_school_setup" model="ir.actions.act_window">
+        <field name="name">Institute Setup</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">list,kanban,form</field>
+        <field name="search_view_id" ref="view_company_search_form"/>
+        <field name="context">
+            {
+                'search_default_institutes': 1,
+                'default_is_school': 1,
+            }
+        </field>
+        <field name="view_ids"
+               eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'list', 'view_id': ref('base.view_partner_tree')}),
+                (0, 0, {'view_mode': 'kanban', 'view_id': ref('base.res_partner_kanban_view')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('school_form_view_inherit')})]"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new institute
+            </p>
+            <p>
+                Create and manage the institutes/colleges/schools.
+            </p>
+        </field>
+    </record>
+
+    <!--Schools menu-->
+    <menuitem name="Escuelas"
+              id="menu_school_schools"
+              parent="menu_school"
+              action="action_school_setup"
+              groups="ps_colegio.group_school_teacher,ps_colegio.group_school_manager"
+              sequence="90"/>
+</odoo>

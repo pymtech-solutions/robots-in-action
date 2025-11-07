@@ -1,0 +1,48 @@
+# -*- coding: utf-8 -*-
+{
+    'name': "School module",
+    'summary': """
+        Custom school module made for RIA
+    """,
+    'description': """
+        School module custom made for RIA that centralices in a single package all the functionalities required
+    """,
+    'author': "Pymtech Solutions",
+    'category': 'Sales/School/Industries',
+    'version': '18.0.0.4',
+    'depends': ['base', 'hr', 'contacts', 'product', 'mail', 'calendar', 'web'],
+    'data': [
+        'security/school_security.xml',
+        'security/ir.model.access.csv',
+        'views/assessment_views.xml',
+        'views/father_menus.xml',
+        'views/school_views.xml',
+        'views/resource_calendar_views.xml',
+        'views/course_line_views.xml',
+        'views/program_views.xml',
+        'views/schedule_views.xml',
+        'views/res_partner_views.xml',
+        'views/student_views.xml',
+        'views/student_medical_views.xml',
+        'views/medical_type_views.xml',
+        'views/teacher_views.xml',
+        'views/course_views.xml',
+        'views/section_views.xml',
+        'views/attendance_views.xml',
+        'views/parent_views.xml',
+        'views/material_movement_views.xml',
+        'report/oe_assessment_report.xml',
+        'views/boxes_views.xml',
+        'views/child_menus.xml',
+        'data/cron_attendance.xml',
+        'views/course_line_views.xml',
+        'views/program_views.xml',
+        'views/schedule_views.xml',
+		'views/product_template_views.xml',
+],
+    'license': 'LGPL-3',
+    'images': ['static/description/banner.gif'],
+    'installable': True,
+    'application': True,
+    'auto_install': False,
+}

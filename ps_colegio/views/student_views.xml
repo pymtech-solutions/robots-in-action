@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--        Student form view-->
+        <record id="course_line_selector_view" model="ir.ui.view">
+            <field name="name">course.line.selector.list</field>
+            <field name="model">oe.school.course.line</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="course_id"/>
+                    <field name="school_id"/>
+                    <field name="teacher_ids" widget="many2many_tags"/>
+                    <field name="schedule_ids" widget="many2many_tags"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                </list>
+            </field>
+        </record>
+
+        <!--        Student form view-->
+        <record id="student_primary_form_view" model="ir.ui.view">
+            <field name="name">student.form.view</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="ps_colegio.view_partner_form_inherit_student"/>
+            <field name="mode">primary</field>
+            <field name="priority">999</field>
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+                    <button invisible="not is_student"
+                            name="open_medical_info"
+                            class="oe_stat_button"
+                            icon="fa-plus"
+                            type="object">
+                        <field name="med_info_count" widget="statinfo" string="Medical Info"/>
+                    </button>
+                    <button name="open_assessment_info"
+                            class="oe_stat_button"
+                            icon="fa-bars"
+                            type="object"
+                            invisible="not is_student">
+                        <field name="assessment_ids" widget="statinfo" string="Evaluaciones"/>
+                    </button>
+                </xpath>
+                <xpath expr="//field[@name='company_type']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='type']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='parent_id']" position="attributes">
+                    <attribute name="invisible">is_student == True</attribute>
+                    <attribute name="required">is_parent == True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='vat']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='function']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='website']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//form[1]/sheet[1]/group[1]/group[1]" position="attributes">
+                    <attribute name="string">Dirección</attribute>
+                </xpath>
+                <xpath expr="//form[1]/sheet[1]/group[1]/group[2]" position="attributes">
+                    <attribute name="string">Información de contacto</attribute>
+                </xpath>
+                <xpath expr="//field[@name='title']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//div[hasclass('o_row')]" position="inside">
+                    <field name="is_parent" invisible="1"/>
+                    <field name="parent_id" domain="[('is_student','=',True),('is_parent','=',False)]"
+                           placeholder="Student Name"
+                           invisible="is_parent != True"
+                           required="is_parent == True"/>
+                </xpath>
+
+                <!-- Add Current Enrollment Detail -->
+                <xpath expr="//group[1]" position="after">
+                    <group>
+                        <group string="Inscripción" invisible="is_student != True or is_parent == True">
+                            <field name="start_date"/>
+                            <field name="finish_date"/>
+                            <field name="enrollment_state"/>
+                        </group>
+                        <group>
+                            <separator/>
+                            <field name="school_id" string="Escuela"
+                                   options="{'no_create': True}"
+                                   readonly="False"
+                                   force_save="1"/>
+                            <field name="is_student"/>
+                        </group>
+                    </group>
+                </xpath>
+
+                <xpath expr="//field[@name='child_ids']/form[1]/sheet[1]" position="inside">
+                    <field name="is_parent" invisible="1"/>
+                </xpath>
+
+                <xpath expr="//field[@name='child_ids']/form[1]/sheet[1]//field[@name='type']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='child_ids']/form[1]/sheet[1]//div[1]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//page[@name='sales_purchases']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//page[@name='contact_addresses']" position="attributes">
+                    <attribute name="string">Guardian</attribute>
+                </xpath>
+
+                <xpath expr="//notebook" position="inside">
+                <page string="Cursos" invisible="not is_student">
+                    <field name="student_course_line_ids">
+                        <list>
+                            <field name="course_id" string="Grupo"/>
+                            <field name="program_id"/>
+                            <field name="teacher_ids" widget="many2many_tags"/>
+                            <field name="schedule_ids" widget="many2many_tags"/>
+                            <field name="start_date"/>
+                            <field name="student_ids" string="N Alumnos"/>
+                            <field name="end_date"/>
+                            <field name="academic_period"/>
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+
+                <xpath expr="//page[1]" position='after'>
+                    <page name='additional_info' string="Información Adicional"
+                          invisible="is_student != True or is_parent == True">
+                        <group>
+                            <group string="Demographics" name="demographics">
+                                <field name="date_birth"/>
+                                <field name="gender"/>
+                                <field name="country_birth" placeholder="Country of Birth" class="o_address_country"
+                                       options='{"no_open": True, "no_create": True}'/>
+                                <field name="country_nationality" placeholder="Nationality" class="o_address_country"
+                                       options='{"no_open": True, "no_create": True}'/>
+                            </group>
+                            <group string="Medical" name="medical">
+                                <field name="student_complexion"/>
+                                <field name="student_weight"/>
+                                <field name="student_height"/>
+                                <field name="student_mark_identify"/>
+                            </group>
+                            <group string="Emergency Contact">
+                                <field name="student_emergency_contact" string="Contact Name"/>
+                                <field name="student_emergency_phone" string="Contact No."/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Student List View -->
+        <record id="partner_student_tree_view" model="ir.ui.view">
+            <field name="name">res.partner.student.tree.view</field>
+            <field name="model">res.partner</field>
+            <field eval="8" name="priority"/>
+            <field name="arch" type="xml">
+                <list string="Students" sample="1" multi_edit="1">
+                    <field name="display_name" string="Name"/>
+                    <field name="function" invisible="1"/>
+                    <field name="ref" optional="hide"/>
+                    <field name="phone" class="o_force_ltr" optional="show"/>
+                    <field name="email" optional="show"/>
+                    <field name="user_id" optional="hide" widget="many2one_avatar_user"
+                           domain="[('share', '=', False)]"/>
+                    <field name="city" optional="show"/>
+                    <field name="state_id" optional="hide" readonly="1"/>
+                    <field name="country_id" optional="show" readonly="1"/>
+                    <field name="category_id" optional="hide" widget="many2many_tags"
+                           options="{'color_field': 'color'}"/>
+                    <field name="school_id" string="School" readonly="1"/>
+                    <field name="is_company" invisible="1"/>
+                    <field name="parent_id" invisible="1" readonly="1"/>
+                    <field name="active" invisible="1"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Custom Student Kanban View -->
+        <record id="partner_student_kanban_view" model="ir.ui.view">
+            <field name="name">res.partner.student.kanban.view</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <kanban class="o_res_partner_kanban" sample="1">
+                    <field name="id"/>
+                    <field name="display_name"/>
+                    <field name="image_128"/>
+                    <field name="school_id"/>
+                    <field name="enrollment_state"/>
+                    <field name="student_course_line_ids"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_card oe_kanban_global_click">
+                                <div class="o_kanban_image">
+                                    <img t-att-src="kanban_image('res.partner', 'image_128', record.id.raw_value)"
+                                         alt="Student" class="o_kanban_image_fill_left"/>
+                                </div>
+                                <div class="oe_kanban_details">
+                                    <div class="o_kanban_record_top">
+                                        <div class="o_kanban_record_headings">
+                                            <strong class="o_kanban_record_title">
+                                                <field name="display_name"/>
+                                            </strong>
+                                            <div t-if="record.enrollment_state.value" class="mt-1">
+                                                <small class="text-muted">Estado:</small>
+                                                <span t-attf-class="badge badge-sm #{record.enrollment_state.value == 'alta' ? 'badge-success' : 'badge-secondary'}">
+                                                    <field name="enrollment_state"/>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="o_kanban_record_body">
+                                        <div t-if="record.school_id.value" class="text-muted">
+                                            <i class="fa fa-graduation-cap" role="img" aria-label="School"
+                                               title="School"/>
+                                            <field name="school_id"/>
+                                        </div>
+                                        <div class="text-muted">
+                                            <i class="fa fa-book" role="img" aria-label="Courses" title="Courses"/>
+                                            <t t-esc="record.student_course_line_ids.raw_value.length"/>
+                                            Cursos
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="student_search_view" model="ir.ui.view">
+            <field name="name">student.view.search</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <search string="Search Title">
+                    <field name="name" string="Name" filter_domain="[('name','ilike',self)]"/>
+                    <field name="school_id" string="Escuela" filter_domain="[('school_id.name','ilike',self)]"/>
+                    <group string="Filters">
+                        <filter string="Alta" name="active" domain="[('enrollment_state','=','active')]"/>
+                        <filter string="Baja" name="inactive" domain="[('enrollment_state','=','inactive')]"/>
+                    </group>
+                    <separator/>
+                    <group string="Group By">
+                        <filter string="Escuela" name="escuela" context="{'group_by':'school_id'}"/>
+                        <filter string="Cursos" name="cursos" context="{'group_by':'student_course_line_ids'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Acción para abrir sección de alumnos -->
+        <record id="action_res_partner_student" model="ir.actions.act_window">
+            <field name="name">Students</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">kanban,list,form</field>
+            <field name="search_view_id" ref="student_search_view"/>
+            <field name="context">
+                {'default_is_student':'True','default_company_type':'person','default_type':'contact'}
+            </field>
+            <field name="domain">[('is_student','=','True'),('is_parent','=',False),('parent_id','=',False)]
+            </field>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'kanban', 'view_id': ref('partner_student_kanban_view')}),
+                (0, 0, {'view_mode': 'list', 'view_id': ref('partner_student_tree_view')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('student_primary_form_view')})]"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Añade el primer estudiante
+                </p>
+            </field>
+        </record>
+    </data>
+</odoo>

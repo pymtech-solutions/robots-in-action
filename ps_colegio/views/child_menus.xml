@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- Hijos de Profesores -->
+        <menuitem name="Lista de Profesores"
+                  id="menu_school_teachers_list"
+                  parent="menu_school_teachers"
+                  action="action_hr_employees_teachers"
+                  groups="ps_colegio.group_school_teacher,ps_colegio.group_school_manager"
+                  sequence="1"/>
+
+        <!-- Hijos de Alumnos -->
+        <menuitem name="Lista de Alumnos"
+                  id="menu_school_students_list"
+                  parent="menu_school_students"
+                  action="action_res_partner_student"
+                  groups="ps_colegio.group_school_teacher,ps_colegio.group_school_manager"
+                  sequence="1"/>
+
+        <!-- Hijos de Cursos -->
+        <menuitem name="Cursos"
+                  id="menu_school_courses_list"
+                  parent="menu_school_courses"
+                  action="action_oe_school_course"
+                  groups="ps_colegio.group_school_teacher,ps_colegio.group_school_manager"
+                  sequence="1"/>
+
+        <menuitem name="Lineas de cursos"
+                  id="menu_school_courses_line"
+                  parent="menu_school_courses"
+                  action="action_oe_school_course_line"
+                  groups="ps_colegio.group_school_teacher,ps_colegio.group_school_manager"
+                  sequence="2"/>
+
+        <menuitem name="Lista de programas"
+                  id="menu_school_programs"
+                  parent="menu_school_courses"
+                  action="action_oe_school_program"
+                  groups="ps_colegio.group_school_teacher,ps_colegio.group_school_manager"
+                  sequence="3"/>
+
+        <menuitem name="Horarios"
+                  id="menu_school_schedule_list"
+                  parent="menu_school_schedule_category"
+                  action="action_oe_school_schedule"
+                  groups="ps_colegio.group_school_teacher,ps_colegio.group_school_manager"
+                  sequence="1"/>
+
+        <!-- Hijos de asistencia -->
+        <menuitem name="Asistencia"
+                  id="menu_school_attendance_list"
+                  parent="menu_school_attendance"
+                  action="action_oe_school_attendance"
+                  groups="ps_colegio.group_school_teacher,ps_colegio.group_school_manager"
+                  sequence="1"/>
+
+        <!-- Hijos de Medical -->
+        <menuitem name="Categoría Médica"
+                  id="menu_school_medical_category"
+                  parent="menu_school_config_medical"
+                  action="action_medical_category"
+                  groups="ps_colegio.group_school_teacher,ps_colegio.group_school_manager"
+                  sequence="1"/>
+
+        <menuitem name="Tipo Médico"
+                  id="menu_school_medical_type"
+                  parent="menu_school_config_medical"
+                  action="action_medical_type"
+                  groups="ps_colegio.group_school_teacher,ps_colegio.group_school_manager"
+                  sequence="2"/>
+
+    </data>
+</odoo>
