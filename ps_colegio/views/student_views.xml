@@ -23,7 +23,7 @@
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="ps_colegio.view_partner_form_inherit_student"/>
             <field name="mode">primary</field>
-            <field name="priority">999</field>
+            <field name="priority">0</field>
             <field name="arch" type="xml">
                 <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
                     <button invisible="not is_student"

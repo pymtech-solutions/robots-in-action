@@ -52,8 +52,10 @@
                             <!-- Pestaña de Profesores -->
                             <page string="Profesores" name="teachers">
                                 <field name="teacher_ids" widget="many2many"
-                                       context="{'default_is_teacher': True}"
-                                >
+                                       context="{
+           'default_is_teacher': True,
+           'form_view_ref': 'ps_colegio.student_primary_form_view'
+       }">
                                     <kanban>
                                         <field name="name"/>
                                         <field name="work_email"/>
@@ -82,21 +84,52 @@
                                             </t>
                                         </templates>
                                     </kanban>
+                                    <form>
+
+                                    </form>
                                 </field>
                             </page>
                             <!-- Pestaña de Estudiantes -->
+
                             <page string="Estudiantes" name="students">
-                                <field name="student_ids" widget="many2many"
-                                       context="{'default_is_student': True}"
-                                >
-                                    <list editable="bottom">
+                                <field name="student_ids" widget="many2many_kanban">
+                                    <kanban>
                                         <field name="name"/>
-                                        <field name="email" optional="hide"/>
-                                        <field name="phone" optional="hide"/>
-                                        <field name="enrollment_state" string="Estado"/>
-                                    </list>
+                                        <field name="email"/>
+                                        <field name="phone"/>
+                                        <field name="image_128"/> <!-- si quieres mostrar la foto del estudiante -->
+                                        <templates>
+                                            <t t-name="kanban-box">
+                                                <div class="oe_kanban_card oe_kanban_global_click">
+                                                    <div class="o_kanban_image">
+                                                        <img t-att-src="kanban_image('res.partner', 'image_128', record.id.value)"
+                                                             t-att-alt="record.name.value"/>
+                                                    </div>
+                                                    <div class="o_kanban_details">
+                                                        <div>
+                                                            <strong>
+                                                                <field name="name"/>
+                                                            </strong>
+                                                        </div>
+                                                        <div>
+                                                            <i class="fa fa-envelope-o"/>
+                                                            <field name="email" optional="hide"/>
+                                                        </div>
+                                                        <div>
+                                                            <i class="fa fa-phone"/>
+                                                            <field name="phone" optional="hide"/>
+                                                        </div>
+                                                        <div>
+                                                            <field name="enrollment_state" string="Estado"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </t>
+                                        </templates>
+                                    </kanban>
                                 </field>
                             </page>
+
                             <!-- Pestaña de Horarios -->
                             <page string="Horarios" name="schedules">
                                 <div class="alert alert-info" role="alert">
