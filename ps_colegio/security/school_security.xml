@@ -27,6 +27,22 @@
             ]"/>
         </record>
 
+        <!-- Employees can't see other employees -->
+        <record id="hide_other_employees" model="ir.rule">
+            <field name="name">Employee: can only see their own employee record</field>
+            <field name="model_id" ref="hr.model_hr_employee"/>
+            <field name="domain_force">[
+                ('user_id', '=', user.id),
+            ]
+            </field>
+            <field name="groups" eval="[(4, ref('group_school_teacher'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+
         <!-- Regla para res.partner impedir que los profesores puedan ver alumnos y colegios en donde no esta asignado -->
         <record id="partner_school_rule" model="ir.rule">
             <field name="name">Partner: School Access Rule</field>
@@ -45,7 +61,7 @@
                 '&amp;',
                 ('is_student', '=', True),
                 ('school_id', 'in', user.school_ids.ids)
-                ]
+            ]
             </field>
             <field name="groups" eval="[(4, ref('group_school_teacher'))]"/>
             <field name="perm_read" eval="True"/>
@@ -54,47 +70,16 @@
             <field name="perm_unlink" eval="False"/>
         </record>
 
-        <!-- Profesores solo pueden modificar su propio employee y ver los demas -->
-
-        <!--Teachers can only read teachers in the same school-->
-        <record id="employee_teacher_read_rule" model="ir.rule">
-            <field name="name">Employee: View Teachers of Own Schools</field>
-            <field name="model_id" ref="hr.model_hr_employee"/>
-            <field name="domain_force">[
-                ('is_teacher', '=', True),
-                ('school_ids', 'in', user.school_ids.ids),
-                ]
-            </field>
-            <field name="groups" eval="[(4, ref('group_school_teacher'))]"/>
-            <field name="perm_read" eval="True"/>
-            <field name="perm_write" eval="False"/>
-        </record>
-
-        <!-- Teachers can edit their own hr.employee registry -->
-        <record id="employee_teacher_edit_own_rule" model="ir.rule">
-            <field name="name">Employee: Edit own registry</field>
-            <field name="model_id" ref="hr.model_hr_employee"/>
-            <field name="domain_force">[
-                ('user_partner_id', '=', user.partner_id.id)
-                ]
-            </field>
-            <field name="groups" eval="[(4, ref('group_school_teacher'))]"/>
-            <field name="perm_read" eval="True"/>
-            <field name="perm_write" eval="True"/>
-            <field name="perm_create" eval="False"/>
-            <field name="perm_unlink" eval="False"/>
-        </record>
-
         <record id="partner_attendance_rule" model="ir.rule">
             <field name="name">Attendance: School Access Rule</field>
             <field name="model_id" ref="model_oe_attendance"/>
             <field name="domain_force">
                 [
-                '|',
-                '&amp;',
-                ('teacher_ids', 'in', [user.employee_id.id]),
-                ('school_id', 'in', user.school_ids.ids),
-                ('substitute_teacher_ids', 'in', [user.employee_id.id])
+                    '|',
+                    '&amp;',
+                    ('teacher_ids', 'in', [user.employee_id.id]),
+                    ('school_id', 'in', user.school_ids.ids),
+                    ('substitute_teacher_ids', 'in', [user.employee_id.id])
                 ]
             </field>
             <field name="groups" eval="[(4, ref('group_school_teacher'))]"/>
@@ -109,7 +94,7 @@
             <field name="name">Assessment: School Access Rule</field>
             <field name="model_id" ref="model_oe_assessment"/>
             <field name="domain_force">[('teacher_ids', 'in', [user.employee_id.id]), ('school_id', 'in',
-                user.school_ids.ids)]
+                                                                                       user.school_ids.ids)]
             </field>
             <field name="groups" eval="[(4, ref('group_school_teacher'))]"/>
             <field name="perm_read" eval="True"/>
