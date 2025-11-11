@@ -53,7 +53,7 @@
             </field>
         </record>
 
-        <!--Inherit resume inherited view to hide it if an employee is marked as teacher-->
+        <!--Inherit resume inherited form view to hide it if an employee is marked as teacher-->
         <record id="teacher_form_view_inherit_hide_resume" model="ir.ui.view">
             <field name="name">teacher.form.view.inherit.hide.resumee</field>
             <field name="model">hr.employee</field>
