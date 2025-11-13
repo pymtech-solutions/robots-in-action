@@ -9,5 +9,4 @@ from . import resource_calendar
 from . import schools
 from . import section
 from . import student
-from . import student_medical
 from . import teacher

@@ -26,13 +26,6 @@
             <field name="priority">0</field>
             <field name="arch" type="xml">
                 <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
-                    <button invisible="not is_student"
-                            name="open_medical_info"
-                            class="oe_stat_button"
-                            icon="fa-plus"
-                            type="object">
-                        <field name="med_info_count" widget="statinfo" string="Medical Info"/>
-                    </button>
                     <button name="open_assessment_info"
                             class="oe_stat_button"
                             icon="fa-bars"

@@ -50,9 +50,6 @@ class ResPartner(models.Model):
         string='Evaluaciones1'
     )
 
-    med_info_ids = fields.One2many('oe.school.student.medical', 'student_id', 'Medical Info')
-    med_info_count = fields.Integer(string='Enrollments', compute='_compute_med_info_count')
-
     # Demographic Info
     date_birth = fields.Date(string='Fecha de nacimiento')
     gender = fields.Selection([
@@ -77,10 +74,6 @@ class ResPartner(models.Model):
         for record in self:
             record.enrollment_count = len(
                 enrollment_ids.search([('model', '=', self._name), ('res_id', '=', record.id)]))
-
-    def _compute_med_info_count(self):
-        for record in self:
-            record.med_info_count = len(record.med_info_ids)
 
     @api.depends('parent_id')
     def _compute_parent(self):

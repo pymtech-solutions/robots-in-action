@@ -23,8 +23,6 @@
         'views/schedule_views.xml',
         'views/res_partner_views.xml',
         'views/student_views.xml',
-        'views/student_medical_views.xml',
-        'views/medical_type_views.xml',
         'views/teacher_views.xml',
         'views/course_views.xml',
         'views/section_views.xml',
