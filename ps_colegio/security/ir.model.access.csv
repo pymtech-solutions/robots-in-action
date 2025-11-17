@@ -9,12 +9,6 @@ access_school_program_manager,access.school.program.manager,model_oe_program,gro
 access_school_program_teacher,access.school.program.teacher,model_oe_program,group_school_teacher,1,1,1,1
 access_school_course_section_manager,access.school.course.section.manager,model_oe_school_course_section,group_school_manager,1,1,1,1
 access_school_course_section_teacher,access.school.course.section.teacher,model_oe_school_course_section,group_school_teacher,1,1,1,1
-access_medical_category_manager,access.medical.category.manager,model_oe_school_medical_cat,group_school_manager,1,1,1,1
-access_medical_category_teacher,access.medical.category.teacher,model_oe_school_medical_cat,group_school_teacher,1,1,1,1
-access_medical_type_manager,access.medical.type.manager,model_oe_school_medical_type,group_school_manager,1,1,1,1
-access_medical_type_teacher,access.medical.type.teacher,model_oe_school_medical_type,group_school_teacher,1,1,1,1
-access_student_medical_manager,access.student.medical.manager,model_oe_school_student_medical,group_school_manager,1,1,1,1
-access_student_medical_teacher,access.student.medical.teacher,model_oe_school_student_medical,group_school_teacher,1,1,1,1
 access_student_assessment_manager,access.student.assessment.manager,model_oe_assessment,group_school_manager,1,1,1,1
 access_student_assessment_teacher,access.student.assessment.teacher,model_oe_assessment,group_school_teacher,1,1,1,1
 access_student_assessment_line_manager,access.student.assessment.line.manager,model_oe_assessment_line,group_school_manager,1,1,1,1

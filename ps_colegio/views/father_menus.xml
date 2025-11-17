@@ -59,13 +59,6 @@
                   sequence="100"
                   groups="ps_colegio.group_school_teacher,ps_colegio.group_school_manager"/>
 
-        <!-- Submenú Medical (dentro de Configuración) -->
-        <menuitem name="Medical"
-                  id="menu_school_config_medical"
-                  parent="menu_school_config"
-                  groups="ps_colegio.group_school_teacher,ps_colegio.group_school_manager"
-                  sequence="10"/>
-
         <!-- Submenú Course (dentro de Configuración) -->
         <menuitem name="Course"
                   id="menu_school_config_course"
