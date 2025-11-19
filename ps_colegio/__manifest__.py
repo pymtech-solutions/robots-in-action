@@ -37,6 +37,8 @@
         'views/program_views.xml',
         'views/schedule_views.xml',
 		'views/product_template_views.xml',
+        'wizard/adjust_box_material_views.xml',
+        'wizard/attendance_adjust_box_material_views.xml',
 ],
     'license': 'LGPL-3',
     'images': ['static/description/banner.gif'],

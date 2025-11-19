@@ -10,3 +10,4 @@ from . import schools
 from . import section
 from . import student
 from . import teacher
+from . import oe_material_movement

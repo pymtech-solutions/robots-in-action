@@ -149,17 +149,10 @@ class OeSchoolCourseLine(models.Model):
     )
 
     # This course material box
-    box_id = fields.Many2one(
+    box_ids = fields.Many2many(
         'oe.boxes',
         string='Caja de materiales',
         help="Caja de materiales"
-    )
-
-    # Materials inside the related box
-    box_line_ids = fields.One2many(
-        related='box_id.oe_box_line_ids',
-        string='Materiales en la caja',
-        readonly=False,
     )
 
     @api.model_create_multi

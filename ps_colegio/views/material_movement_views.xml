@@ -9,8 +9,7 @@
                 <field name="attendance_id"/>
                 <field name="product_id"/>
                 <field name="movement_type"/>
-                <field name="quantity_lost"/>
-                <field name="quantity_refilled"/>
+                <field name="qty"/>
                 <field name="school_id"/>
             </list>
         </field>
@@ -29,10 +28,7 @@
                         <field name="movement_type"/>
                     </group>
                     <group>
-                        <field name="quantity_before"/>
-                        <field name="quantity_after"/>
-                        <field name="quantity_lost"/>
-                        <field name="quantity_refilled"/>
+                        <field name="qty"/>
                         <field name="date"/>
                     </group>
                 </group>

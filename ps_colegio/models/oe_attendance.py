@@ -53,17 +53,10 @@ class OeAttendance(models.Model):
     )
 
     # Course box
-    box_id = fields.Many2one(
-        related='course_line_id.box_id',
+    box_ids = fields.Many2many(
+        related='course_line_id.box_ids',
         string='Caja de materiales',
         help="Caja de materiales"
-    )
-
-    # NUEVO SISTEMA DE GESTIÓN DE MATERIALES
-    attendance_material_line_ids = fields.One2many(
-        'oe.attendance.material.line',
-        'attendance_id',
-        string='Control de materiales'
     )
 
     # Movimientos de materiales relacionados
@@ -79,37 +72,24 @@ class OeAttendance(models.Model):
         ('closed', 'Cerrado'),
     ], string='Estado de materiales', default='review')
 
-    # Campos computados para resumen
-    total_materials_lost = fields.Integer(
-        compute='_compute_material_summary',
-        string='Total materiales perdidos',
-        store=True
-    )
-
-    total_materials_damaged = fields.Integer(
-        compute='_compute_material_summary',
-        string='Total materiales dañados',
-        store=True
-    )
-
-    has_material_issues = fields.Boolean(
-        compute='_compute_material_summary',
-        string='Tiene problemas de materiales',
-        store=True
-    )
-
-    @api.depends('attendance_material_line_ids.lost_quantity', 'attendance_material_line_ids.damaged_quantity')
-    def _compute_material_summary(self):
-        for record in self:
-            record.total_materials_lost = sum(record.attendance_material_line_ids.mapped('lost_quantity'))
-            record.total_materials_damaged = sum(record.attendance_material_line_ids.mapped('damaged_quantity'))
-            record.has_material_issues = record.total_materials_lost > 0 or record.total_materials_damaged > 0
+    def action_adjust_materials(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Modificar Materiales',
+            'res_model': 'attendance.adjust.box.material',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {
+                'default_attendance_id': self.id,
+                'default_box_id': self.box_ids[:1].id,
+            }
+        }
 
     @api.model_create_multi
     def create(self, vals):
         record = super().create(vals)
         if record.course_line_id:
-            record._generate_attendance_material_lines()
             record._generate_attendance_lines()
         return record
 
@@ -143,35 +123,6 @@ class OeAttendance(models.Model):
                 ]
 
                 record.attendance_line_ids = lines
-
-
-    def _generate_attendance_material_lines(self):
-        for record in self:
-            # Ensure only one record is processed
-            self.ensure_one()
-
-            # Clear previous attendance lines and material lines
-            record.attendance_material_line_ids = [(5, 0, 0)]
-
-            if record.course_line_id:
-                # Only proceed if there is a material box assigned
-                if not (record.box_id and record.box_id.oe_box_line_ids):
-                    continue
-
-                material_lines = []
-                for box_line in record.box_id.oe_box_line_ids:
-                    # Usar exists() para verificar que el registro existe en la BD
-                    if box_line.product_id and box_line.product_id.exists():
-                        material_lines.append((0, 0, {
-                            'product_id': box_line.product_id.id,
-                            'original_expected_quantity': box_line.expected_quantity or 0,
-                            'original_real_quantity': box_line.real_quantity or 0,
-                            'current_quantity': box_line.real_quantity or 0,
-                            'lost_quantity': 0,
-                            'damaged_quantity': 0,
-                        }))
-
-                record.attendance_material_line_ids = material_lines
 
     def action_view_material_movements(self):
         """

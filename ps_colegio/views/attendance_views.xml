@@ -14,9 +14,6 @@
                     <field name="teacher_ids" widget="many2many_tags" readonly="1"/>
                     <field name="substitute_teacher_ids" widget="many2many_tags"/>
                     <field name="materials_status"/>
-                    <field name="has_material_issues" invisible="1"/>
-                    <field name="total_materials_lost"/>
-                    <field name="total_materials_damaged"/>
                 </list>
             </field>
         </record>
@@ -27,6 +24,8 @@
             <field name="arch" type="xml">
                 <form string="Attendance">
                     <header>
+                        <button name="action_adjust_materials" string="Modificar material"
+                                type="object" class="btn-primary"/>
                         <button name="action_close_materials" string="Cerrar asistencia"
                                 type="object" class="btn-success" invisible="materials_status == 'closed'"/>
                         <button name="action_reopen_materials" string="Reabrir asistencia"
@@ -53,18 +52,7 @@
                                 <field name="course_schedule_ids" widget="many2many_tags" readonly="1"/>
                                 <field name="teacher_ids" widget="many2many_tags" readonly="1"/>
                                 <field name="substitute_teacher_ids" widget="many2many_tags"/>
-                                <field name="box_id" readonly="1"/>
-                            </group>
-                        </group>
-
-                        <!-- Resumen de materiales -->
-                        <group string="Resumen de Materiales">
-                            <group>
-                                <field name="total_materials_lost"/>
-                                <field name="total_materials_damaged"/>
-                            </group>
-                            <group>
-                                <field name="has_material_issues" invisible="1"/>
+                                <field name="box_ids" readonly="1" widget="many2many_tags"/>
                             </group>
                         </group>
 
@@ -78,32 +66,14 @@
                                 </field>
                             </page>
 
-                            <page string="Control de Materiales">
-                                <field name="attendance_material_line_ids">
-                                    <list editable="bottom"
-                                          decoration-danger="lost_quantity > 0 or damaged_quantity > 0">
-                                        <field name="product_id"/>
-                                        <field name="original_expected_quantity" readonly="1"
-                                               string="Cant. Original Esperada"/>
-                                        <field name="original_real_quantity" readonly="1" string="Cant. Original Real"/>
-                                        <field name="current_quantity" string="Cant. Actual"/>
-                                        <field name="lost_quantity" string="Perdidas"/>
-                                        <field name="damaged_quantity" string="Dañados"/>
-                                        <field name="total_difference" readonly="1" string="Diferencia"/>
-                                        <field name="notes" placeholder="Observaciones..."/>
-                                    </list>
-                                </field>
-                            </page>
-
                             <page string="Historial de Movimientos">
                                 <field name="material_movement_ids" readonly="1">
                                     <list>
                                         <field name="date"/>
+                                        <field name="box_id"/>
                                         <field name="product_id"/>
                                         <field name="movement_type"/>
-                                        <field name="quantity_before"/>
-                                        <field name="quantity_after"/>
-                                        <field name="quantity_lost"/>
+                                        <field name="qty"/>
                                         <field name="notes"/>
                                     </list>
                                 </field>
@@ -121,8 +91,8 @@
             <field name="view_mode">list,form</field>
             <field name="context">
                 {
-                'group_by': 'date',
-                'orderedBy': [{'name': 'date', 'asc': False}]
+                    'group_by': 'date',
+                    'orderedBy': [{'name': 'date', 'asc': False}]
                 }
             </field>
             <field name="help" type="html">

@@ -25,5 +25,7 @@ access_material_movement_manager,access.material.movement.manager,model_oe_mater
 access_material_movement_teacher,access.material.movement.teacher,model_oe_material_movement,group_school_teacher,1,1,1,0
 access_attendance_material_line_manager,access.attendance.material.line.manager,model_oe_attendance_material_line,group_school_manager,1,1,1,1
 access_attendance_material_line_teacher,access.attendance.material.line.teacher,model_oe_attendance_material_line,group_school_teacher,1,1,1,1
-access_refill_wizard_manager,access.refill.wizard.manager,model_oe_refill_wizard,group_school_manager,1,1,1,1
-access_refill_wizard_teacher,access.refill.wizard.teacher,model_oe_refill_wizard,group_school_teacher,1,1,1,0
+adjust_box_material_manager,adjust.box.material.manager,model_adjust_box_material,group_school_manager,1,1,1,1
+adjust_box_material_teacher,adjust.box.material.teacher,model_adjust_box_material,group_school_teacher,1,1,1,1
+attendance_adjust_box_material_manager,attendance.adjust.box.material.manager,model_attendance_adjust_box_material,group_school_manager,1,1,1,1
+attendance_adjust_box_material_teacher,attendance.adjust.box.material.teacher,model_attendance_adjust_box_material,group_school_teacher,1,1,1,1
