@@ -31,11 +31,35 @@ class OeBoxes(models.Model):
         string='Historial de movimientos'
     )
 
+    total_material_movement = fields.Integer(
+        compute='_compute_total_material_movement',
+        string='Total de movimientos',
+        store=True
+    )
+
     diferences = fields.Boolean(
         compute='_compute_diferences',
-        string="Diferencias")
+        string="Diferencias",
+        store=True
+    )
 
     alert_icon = fields.Html(compute='_compute_alert_icon', string="Alert")
+
+    @api.depends('material_movement_ids')
+    def _compute_total_material_movement(self):
+        for record in self:
+            record.total_material_movement = len(record.material_movement_ids)
+
+    def action_initial_replenishment(self):
+        if not self.material_movement_ids:
+            return self.env['oe.material.movement'].create([{
+                'box_id': self.id,
+                'notes': 'Reabastecimiento inicial de materiales.',
+                'movement_type': 'increment',
+                'product_id': line.product_id.id,
+                'qty': line.expected_quantity
+            } for line in self.oe_box_line_ids])
+
 
     @api.depends('diferences')
     def _compute_alert_icon(self):
@@ -105,7 +129,8 @@ class OeBoxesLine(models.Model):
 
     # Expected quantity of product a box should have
     expected_quantity = fields.Integer(string='Cantidad esperada')
-    real_quantity = fields.Integer(string='Cantidad real', readonly=True, store=True, compute='_compute_real_quantity')
+    real_quantity = fields.Integer(string='Cantidad real', readonly=True, store=True,
+                                   compute='_compute_real_quantity')
 
     # Campo para mostrar diferencias
     quantity_difference = fields.Integer(
