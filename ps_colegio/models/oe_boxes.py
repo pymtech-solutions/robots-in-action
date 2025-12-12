@@ -37,13 +37,8 @@ class OeBoxes(models.Model):
         store=True
     )
 
-    diferences = fields.Boolean(
-        compute='_compute_diferences',
-        string="Diferencias",
-        store=True
-    )
-
-    alert_icon = fields.Html(compute='_compute_alert_icon', string="Alert")
+    alert_icon = fields.Html(compute='_compute_alert_icon', string="Alert", store=True)
+    differences = fields.Boolean(string='Diferencias de materiales', compute='_compute_alert_icon', store=True)
 
     @api.depends('material_movement_ids')
     def _compute_total_material_movement(self):
@@ -60,22 +55,16 @@ class OeBoxes(models.Model):
                 'qty': line.expected_quantity
             } for line in self.oe_box_line_ids])
 
-
-    @api.depends('diferences')
+    @api.depends('oe_box_line_ids.real_quantity', 'oe_box_line_ids.expected_quantity')
     def _compute_alert_icon(self):
+        """ Calculate if there are any differences in materials """
         for record in self:
-            if record.diferences:
-                record.alert_icon = '<span class="text-warning">Diferencia de cantidades⚠️</span>'
-            else:
-                record.alert_icon = ''
-
-    @api.depends('oe_box_line_ids')
-    def _compute_diferences(self):
-        for record in self:
-            record.diferences = False
-            for line in record.oe_box_line_ids:
-                if line.real_quantity != line.expected_quantity:
-                    record.diferences = True
+            has_difference = any(
+                line.real_quantity < line.expected_quantity
+                for line in record.oe_box_line_ids
+            )
+            record.differences = has_difference
+            record.alert_icon = '<span class="text-warning">Diferencia de cantidades⚠️</span>' if has_difference else ''
 
     @api.depends('oe_box_line_ids')
     def _compute_products_ids(self):

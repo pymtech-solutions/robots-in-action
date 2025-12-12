@@ -12,7 +12,8 @@ class OeMaterialMovement(models.Model):
     box_id = fields.Many2one(
         'oe.boxes',
         string='Caja',
-        required=True
+        required=True,
+        ondelete='cascade',
     )
 
     attendance_id = fields.Many2one(
