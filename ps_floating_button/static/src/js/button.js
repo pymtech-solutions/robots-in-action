@@ -1,31 +1,43 @@
 /** @odoo-module **/
-
-import { Component, onWillStart, useState } from "@odoo/owl";
-import { registry } from "@web/core/registry";
-import { useService } from "@web/core/utils/hooks";
+import {Component, onWillStart, useState} from "@odoo/owl";
+import {registry} from "@web/core/registry";
+import {useService} from "@web/core/utils/hooks";
 
 class FloatingButton extends Component {
     static template = "ps_floating_button.FloatingButton";
 
     setup() {
-        // User orm service to call ir.config_parameter.get_param
         this.orm = useService("orm");
-
-        // State to store the button url
         this.state = useState({
-            buttonUrl: null
+            buttonUrl: null,
+            x: null,
+            y: null,
         });
 
         onWillStart(async () => {
-            this.state.buttonUrl = await this.orm.call(
-                "ir.config_parameter",
-                "get_param",
-                ["ps_floating_button.button_url"]
-            );
+            try {
+                // Get button url
+                this.state.buttonUrl = await this.orm.call(
+                    "floating.button",
+                    "get_button_url",
+                    []
+                );
+
+                // Get button coordinates
+                const coordinates = await this.orm.call(
+                    "floating.button",
+                    "get_button_coordinates",
+                    []
+                );
+
+                this.state.x = coordinates.x;
+                this.state.y = coordinates.y;
+            } catch (error) {
+                console.error("Error loading button parameters:", error);
+            }
         });
     }
 
-    // Function to handle button click
     onClick() {
         if (this.state.buttonUrl) {
             window.open(this.state.buttonUrl, '_blank');

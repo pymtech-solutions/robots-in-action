@@ -9,3 +9,6 @@ class ResConfigSettings(models.TransientModel):
     button_url = fields.Char(string='URL del botón', default='https://www.example.com', required=True,
                              config_parameter='ps_floating_button.button_url',
                              help='URL a la que el botón redirige cuando se hace clic')
+
+    button_x = fields.Integer(string='X', config_parameter='ps_floating_button.button_x', default=1)
+    button_y = fields.Integer(string='Y', config_parameter='ps_floating_button.button_y', default=1)

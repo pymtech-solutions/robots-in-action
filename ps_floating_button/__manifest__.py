@@ -11,7 +11,7 @@
   'company': 'Pymtech Solutions',
   'maintainer': 'Pymtech Solutions',
   'website': '',
-  "depends": ["base", "mail"],
+  "depends": ["web", "base", "mail"],
   "data": [		"views/res_config_settings_views.xml",
 ],
   "demo": [

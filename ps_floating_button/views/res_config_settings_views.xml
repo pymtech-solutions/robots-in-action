@@ -12,6 +12,12 @@
                         <setting string="URL del botón flotante">
                             <field name="button_url"/>
                         </setting>
+                        <setting string="Posición X">
+                            <field name="button_x"/>
+                        </setting>
+                        <setting string="Posición Y">
+                            <field name="button_y"/>
+                        </setting>
                     </block>
                 </div>
             </xpath>
