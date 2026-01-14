@@ -100,7 +100,6 @@ class OeAttendance(models.Model):
         result = super().write(vals)
         if 'course_line_id' in vals:
             for record in self:
-                record._generate_attendance_material_lines()
                 record._generate_attendance_lines()
         return result
 
