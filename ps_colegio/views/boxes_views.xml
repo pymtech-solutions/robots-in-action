@@ -8,7 +8,8 @@
             <form string="Cajas">
                 <header>
                     <button name="action_reponer" string="Modificar Materiales" class="oe_highlight" type="object"/>
-                    <button name="action_initial_replenishment" string="Reposición Inicial" class="btn btn-action" type="object" invisible="total_material_movement != 0"/>
+                    <button name="action_initial_replenishment" string="Reposición Inicial" class="btn btn-action"
+                            type="object" invisible="total_material_movement != 0"/>
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
@@ -20,6 +21,7 @@
 
                     <group>
                         <field name="name"/>
+                        <field name="teacher_id"/>
                         <field name="products_ids" widget="many2many_tags" invisible="1"/>
                         <notebook>
                             <page string="Materiales dentro de esta caja">
@@ -66,16 +68,21 @@
         </field>
     </record>
 
+    <!--Search view -->
     <record id="boxes_view_search" model="ir.ui.view">
         <field name="name">boxes.view.search</field>
         <field name="model">oe.boxes</field>
         <field name="arch" type="xml">
             <search string="Search Title">
                 <field name="name" string="Name"/>
+                <field name="teacher_id"/>
                 <filter string="Con Diferencias" name="differences" domain="[('differences','=',True)]"/>
                 <separator/>
                 <group expand="0" string="Group By">
-                    <filter string="Agrupar por Diferencias" name="group_differences" context="{'group_by':'differences'}"/>
+                    <filter string="Agrupar por Diferencias" name="group_differences"
+                            context="{'group_by':'differences'}"/>
+                    <filter string="Agrupar por Profesor" name="group_teacher"
+                            context="{'group_by':'teacher_id'}"/>
                 </group>
             </search>
         </field>
@@ -88,7 +95,6 @@
         <field name="view_mode">list,form</field>
         <field name="context">{'search_default_differences': 1}</field>
     </record>
-
 
 
     <!-- Menu for material boxes -->

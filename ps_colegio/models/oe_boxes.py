@@ -13,6 +13,8 @@ class OeBoxes(models.Model):
     _description = 'OeBoxes'
 
     name = fields.Char(string='Nombre', required=True)
+    teacher_id = fields.Many2one(comodel_name='hr.employee', string='Profesor asignado',
+                                 domain=[('is_teacher', '=', True)])
 
     oe_box_line_ids = fields.One2many(
         'oe.boxes.line',
@@ -24,7 +26,6 @@ class OeBoxes(models.Model):
     products_ids = fields.Many2many(comodel_name='product.product', string='Productos en caja',
                                     compute='_compute_products_ids')
 
-    # Historial de movimientos de materiales
     material_movement_ids = fields.One2many(
         'oe.material.movement',
         'box_id',
