@@ -147,8 +147,6 @@ class OeAttendance(models.Model):
         Acción para cerrar la gestión de materiales y actualizar la caja original
         """
         self.ensure_one()
-        self._update_original_box()
-        self._create_material_movements()
         self.materials_status = 'closed'
 
     def action_reopen_materials(self):
@@ -156,41 +154,8 @@ class OeAttendance(models.Model):
         Acción para reabrir la asistencia y deshacer los movimientos de los materiales
         """
         self.ensure_one()
-        self._undo_update_original_box()
         self._undo_material_movements()
         self.materials_status = 'review'
-
-    def _create_material_movements(self):
-        """
-        Crear registros de movimientos de materiales
-        """
-        for material_line in self.attendance_material_line_ids:
-            if material_line.lost_quantity > 0 or material_line.damaged_quantity > 0:
-                # Crear movimiento por pérdidas
-                if material_line.lost_quantity > 0:
-                    self.env['oe.material.movement'].create({
-                        'box_id': self.box_id.id,
-                        'attendance_id': self.id,
-                        'product_id': material_line.product_id.id,
-                        'quantity_before': material_line.original_real_quantity,
-                        'quantity_after': material_line.current_quantity,
-                        'quantity_lost': material_line.lost_quantity,
-                        'movement_type': 'loss',
-                        'notes': material_line.notes,
-                    })
-
-                # Crear movimiento por daños
-                if material_line.damaged_quantity > 0:
-                    self.env['oe.material.movement'].create({
-                        'box_id': self.box_id.id,
-                        'attendance_id': self.id,
-                        'product_id': material_line.product_id.id,
-                        'quantity_before': material_line.original_real_quantity,
-                        'quantity_after': material_line.current_quantity,
-                        'quantity_lost': material_line.damaged_quantity,
-                        'movement_type': 'damage',
-                        'notes': material_line.notes,
-                    })
 
     def _undo_material_movements(self):
         """
@@ -199,29 +164,6 @@ class OeAttendance(models.Model):
         for record in self:
             if record.material_movement_ids:
                 record.material_movement_ids.unlink()
-
-    def _update_original_box(self):
-        """
-        Update the original box with the current quantity of materials.
-        """
-        for material_line in self.attendance_material_line_ids:
-            # Search the corresponding material box
-            box_line = self.box_id.oe_box_line_ids.filtered(
-                lambda l: l.product_id.id == material_line.product_id.id
-            )
-            if box_line:
-                # Update the real quantity of materials inside the box, not allowing negative quantities
-                box_line.real_quantity = max(0, material_line.current_quantity)
-
-    def _undo_update_original_box(self):
-        for material_line in self.attendance_material_line_ids:
-            # Search the corresponding material box
-            box_line = self.box_id.oe_box_line_ids.filtered(
-                lambda l: l.product_id.id == material_line.product_id.id
-            )
-            if box_line:
-                # Update the real quantity of materials inside the box, not allowing negative quantities
-                box_line.real_quantity = max(0, (material_line.current_quantity + material_line.total_difference))
 
     @api.model
     def create_attendance_with_lines(self):
