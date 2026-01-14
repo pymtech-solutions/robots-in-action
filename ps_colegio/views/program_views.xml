@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <!--Form view-->
     <record id="program_view_form" model="ir.ui.view">
         <field name="name">program.view.form</field>
         <field name="model">oe.program</field>
@@ -16,6 +17,18 @@
                     </group>
                 </sheet>
             </form>
+        </field>
+    </record>
+
+
+    <record id="view_contrato_chatter_form_inherit" model="ir.ui.view">
+        <field name="name">oe.program.chatter</field>
+        <field name="model">oe.program</field>
+        <field name="inherit_id" ref="program_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet" position="after">
+                <chatter/>
+            </xpath>
         </field>
     </record>
 

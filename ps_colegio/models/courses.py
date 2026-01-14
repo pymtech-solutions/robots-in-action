@@ -8,20 +8,7 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-class OeProgram(models.Model):
-    _name = 'oe.program'
-    _description = 'Program'
-    _order = 'name'
 
-    name = fields.Char(
-        string='Nombre del programa',
-        required=True,
-    )
-
-    course_id = fields.Many2many(
-        'oe.school.course',
-        string='Curso',
-    )
 
 
 class OeSchoolCourse(models.Model):
