@@ -20,7 +20,7 @@
         <record id="group_school_manager" model="res.groups">
             <field name="name">Administrador</field>
             <field name="category_id" ref="module_category_openrol_school"/>
-            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user')), (4, ref('group_school_teacher'))]"/>
             <field name="users" eval="[
                 (4, ref('base.user_root')),
                 (4, ref('base.user_admin'))
@@ -40,6 +40,18 @@
             <field name="perm_write" eval="True"/>
             <field name="perm_create" eval="True"/>
             <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <!-- Managers can see all employees -->
+        <record id="manager_see_all_employees" model="ir.rule">
+            <field name="name">Manager: can see all employees</field>
+            <field name="model_id" ref="hr.model_hr_employee"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('group_school_manager'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
         </record>
 
 
