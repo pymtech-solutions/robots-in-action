@@ -25,7 +25,7 @@
                 <form string="Attendance">
                     <header>
                         <button name="action_adjust_materials" string="Modificar material"
-                                type="object" class="btn-primary"/>
+                                type="object" class="btn-primary" invisible="materials_status == 'closed'"/>
                         <button name="action_close_materials" string="Cerrar asistencia"
                                 type="object" class="btn-success" invisible="materials_status == 'closed'"/>
                         <button name="action_reopen_materials" string="Reabrir asistencia"
