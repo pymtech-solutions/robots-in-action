@@ -84,7 +84,7 @@
             </field>
         </record>
 
-        <!--        Attendance action-->
+        <!-- Attendance action-->
         <record id="action_oe_school_attendance" model="ir.actions.act_window">
             <field name="name">Assistance</field>
             <field name="res_model">oe.attendance</field>
@@ -101,5 +101,12 @@
                 </p>
             </field>
         </record>
+
+        <menuitem name="Asistencia"
+                  id="menu_school_attendance"
+                  parent="menu_school"
+                  action="action_oe_school_attendance"
+                  sequence="40"
+                  groups="ps_colegio.group_school_teacher,ps_colegio.group_school_manager"/>
     </data>
 </odoo>

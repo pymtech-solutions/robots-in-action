@@ -46,12 +46,6 @@
                   groups="ps_colegio.group_school_teacher,ps_colegio.group_school_manager"
                   sequence="1"/>
 
-        <!-- Hijos de asistencia -->
-        <menuitem name="Asistencia"
-                  id="menu_school_attendance_list"
-                  parent="menu_school_attendance"
-                  action="action_oe_school_attendance"
-                  groups="ps_colegio.group_school_teacher,ps_colegio.group_school_manager"
-                  sequence="1"/>
+
     </data>
 </odoo>

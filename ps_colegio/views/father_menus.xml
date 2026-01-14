@@ -34,11 +34,6 @@
                   groups="ps_colegio.group_school_teacher,ps_colegio.group_school_manager"
                   sequence="20"/>
 
-        <menuitem name="Asistencia"
-                  id="menu_school_attendance"
-                  parent="menu_school"
-                  sequence="40"
-                  groups="ps_colegio.group_school_teacher,ps_colegio.group_school_manager"/>
 
         <menuitem name="Notas"
                   id="assessment_menu"
