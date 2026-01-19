@@ -126,5 +126,35 @@
             <field name="perm_create" eval="True"/>
             <field name="perm_unlink" eval="False"/>
         </record>
+
+        <!-- Regla para oe.attendance.line: profesores solo ven registros de su colegio y cursos asignados -->
+        <record id="attendance_line_teacher_rule" model="ir.rule">
+            <field name="name">Attendance Line: Teacher Access Rule</field>
+            <field name="model_id" ref="model_oe_attendance_line"/>
+            <field name="domain_force">
+                [
+                    # '&amp;',
+                    ('school_id', 'in', user.school_ids.ids),
+                    # ('course_id', 'in', user.employee_id.course_line_ids.ids)
+                ]
+            </field>
+            <field name="groups" eval="[(4, ref('group_school_teacher'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <!-- Regla para oe.attendance.line: administradores ven todos los registros -->
+        <record id="attendance_line_manager_rule" model="ir.rule">
+            <field name="name">Attendance Line: Manager can see all records</field>
+            <field name="model_id" ref="model_oe_attendance_line"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('group_school_manager'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
     </data>
 </odoo>

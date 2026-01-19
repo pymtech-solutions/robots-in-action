@@ -105,6 +105,13 @@
         <menuitem name="Asistencia"
                   id="menu_school_attendance"
                   parent="menu_school"
+                  sequence="40"
+                  groups="ps_colegio.group_school_teacher,ps_colegio.group_school_manager"/>
+
+
+        <menuitem name="Asistencia"
+                  id="menu_school_attendance_action"
+                  parent="menu_school_attendance"
                   action="action_oe_school_attendance"
                   sequence="40"
                   groups="ps_colegio.group_school_teacher,ps_colegio.group_school_manager"/>
