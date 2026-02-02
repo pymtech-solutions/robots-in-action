@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="paperformat_school_grade" model="report.paperformat">
+        <field name="name">School Grade Report</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">10</field>
+        <field name="margin_bottom">10</field>
+        <field name="margin_left">10</field>
+        <field name="margin_right">10</field>
+        <field name="header_spacing">5</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <record id="school_grade_report_action_report" model="ir.actions.report">
+        <field name="name">Evaluación de estudiante</field>
+        <field name="model">school.grade.line</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">ps_school_ria.report_school_grade_report_document</field>
+        <field name="report_file">ps_school_ria.report_school_grade_report_document</field>
+        <field name="binding_model_id" ref="model_school_grade_line"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="paperformat_school_grade"/>
+    </record>
+
+    <template id="report_school_grade_report_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.basic_layout">
+                    <div style="background-color: #3f72ff; height: 230px;">
+                        <t t-if="doc.grade_id.show_school_logo and doc.grade_id.school_logo">
+                            <div class="row justify-content-between">
+                                <div class="col-5">
+                                    <img class="mx-4" src="/ps_school_ria/static/img/robots.png" alt="Robots"
+                                         style="max-height: 180px;"/>
+                                </div>
+                                <div class="col-5 pt-3 d-flex justify-content-end">
+                                    <img class="mx-4"
+                                         t-att-src="'data:image/png;base64,%s' % doc.grade_id.school_logo.decode('utf-8')"
+                                         alt="Logo Escuela" style="max-height: 150px;"/>
+                                </div>
+                            </div>
+                        </t>
+                        <t t-if="not doc.grade_id.show_school_logo">
+                            <div class="d-flex justify-content-center">
+                                <img class="mx-4" src="/ps_school_ria/static/img/robots.png" alt="Robots"
+                                     style="max-height: 180px;"/>
+                            </div>
+                        </t>
+                        <h4 class="text-center mb-4" style="color: white">EVALUACIÓN <t
+                                t-esc="doc.grade_id.academic_period or None"/></h4>
+                    </div>
+                    <div class="d-flex justify-content-center mt-3">
+                        <div style="width: 80%;">
+                            <div class="row">
+                                <div class="col-6 me-3">
+                                    <t class="mb-0" t-esc="doc.grade_id.school_id.name or 'Nombre de la Escuela'"/>
+                                    <hr style="border: none; border-top: 2px solid #000000; width: 100%; margin: 5px 0; opacity: 1;"/>
+                                </div>
+                                <div class="col-6 ms-3">
+                                    <t class="mb-0" t-esc="doc.grade_id.trimester_value or 'Trimestre'"/>
+                                    <hr style="border: none; border-top: 2px solid #000000; width: 100%; margin: 5px 0; opacity: 1;"/>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-6 me-3">
+                                    <t class="mb-0" t-esc="doc.student_id.name or 'Nombre del Estudiante'"/>
+                                    <hr style="border: none; border-top: 2px solid #000000; width: 100%; margin: 5px 0; opacity: 1;"/>
+                                </div>
+                                <div class="col-6 ms-3">
+                                    <t class="mb-0" t-esc="doc.grade_id.course_id.name or 'Nombre del Curso'"/>
+                                    <hr style="border: none; border-top: 2px solid #000000; width: 100%; margin: 5px 0; opacity: 1;"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4 class="text-center my-4">ROBÓTICA</h4>
+
+                    <div class="row mx-4">
+                        <div class="col-9">
+                            <div class="row pb-3">
+                                <div class="col-9 d-flex align-items-center ps-2"
+                                     style="background-color: #3f72ff; height: 50px;"><p
+                                        style="color: white; margin: 0;">Capacidad
+                                    cognitiva</p></div>
+                                <div class="col-auto border border-dark border-2 ms-3 d-flex align-items-center justify-content-center"
+                                     style="min-width: 90px; height: 50px;">
+                                    <t t-esc="doc.cognitive_capacity or '3'"/>
+                                </div>
+                            </div>
+                            <div class="row pb-3">
+                                <div class="col-9 d-flex align-items-center ps-2"
+                                     style="background-color: #3f72ff; height: 50px;"><p
+                                        style="color: white; margin: 0;">Destreza
+                                    manual</p></div>
+                                <div class="col-auto border border-dark border-2 ms-3 d-flex align-items-center justify-content-center"
+                                     style="min-width: 90px; height: 50px;">
+                                    <t t-esc="doc.dexterity or '3'"/>
+                                </div>
+                            </div>
+                            <div class="row pb-3">
+                                <div class="col-9 d-flex align-items-center ps-2"
+                                     style="background-color: #3f72ff; height: 50px;"><p
+                                        style="color: white; margin: 0;">Lógica y
+                                    razonamiento</p></div>
+                                <div class="col-auto border border-dark border-2 ms-3 d-flex align-items-center justify-content-center"
+                                     style="min-width: 90px; height: 50px;">
+                                    <t t-esc="doc.logic_reasoning or '3'"/>
+                                </div>
+                            </div>
+                            <div class="row pb-3">
+                                <div class="col-9 d-flex align-items-center ps-2"
+                                     style="background-color: #3f72ff; height: 50px;"><p
+                                        style="color: white; margin: 0;">
+                                    Creatividad</p></div>
+                                <div class="col-auto border border-dark border-2 ms-3 d-flex align-items-center justify-content-center"
+                                     style="min-width: 90px; height: 50px;">
+                                    <t t-esc="doc.creativity or '3'"/>
+                                </div>
+                            </div>
+                            <div class="row pb-3">
+                                <div class="col-9 d-flex align-items-center ps-2"
+                                     style="background-color: #3f72ff; height: 50px;"><p
+                                        style="color: white; margin: 0;">Mejora en
+                                    el aprendizaje</p></div>
+                                <div class="col-auto border border-dark border-2 ms-3 d-flex align-items-center justify-content-center"
+                                     style="min-width: 90px; height: 50px;">
+                                    <t t-esc="doc.learning_improvement or '3'"/>
+                                </div>
+                            </div>
+                            <div class="row pb-3">
+                                <div class="col-9 d-flex align-items-center ps-2"
+                                     style="background-color: #3f72ff; height: 50px;"><p
+                                        style="color: white; margin: 0;">Trabajo
+                                    grupal</p></div>
+                                <div class="col-auto border border-dark border-2 ms-3 d-flex align-items-center justify-content-center"
+                                     style="min-width: 90px; height: 50px;">
+                                    <t t-esc="doc.teamwork or '3'"/>
+                                </div>
+                            </div>
+                            <div class="row pb-3">
+                                <div class="col-9 d-flex align-items-center ps-2"
+                                     style="background-color: #3f72ff; height: 50px;"><p
+                                        style="color: white; margin: 0;">
+                                    Motivación</p></div>
+                                <div class="col-auto border border-dark border-2 ms-3 d-flex align-items-center justify-content-center"
+                                     style="min-width: 90px; height: 50px;">
+                                    <t t-esc="doc.motivation or '3'"/>
+                                </div>
+                            </div>
+                            <div class="row pb-3">
+                                <div class="col-9 d-flex align-items-center ps-2"
+                                     style="background-color: #3f72ff; height: 50px;"><p
+                                        style="color: white; margin: 0;">
+                                    Actitud</p></div>
+                                <div class="col-auto border border-dark border-2 ms-3 d-flex align-items-center justify-content-center"
+                                     style="min-width: 90px; height: 50px;">
+                                    <t t-esc="doc.attitude or '3'"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3 text-center" style="background-color: #3f72ff;">
+                            <div class="text-center mt-3 pt-2" style="color: white">
+                                SISTEMA DE<br/>CALIFICACIÓN
+                            </div>
+                            <div class="mt-3"
+                                 style="color: white; font-family: Arial, Helvetica, sans-serif; font-weight: 900; font-size: 30px;">
+                                5</div>
+                            <div class="m-0" style="font-family: Arial, Helvetica, sans-serif;">Excelente</div>
+                            <div class="mt-3"
+                                 style="color: white; font-family: Arial, Helvetica, sans-serif; font-weight: 600; font-size: 30px;">
+                                4</div>
+                            <div class="m-0 " style="font-family: Arial, Helvetica, sans-serif;">Muy bien</div>
+                            <div class="mt-3"
+                                 style="color: white; font-family: Arial, Helvetica, sans-serif; font-weight: 600; font-size: 30px;">
+                                3</div>
+                            <div class="m-0" style="font-family: Arial, Helvetica, sans-serif;">Bien</div>
+                            <div class="mt-3"
+                                 style="color: white; font-family: Arial, Helvetica, sans-serif; font-weight: 600; font-size: 30px;">
+                                2</div>
+                            <div class="m-0 " style="font-family: Arial, Helvetica, sans-serif;">Necesita <br/>
+                                mejorar</div>
+                            <div class="mt-3"
+                                 style="color: white; font-family: Arial, Helvetica, sans-serif; font-weight: 600; font-size: 30px;">
+                                1</div>
+                            <div class="m-0" style="font-family: Arial, Helvetica, sans-serif;">Suspendido</div>
+                        </div>
+                    </div>
+
+                    <div class="mx-4 mt-5 position-relative" style="background-color: #9e51ff; min-height: 250px">
+                        <div class="ms-2 mt-3"><strong>OBSERVACIONES</strong></div>
+                        <p class="px-2"><t t-esc="doc.comments"/></p>
+                        <p class="position-absolute start-0 bottom-0 ms-2 mb-2"><strong>Nombre del Profesor/a:</strong>
+                            <t t-esc="', '.join(doc.grade_id.teacher_ids.mapped('name')) or 'Nombre del Profesor'"/>
+                        </p>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

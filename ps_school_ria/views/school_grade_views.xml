@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Inherit student form to add grade button -->
+    <record id="student_form_view_grade_button" model="ir.ui.view">
+        <field name="name">res.partner.form.grade.button</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="ps_colegio.student_primary_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+                <button name="open_grade_info"
+                        class="oe_stat_button"
+                        icon="fa-bars"
+                        type="object"
+                        invisible="not is_student">
+                    <field name="grade_ids" widget="statinfo" string="Evaluaciones"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="school_grade_view_form" model="ir.ui.view">
+        <field name="name">school.grade.view.form</field>
+        <field name="model">school.grade</field>
+        <field name="arch" type="xml">
+            <form string="Assessment">
+                <header>
+                     <button name="action_open_grade" string="Reabrir"
+                            type="object" class="btn-primary" invisible="state == 'draft'"/>
+                     <button name="action_close_grade" string="Cerrar"
+                            type="object" class="btn-primary" invisible="state == 'closed'"/>
+                    <button name="action_download_all_reports" string="Descargar todas las evaluaciones (ZIP)"
+                            type="object" class="btn-primary"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="course_line_id" widget="many2one" readonly="state == 'closed'"/>
+                        <field name="school_id"/>
+                        <field name="trimester" readonly="state == 'closed'"/>
+                        <field name="academic_period"/>
+                        <field name="teacher_ids" widget="many2many_tags"/>
+                        <notebook>
+                            <page string="Calificaciones">
+                                <field name="grade_line_ids" readonly="state == 'closed'">
+                                    <list editable="bottom">
+                                        <field name="student_id"/>
+                                        <field name="cognitive_capacity"/>
+                                        <field name="dexterity"/>
+                                        <field name="logic_reasoning"/>
+                                        <field name="creativity"/>
+                                        <field name="learning_improvement"/>
+                                        <field name="teamwork"/>
+                                        <field name="motivation"/>
+                                        <field name="attitude"/>
+                                        <field name="comments"/>
+                                        <button name="action_open_form"
+                                                string="Abrir"
+                                                type="object"
+                                                icon="fa-external-link"
+                                                title="Abrir formulario"/>
+                                        <button name="action_download_grade_report"
+                                                string="Descargar PDF"
+                                                type="object"
+                                                icon="fa-download"
+                                                title="Descargar evaluación en PDF"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Lista de estudiantes">
+                                <field name="student_ids" readonly="1"/>
+                            </page>
+                        </notebook>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- List View -->
+    <record id="school_grade_view_list" model="ir.ui.view">
+        <field name="name">school.grade.view.list</field>
+        <field name="model">school.grade</field>
+        <field name="arch" type="xml">
+            <list string="Assessment">
+                <field name="name"/>
+                <field name="school_id"/>
+                <field name="trimester"/>
+                <field name="teacher_ids" widget="many2many_tags"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="grade_action" model="ir.actions.act_window">
+        <field name="name">Assessment</field>
+        <field name="res_model">school.grade</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first grade!
+            </p>
+        </field>
+    </record>
+
+    <!--Menu-->
+    <menuitem name="Notas"
+              id="grade_menu"
+              parent="ps_colegio.menu_school"
+              action="grade_action"
+              sequence="50"
+              groups="ps_colegio.group_school_teacher,ps_colegio.group_school_manager"/>
+</odoo>

@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_student_grade_manager,access.student.grade.manager,model_school_grade,ps_colegio.group_school_manager,1,1,1,1
+access_student_grade_teacher,access.student.grade.teacher,model_school_grade,ps_colegio.group_school_teacher,1,1,1,1
+access_student_grade_line_manager,access.student.grade.line.manager,model_school_grade_line,ps_colegio.group_school_manager,1,1,1,1
+access_student_grade_line_teacher,access.student.grade.line.teacher,model_school_grade_line,ps_colegio.group_school_teacher,1,1,1,1

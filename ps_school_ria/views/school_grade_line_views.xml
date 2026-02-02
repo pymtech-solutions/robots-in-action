@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<odoo>
+    <record id="school_grade_line_view_list" model="ir.ui.view">
+        <field name="name">school.grade.line.view.list</field>
+        <field name="model">school.grade.line</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="cognitive_capacity"/>
+                <field name="dexterity"/>
+                <field name="logic_reasoning"/>
+                <field name="creativity"/>
+                <field name="learning_improvement"/>
+            </list>
+        </field>
+    </record>
+    <record id="school_grade_line_view_form" model="ir.ui.view">
+        <field name="name">school.grade.line.view.form</field>
+        <field name="model">school.grade.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="cognitive_capacity"/>
+                        <field name="dexterity"/>
+                        <field name="logic_reasoning"/>
+                        <field name="creativity"/>
+                    </group>
+                    <group>
+                        <field name="learning_improvement"/>
+                        <field name="teamwork"/>
+                        <field name="motivation"/>
+                        <field name="attitude"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="school_grade_line_view_search" model="ir.ui.view">
+        <field name="name">school.grade.line.view.search</field>
+        <field name="model">school.grade.line</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="cognitive_capacity" string="Capacidad cognitiva"/>
+                <field name="dexterity" string="Destreza manual"/>
+                <field name="logic_reasoning" string="Lógica y razonamiento"/>
+            </search>
+        </field>
+    </record>
+    <record id="school_grade_line_action" model="ir.actions.act_window">
+        <field name="name">school grade line</field>
+        <field name="res_model">school.grade.line</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <menuitem action="school_grade_line_action" id="menu_school_grade_line" name="school grade line" sequence="10"/>
+</odoo>
