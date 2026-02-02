@@ -7,18 +7,18 @@ from pygments.lexer import default
 _logger = logging.getLogger(__name__)
 
 
-class OeBoxes(models.Model):
-    """ This model represents oe.boxes."""
-    _name = 'oe.boxes'
-    _description = 'OeBoxes'
+class SchoolBox(models.Model):
+    """ This model represents the material boxes that can be used in a specific class."""
+    _name = 'school.box'
+    _description = 'Boxes'
 
     name = fields.Char(string='Nombre', required=True)
-    teacher_id = fields.Many2one(comodel_name='hr.employee', string='Profesor asignado',
-                                 domain=[('is_teacher', '=', True)])
+    teacher_ids = (fields.Many2many(comodel_name='hr.employee', string='Profesores asignado',
+                                    domain=[('is_teacher', '=', True)]))
 
-    oe_box_line_ids = fields.One2many(
-        'oe.boxes.line',
-        'oe_box_id',
+    box_line_ids = fields.One2many(
+        comodel_name='school.box.line',
+        inverse_name='box_id',
         copy=True,
         string='Box lines',
     )
@@ -27,7 +27,7 @@ class OeBoxes(models.Model):
                                     compute='_compute_products_ids')
 
     material_movement_ids = fields.One2many(
-        'oe.material.movement',
+        'school.material.movement',
         'box_id',
         string='Historial de movimientos'
     )
@@ -48,29 +48,29 @@ class OeBoxes(models.Model):
 
     def action_initial_replenishment(self):
         if not self.material_movement_ids:
-            return self.env['oe.material.movement'].create([{
+            return self.env['school.material.movement'].create([{
                 'box_id': self.id,
                 'notes': 'Reabastecimiento inicial de materiales.',
                 'movement_type': 'increment',
                 'product_id': line.product_id.id,
                 'qty': line.expected_quantity
-            } for line in self.oe_box_line_ids])
+            } for line in self.box_line_ids])
 
-    @api.depends('oe_box_line_ids.real_quantity', 'oe_box_line_ids.expected_quantity')
+    @api.depends('box_line_ids.real_quantity', 'box_line_ids.expected_quantity')
     def _compute_alert_icon(self):
         """ Calculate if there are any differences in materials """
         for record in self:
             has_difference = any(
                 line.real_quantity < line.expected_quantity
-                for line in record.oe_box_line_ids
+                for line in record.box_line_ids
             )
             record.differences = has_difference
             record.alert_icon = '<span class="text-warning">Diferencia de cantidades⚠️</span>' if has_difference else ''
 
-    @api.depends('oe_box_line_ids')
+    @api.depends('box_line_ids')
     def _compute_products_ids(self):
         for record in self:
-            record.products_ids = record.oe_box_line_ids.mapped('product_id')
+            record.products_ids = record.box_line_ids.mapped('product_id')
 
     def action_view_material_movements(self):
         """
@@ -80,7 +80,7 @@ class OeBoxes(models.Model):
         action = {
             'name': f'Movimientos de Materiales - {self.name}',
             'type': 'ir.actions.act_window',
-            'res_model': 'oe.material.movement',
+            'res_model': 'school.material.movement',
             'view_mode': 'list,form',
             'domain': [('box_id', '=', self.id)],
             'context': {
@@ -103,14 +103,14 @@ class OeBoxes(models.Model):
         }
 
 
-class OeBoxesLine(models.Model):
-    """ This model represents oe.boxes.line"""
-    _name = 'oe.boxes.line'
-    _description = 'OeBoxes.line'
+class SchoolBoxLine(models.Model):
+    """ This model represents the materials inside of a school box"""
+    _name = 'school.box.line'
+    _description = 'Material line inside a box'
 
     # Box
-    oe_box_id = fields.Many2one(comodel_name='oe.boxes', string='Boxes')
-    box_material_movement_ids = fields.One2many(related='oe_box_id.material_movement_ids',
+    box_id = fields.Many2one(comodel_name='school.box', string='Boxes')
+    box_material_movement_ids = fields.One2many(related='box_id.material_movement_ids',
                                                 string='Historial de movimientos')
 
     # Product
@@ -142,19 +142,19 @@ class OeBoxesLine(models.Model):
 
 
 # Nuevo modelo para líneas de materiales específicas de asistencia
-class OeAttendanceMaterialLine(models.Model):
-    _name = 'oe.attendance.material.line'
+class AttendanceMaterialLine(models.Model):
+    _name = 'school.attendance.material.line'
     _description = 'Attendance Material Line'
 
     attendance_id = fields.Many2one(
-        'oe.attendance',
+        comodel_name='school.attendance',
         string='Asistencia',
         required=True,
         ondelete='cascade'
     )
 
     product_id = fields.Many2one(
-        'product.product',
+        comodel_name='product.product',
         string='Producto',
         required=True
     )

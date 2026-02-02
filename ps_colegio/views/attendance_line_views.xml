@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <odoo>
     <!--List view-->
-    <record id="oe_attendance_line_view_list" model="ir.ui.view">
-        <field name="name">oe.attendance.line.view.list</field>
-        <field name="model">oe.attendance.line</field>
+    <record id="school_attendance_line_view_list" model="ir.ui.view">
+        <field name="name">school.attendance.line.view.list</field>
+        <field name="model">school.attendance.line</field>
         <field name="arch" type="xml">
             <list>
+                <field name="date"/>
                 <field name="school_id"/>
                 <field name="course_id"/>
                 <field name="student_id"/>
@@ -15,9 +16,9 @@
     </record>
 
     <!--Search view-->
-    <record id="oe_attendance_line_view_search" model="ir.ui.view">
-        <field name="name">oe.attendance.line.view.search</field>
-        <field name="model">oe.attendance.line</field>
+    <record id="school_attendance_line_view_search" model="ir.ui.view">
+        <field name="name">school.attendance.line.view.search</field>
+        <field name="model">school.attendance.line</field>
         <field name="arch" type="xml">
             <search>
                 <field name="school_id" string="Escuela"/>
@@ -27,17 +28,22 @@
                 <filter string="Curso" name="group_by_course" context="{'group_by': 'course_id'}"/>
                 <filter string="Alumno" name="group_by_student" context="{'group_by': 'student_id'}"/>
                 <filter string="Presente" name="group_by_attended" context="{'group_by': 'attended'}"/>
+                <filter string="Fecha" name="group_by_date" context="{'group_by': 'date'}"/>
             </search>
         </field>
     </record>
 
     <!--Action-->
-    <record id="oe_attendance_line_action" model="ir.actions.act_window">
-        <field name="name">oe attendance line</field>
-        <field name="res_model">oe.attendance.line</field>
-        <field name="view_mode">list</field>
+    <record id="school_attendance_line_action" model="ir.actions.act_window">
+        <field name="name">Attendance</field>
+        <field name="res_model">school.attendance.line</field>
+        <field name="view_mode">list,form</field>
     </record>
 
 
-    <menuitem action="oe_attendance_line_action" id="menu_oe_attendance_line" parent="menu_school_attendance" name="Lineas de asistencia" sequence="50"/>
+    <menuitem action="school_attendance_line_action"
+              id="menu_school_attendance_line"
+              parent="menu_school_attendance"
+              name="Lineas de asistencia"
+              sequence="50"/>
 </odoo>

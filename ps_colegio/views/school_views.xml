@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Institute Setup -->
+    <!--List view-->
+    <record id="school_list_view_inherit_school" model="ir.ui.view">
+        <field name="name">school.list.view.inherit.school</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name = 'complete_name']" position="after">
+                <field name="student_qty" invisible="not is_school"/>
+                <field name="active_student_qty" invisible="not is_school"/>
+                <field name="inactive_student_qty" invisible="not is_school"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Form view -->
     <record id="school_form_view_inherit" model="ir.ui.view">
         <field name="name">view.company.form.inherit</field>
         <field name="model">res.partner</field>
@@ -8,6 +22,9 @@
         <field name="arch" type="xml">
             <xpath expr="//group[1]/group[1]" position="inside">
                 <field name="is_school"/>
+                <field name="student_qty" invisible="not is_school"/>
+                <field name="active_student_qty" invisible="not is_school"/>
+                <field name="inactive_student_qty" invisible="not is_school"/>
             </xpath>
             <!-- Ocultar página de Contacts & Addresses -->
             <xpath expr="//page[@name='contact_addresses']" position="attributes">
@@ -33,7 +50,7 @@
                             <field name="teacher_ids" widget="many2many_tags"/>
                             <field name="schedule_ids" widget="many2many_tags"/>
                             <field name="start_date"/>
-                            <field name="student_ids" string="N Alumnos"/>
+                            <field name="student_qty"/>
                             <field name="end_date"/>
                             <field name="academic_period"/>
                         </list>

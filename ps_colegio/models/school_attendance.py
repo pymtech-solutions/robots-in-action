@@ -8,69 +8,45 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-class OeAttendance(models.Model):
-    _name = 'oe.attendance'
+class SchoolAttendance(models.Model):
+    _name = 'school.attendance'
     _description = 'Attendance tracking'
     _order = 'date desc, id desc'
 
-    date = fields.Date(
-        string='Fecha',
-        required=True,
-        default=fields.Date.today)
-
+    name = fields.Char(string='Asistencia', compute='_compute_name', store=True)
+    date = fields.Date(string='Fecha', required=True, default=fields.Date.today)
     course_line_id = fields.Many2one(
-        'oe.school.course.line',
+        comodel_name='school.course.line',
         string='Course',
         required=True,
         ondelete='cascade',
     )
-
-    course_schedule_ids = fields.Many2many(
-        related='course_line_id.schedule_ids',
-        string='Horario',
-    )
-
-    teacher_ids = fields.Many2many(
-        related='course_line_id.teacher_ids',
-        string='Profesores',
-    )
-
-    substitute_teacher_ids = fields.Many2many(
-        'hr.employee',
-        string="Profesores sustitutos"
-    )
-
+    course_schedule_ids = fields.Many2many(related='course_line_id.schedule_ids', string='Horario')
+    teacher_ids = fields.Many2many(related='course_line_id.teacher_ids', string='Profesores')
+    substitute_teacher_ids = fields.Many2many(comodel_name='hr.employee', string="Profesores sustitutos")
     attendance_line_ids = fields.One2many(
-        'oe.attendance.line',
-        'attendance_id',
+        comodel_name='school.attendance.line',
+        inverse_name='attendance_id',
         string='Registros de asistencia',
         store=True
     )
 
-    school_id = fields.Many2one(
-        related='course_line_id.school_id',
-        string='Colegio',
-    )
-
-    # Course box
+    school_id = fields.Many2one(related='course_line_id.school_id', string='Colegio', )
     box_ids = fields.Many2many(
         related='course_line_id.box_ids',
         string='Caja de materiales',
         help="Caja de materiales"
     )
-
-    # Movimientos de materiales relacionados
     material_movement_ids = fields.One2many(
-        'oe.material.movement',
-        'attendance_id',
+        comodel_name='school.material.movement',
+        inverse_name='attendance_id',
         string='Movimientos de materiales'
     )
 
-    # Estado de materiales
     materials_status = fields.Selection([
         ('review', 'Borrador'),
         ('closed', 'Cerrado'),
-    ], string='Estado de materiales', default='review')
+    ], string='Estado', default='review')
 
     def action_adjust_materials(self):
         self.ensure_one()
@@ -94,12 +70,10 @@ class OeAttendance(models.Model):
         return record
 
     def write(self, vals):
-        """
-        Override write para regenerar líneas cuando cambie course_line_id
-        """
         result = super().write(vals)
         if 'course_line_id' in vals:
             for record in self:
+                # Generate attendance lines after course line change
                 record._generate_attendance_lines()
         return result
 
@@ -113,15 +87,17 @@ class OeAttendance(models.Model):
 
             # Create a new attendance line for each student in the course line
             if record.course_line_id:
-                lines = [
-                    (0, 0, {
-                        'student_id': student.id,
-                        'attended': False
-                    })
-                    for student in record.course_line_id.student_ids
-                ]
+                lines = [(0, 0, {
+                    'student_id': student.id,
+                    'attended': False
+                }) for student in record.course_line_id.student_ids]
 
                 record.attendance_line_ids = lines
+
+    @api.depends('date', 'course_line_id')
+    def _compute_name(self):
+        for record in self:
+            record.name = f'Asistencia {record.date} - {record.course_line_id.name}'
 
     def action_view_material_movements(self):
         """
@@ -131,7 +107,7 @@ class OeAttendance(models.Model):
         action = {
             'name': f'Movimientos de Materiales - {self.course_line_id.name}',
             'type': 'ir.actions.act_window',
-            'res_model': 'oe.material.movement',
+            'res_model': 'school.material.movement',
             'view_mode': 'list,form',
             'domain': [('attendance_id', '=', self.id)],
             'context': {
@@ -141,34 +117,22 @@ class OeAttendance(models.Model):
         }
         return action
 
-    def action_close_materials(self):
-        """
-        Acción para cerrar la gestión de materiales y actualizar la caja original
-        """
+    def action_close_attendance(self):
         self.ensure_one()
         self.materials_status = 'closed'
 
-    def action_reopen_materials(self):
-        """
-        Acción para reabrir la asistencia y deshacer los movimientos de los materiales
-        """
+    def action_reopen_attendance(self):
         self.ensure_one()
-        self._undo_material_movements()
         self.materials_status = 'review'
 
-    def _undo_material_movements(self):
-        """
-        Deshace los movimientos creados anteriormente en la misma asistencia
-        """
+    def action_undo_material_movements(self):
         for record in self:
             if record.material_movement_ids:
                 record.material_movement_ids.unlink()
 
     @api.model
     def create_attendance_with_lines(self):
-        """
-        Método para crear asistencias automáticamente via cron.
-        """
+        """Create attendance records for today's course lines automatically via cron job"""
         try:
             _logger.info("Iniciando creación automática de asistencias...")
 
@@ -176,13 +140,13 @@ class OeAttendance(models.Model):
             today_weekday = today.weekday()
 
             weekday_mapping = {
-                0: '0',  # Lunes
+                0: '0',  # Monday
                 1: '1',
                 2: '2',
                 3: '3',
                 4: '4',
                 5: '5',
-                6: '6'  # Domingo
+                6: '6'  # Sunday
             }
 
             today_weekday_str = weekday_mapping.get(today_weekday)
@@ -191,7 +155,7 @@ class OeAttendance(models.Model):
                 return
 
             # Buscar líneas de curso con horario en el día de hoy
-            course_lines = self.env['oe.school.course.line'].search([
+            course_lines = self.env['school.course.line'].search([
                 ('schedule_ids.weekday', '=', today_weekday_str)
             ])
 
@@ -223,5 +187,3 @@ class OeAttendance(models.Model):
         except Exception as e:
             _logger.error(f"Error en create_attendance_with_lines: {str(e)}")
             raise
-
-

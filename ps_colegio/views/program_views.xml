@@ -3,7 +3,7 @@
     <!--Form view-->
     <record id="program_view_form" model="ir.ui.view">
         <field name="name">program.view.form</field>
-        <field name="model">oe.program</field>
+        <field name="model">school.program</field>
         <field name="arch" type="xml">
             <form string="Programa">
                 <sheet>
@@ -20,10 +20,10 @@
         </field>
     </record>
 
-
+    <!--Inherit chatter-->
     <record id="view_contrato_chatter_form_inherit" model="ir.ui.view">
-        <field name="name">oe.program.chatter</field>
-        <field name="model">oe.program</field>
+        <field name="name">school.program.chatter</field>
+        <field name="model">school.program</field>
         <field name="inherit_id" ref="program_view_form"/>
         <field name="arch" type="xml">
             <xpath expr="//form/sheet" position="after">
@@ -32,9 +32,10 @@
         </field>
     </record>
 
-    <record id="action_oe_school_program" model="ir.actions.act_window">
+    <!--Action-->
+    <record id="action_school_program" model="ir.actions.act_window">
         <field name="name">Programas</field>
-        <field name="res_model">oe.program</field>
+        <field name="res_model">school.program</field>
         <field name="view_mode">list,form</field>
         <field name="context">{}</field>
         <field name="help" type="html">
@@ -43,4 +44,12 @@
             </p>
         </field>
     </record>
+
+    <!--Menuitem-->
+    <menuitem name="Programs"
+              id="menu_school_programs"
+              parent="menu_school_courses"
+              action="action_school_program"
+              groups="ps_colegio.group_school_teacher,ps_colegio.group_school_manager"
+              sequence="3"/>
 </odoo>

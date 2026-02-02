@@ -27,34 +27,6 @@
             ]"/>
         </record>
 
-        <!-- Employees can't see other employees -->
-        <record id="hide_other_employees" model="ir.rule">
-            <field name="name">Employee: can only see their own employee record</field>
-            <field name="model_id" ref="hr.model_hr_employee"/>
-            <field name="domain_force">[
-                ('user_id', '=', user.id),
-            ]
-            </field>
-            <field name="groups" eval="[(4, ref('group_school_teacher'))]"/>
-            <field name="perm_read" eval="True"/>
-            <field name="perm_write" eval="True"/>
-            <field name="perm_create" eval="True"/>
-            <field name="perm_unlink" eval="False"/>
-        </record>
-
-        <!-- Managers can see all employees -->
-        <record id="manager_see_all_employees" model="ir.rule">
-            <field name="name">Manager: can see all employees</field>
-            <field name="model_id" ref="hr.model_hr_employee"/>
-            <field name="domain_force">[(1, '=', 1)]</field>
-            <field name="groups" eval="[(4, ref('group_school_manager'))]"/>
-            <field name="perm_read" eval="True"/>
-            <field name="perm_write" eval="True"/>
-            <field name="perm_create" eval="True"/>
-            <field name="perm_unlink" eval="True"/>
-        </record>
-
-
         <!-- Regla para res.partner impedir que los profesores puedan ver alumnos y colegios en donde no esta asignado -->
         <record id="partner_school_rule" model="ir.rule">
             <field name="name">Partner: School Access Rule</field>
@@ -94,9 +66,10 @@
             <field name="perm_unlink" eval="True"/>
         </record>
 
-        <record id="partner_attendance_rule" model="ir.rule">
-            <field name="name">Attendance: School Access Rule</field>
-            <field name="model_id" ref="model_oe_attendance"/>
+        <!--Teachers can only see attendances where they are assigned-->
+        <record id="attendance_teacher_rule" model="ir.rule">
+            <field name="name">Attendance: Teacher Own Records</field>
+            <field name="model_id" ref="model_school_attendance"/>
             <field name="domain_force">
                 [
                     '|',
@@ -113,24 +86,22 @@
             <field name="perm_unlink" eval="False"/>
         </record>
 
-
-        <record id="partner_assessment_rule" model="ir.rule">
-            <field name="name">Assessment: School Access Rule</field>
-            <field name="model_id" ref="model_oe_assessment"/>
-            <field name="domain_force">[('teacher_ids', 'in', [user.employee_id.id]), ('school_id', 'in',
-                                                                                       user.school_ids.ids)]
-            </field>
-            <field name="groups" eval="[(4, ref('group_school_teacher'))]"/>
+        <!--Administrators can see all attendances-->
+        <record id="attendance_manager_rule" model="ir.rule">
+            <field name="name">Attendance: Manager Full Access</field>
+            <field name="model_id" ref="model_school_attendance"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('group_school_manager'))]"/>
             <field name="perm_read" eval="True"/>
             <field name="perm_write" eval="True"/>
             <field name="perm_create" eval="True"/>
-            <field name="perm_unlink" eval="False"/>
+            <field name="perm_unlink" eval="True"/>
         </record>
 
         <!-- Regla para oe.attendance.line: profesores solo ven registros de su colegio y cursos asignados -->
         <record id="attendance_line_teacher_rule" model="ir.rule">
             <field name="name">Attendance Line: Teacher Access Rule</field>
-            <field name="model_id" ref="model_oe_attendance_line"/>
+            <field name="model_id" ref="model_school_attendance_line"/>
             <field name="domain_force">
                 [
                     # '&amp;',
@@ -148,7 +119,32 @@
         <!-- Regla para oe.attendance.line: administradores ven todos los registros -->
         <record id="attendance_line_manager_rule" model="ir.rule">
             <field name="name">Attendance Line: Manager can see all records</field>
-            <field name="model_id" ref="model_oe_attendance_line"/>
+            <field name="model_id" ref="model_school_attendance_line"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('group_school_manager'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+        <!-- Regla para oe.course.line: profesores solo ven sus líneas de curso asignadas -->
+        <record id="course_line_teacher_rule" model="ir.rule">
+            <field name="name">Course Line: Teacher Access Rule</field>
+            <field name="model_id" ref="model_school_course_line"/>
+            <field name="domain_force">[('teacher_ids', 'in', [user.employee_id.id]),
+                                        ('school_id', 'in', user.school_ids.ids)]</field>
+            <field name="groups" eval="[(4, ref('group_school_teacher'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <!-- Regla para oe.course.line: administradores ven todas las líneas de curso -->
+        <record id="course_line_manager_rule" model="ir.rule">
+            <field name="name">Course Line: Manager Full Access</field>
+            <field name="model_id" ref="model_school_course_line"/>
             <field name="domain_force">[(1, '=', 1)]</field>
             <field name="groups" eval="[(4, ref('group_school_manager'))]"/>
             <field name="perm_read" eval="True"/>

@@ -7,7 +7,7 @@ class RefillBoxMaterial(models.TransientModel):
     _name = 'adjust.box.material'
     _description = 'Wizard para reponer productos'
 
-    box_id = fields.Many2one(comodel_name='oe.boxes', string='Caja', required=True)
+    box_id = fields.Many2one(comodel_name='school.box', string='Caja', required=True)
     box_product_ids = fields.Many2many(related='box_id.products_ids', string='Productos de la caja')
     product_id = fields.Many2one(comodel_name='product.product', string='Producto', required=True)
 
@@ -43,7 +43,7 @@ class RefillBoxMaterial(models.TransientModel):
         """
         Create a new material movement line
         """
-        self.env['oe.material.movement'].create({
+        self.env['school.material.movement'].create({
             'box_id': self.box_id.id,
             'product_id': self.product_id.id,
             'qty': self.qty if self.movement_type == 'increment' else -self.qty,

@@ -2,74 +2,28 @@
 from random import randint
 
 from odoo import api, fields, models, _
-from odoo.exceptions import UserError, AccessError
+from odoo.exceptions import UserError, AccessError, ValidationError
 import logging
 
 _logger = logging.getLogger(__name__)
 
 
-
-
-
-class OeSchoolCourse(models.Model):
-    _name = 'oe.school.course'
-    _description = 'Course'
-    _order = 'name'
-
-    name = fields.Char(
-        string='Nombre del curso',
-        required=True,
-        index=True,
-        translate=True
-    )
-
-    # Programas asociados
-    program_ids = fields.Many2many(
-        'oe.program',
-        string="Programas"
-    )
-
-    # Líneas de curso (One2many - un curso puede tener varias líneas en diferentes escuelas)
-    course_line_ids = fields.One2many(
-        'oe.school.course.line',
-        'course_id',
-        string="Líneas de Curso"
-    )
-
-    # Color del curso, se escoge un color aleatorio entre 1 y 11
-    color = fields.Integer(default=lambda self: randint(1, 11))
-
-
-# Linea de curso
-class OeSchoolCourseLine(models.Model):
-    _name = 'oe.school.course.line'
+class SchoolCourseLine(models.Model):
+    _name = 'school.course.line'
     _description = 'Course Line'
     _rec_name = 'name'
 
-    # Campo 'name' calculado para el display
-    name = fields.Char(
-        string='Línea de Curso',
-        compute='_compute_name',
-        store=False,
-    )
-
-    # Campo display_name explícito
-    display_name = fields.Char(
-        string='Display Name',
-        compute='_compute_display_name',
-        store=False,
-    )
-
-    # CAMPOS CLAVE: Relaciones principales
+    name = fields.Char(string='Línea de Curso', compute='_compute_name', store=False)
+    display_name = fields.Char(string='Display Name', compute='_compute_display_name', store=False)
+    program_id = fields.Many2one(comodel_name='school.program', string='Programa')
     course_id = fields.Many2one(
-        'oe.school.course',
+        comodel_name='school.course',
         string='Grupo',
         required=True,
         ondelete='cascade'
     )
-
     related_program_ids = fields.Many2many(
-        'oe.program',
+        comodel_name='school.program',
         string='Programas relacionados',
         compute='_compute_related_program_ids',
         store=False,
@@ -79,11 +33,6 @@ class OeSchoolCourseLine(models.Model):
     def _compute_related_program_ids(self):
         for record in self:
             record.related_program_ids = record.course_id.program_ids
-
-    program_id = fields.Many2one(
-        'oe.program',
-        string='Programa',
-    )
 
     # School related to this course line
     school_id = fields.Many2one(
@@ -103,6 +52,7 @@ class OeSchoolCourseLine(models.Model):
         string="Alumnos",
         domain=[('is_student', '=', True)],
     )
+    student_qty = fields.Integer(string='Students', compute='_compute_student_qty', store=True)
 
     # Profesores asociados a la línea de curso
     teacher_ids = fields.Many2many(
@@ -115,32 +65,35 @@ class OeSchoolCourseLine(models.Model):
     )
 
     # Horarios asociados a la línea de curso
-    schedule_ids = fields.Many2many(
-        'oe.school.schedule',
-        string='Horarios',
-    )
-
+    schedule_ids = fields.Many2many(comodel_name='school.schedule', string='Horarios', )
     attendance_ids = fields.One2many(
-        'oe.attendance',
-        'course_line_id',
+        comodel_name='school.attendance',
+        inverse_name='course_line_id',
         string='Asistencias'
     )
-
     # Fechas del curso
-    start_date = fields.Date(string='Fecha de inicio')
-    end_date = fields.Date(string='Fecha de fin')
-
-    # Academic year
-    academic_period = fields.Char(
-        string="Periodo academico",
-    )
+    start_date = fields.Date(string='Start', required=True)
+    end_date = fields.Date(string='End', required=True)
+    academic_period = fields.Char(string="Periodo académico")
 
     # This course material box
     box_ids = fields.Many2many(
-        'oe.boxes',
+        comodel_name='school.box',
         string='Caja de materiales',
         help="Caja de materiales"
     )
+
+    @api.depends('student_ids')
+    def _compute_student_qty(self):
+        for record in self:
+            record.student_qty = len(record.student_ids)
+
+    @api.constrains('start_date', 'end_date')
+    def _check_dates(self):
+        """ Verify that the end date is after the start date """
+        for record in self:
+            if record.start_date and record.end_date and record.end_date <= record.start_date:
+                raise ValidationError(f"End date of program {record.program_id.name} must be after start date.")
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -273,46 +226,3 @@ class OeSchoolCourseLine(models.Model):
                 _logger.error(f"Error in name_get for course line {record.id}: {str(e)}")
                 result.append((record.id, f'Error #{record.id}' if record.id else 'Error'))
         return result
-
-
-# Modelo nuevo para horarios
-class OeSchedule(models.Model):
-    _name = 'oe.school.schedule'
-    _description = 'Schedule'
-    _order = 'name'
-
-    name = fields.Char(string='Horario', compute='_compute_name', store=True)
-
-    # Horarios
-    start_hour = fields.Float(
-        string='Hora de inicio',
-        required=True,
-        default=8.0,
-    )
-    end_hour = fields.Float(
-        string='Hora de fin',
-        required=True,
-        default=10.0,
-    )
-    weekday = fields.Selection([
-        ('0', 'Lunes'),
-        ('1', 'Martes'),
-        ('2', 'Miércoles'),
-        ('3', 'Jueves'),
-        ('4', 'Viernes'),
-        ('5', 'Sábado'),
-        ('6', 'Domingo')
-    ], string='Día de la semana', default='0', required=True)
-
-    weekday_name = fields.Char(compute='_compute_weekday_name', store=True)
-
-    @api.depends('weekday')
-    def _compute_weekday_name(self):
-        weekday_dict = dict(self._fields['weekday'].selection)
-        for record in self:
-            record.weekday_name = weekday_dict.get(record.weekday, '')
-
-    @api.depends('start_hour', 'end_hour', 'weekday')
-    def _compute_name(self):
-        for record in self:
-            record.name = f"{record.weekday_name} {record.start_hour} - {record.end_hour}"

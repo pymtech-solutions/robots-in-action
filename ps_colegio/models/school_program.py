@@ -2,8 +2,8 @@
 from odoo import api, fields, models
 
 
-class OeProgram(models.Model):
-    _name = 'oe.program'
+class SchoolProgram(models.Model):
+    _name = 'school.program'
     _description = 'Program'
     _order = 'name'
     _inherit = ['mail.thread', 'mail.activity.mixin']
@@ -14,6 +14,6 @@ class OeProgram(models.Model):
     )
 
     course_id = fields.Many2many(
-        'oe.school.course',
+        'school.course',
         string='Curso',
     )

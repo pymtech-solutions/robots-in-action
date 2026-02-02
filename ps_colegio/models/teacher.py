@@ -3,40 +3,11 @@ from odoo import api, fields, models, _
 from odoo.exceptions import UserError, ValidationError
 
 
-class User(models.Model):
-    _inherit = 'res.users'
-
-    school_ids = fields.Many2many(
-        related='employee_ids.school_ids',
-        string='Colegios',
-    )
-
-    @api.model
-    def get_user_schools_domain(self):
-        """
-        Helper method to get schools domain for the current user
-        Can be used in other parts of the application
-        """
-        return [('id', 'in', self.env.user.school_ids.ids)]
-
-    @api.model
-    def get_user_schools_ids(self):
-        """
-        Método específico para usar en reglas de seguridad
-        Retorna solo los IDs de los colegios del usuario
-        """
-        return self.env.user.school_ids.ids
 
 class HrEmployee(models.Model):
     _inherit = 'hr.employee'
 
     is_teacher = fields.Boolean('Es profesor')
-
-    genero = fields.Selection([
-        ('M', 'Masculino'),
-        ('F', 'Femenino'),
-        ('O', 'Otro'),
-    ], string='Género')
 
     student_ids = fields.Many2many(
         'res.partner',
@@ -53,7 +24,7 @@ class HrEmployee(models.Model):
     )
 
     subject_line_ids = fields.Many2many(
-        'oe.school.course.line',
+        'school.course.line',
         'course_line_teacher_rel',  # Misma tabla intermedia
         'teacher_id',  # Campo inverso
         'course_line_id',  # Campo directo
@@ -87,7 +58,7 @@ class HrEmployee(models.Model):
     def _compute_student_ids(self):
         for record in self:
             # Filtrar solo las líneas donde el empleado es profesor y obtener estudiantes
-            teacher_lines = self.env['oe.school.course.line'].search([
+            teacher_lines = self.env['school.course.line'].search([
                 ('teacher_ids', 'in', record.id)
             ])
 
@@ -101,7 +72,7 @@ class HrEmployee(models.Model):
 
         for record in self:
             # Filtrar solo las líneas donde el empleado es profesor y obtener escuelas
-            teacher_lines = self.env['oe.school.course.line'].search([
+            teacher_lines = self.env['school.course.line'].search([
                 ('teacher_ids', 'in', record.id)
             ])
 

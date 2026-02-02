@@ -1,7 +1,7 @@
 <odoo>
     <record id="material_movement_list_view" model="ir.ui.view">
         <field name="name">material.movement.list.view</field>
-        <field name="model">oe.material.movement</field>
+        <field name="model">school.material.movement</field>
         <field name="arch" type="xml">
             <list default_group_by="date">
                 <field name="date"/>
@@ -17,7 +17,7 @@
 
     <record id="material_movement_form_view" model="ir.ui.view">
         <field name="name">material.movement.form.view</field>
-        <field name="model">oe.material.movement</field>
+        <field name="model">school.material.movement</field>
         <field name="arch" type="xml">
             <form string="Movimiento de Material">
                 <group>
@@ -40,7 +40,7 @@
     <!-- Action para Material Movements -->
     <record id="material_movement_action" model="ir.actions.act_window">
         <field name="name">Movimientos de Materiales</field>
-        <field name="res_model">oe.material.movement</field>
+        <field name="res_model">school.material.movement</field>
         <field name="view_mode">list,form</field>
     </record>
 </odoo>

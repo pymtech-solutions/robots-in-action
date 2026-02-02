@@ -2,45 +2,14 @@
 <odoo>
     <data>
         <!-- Menú principal -->
-        <menuitem name="Escuela"
+        <menuitem name="School"
                   id="menu_school"
                   web_icon="ps_colegio,static/description/icon.png"
                   sequence="55"
                   groups="ps_colegio.group_school_teacher,ps_colegio.group_school_manager"/>
 
-        <!-- Menús de primer nivel -->
-        <menuitem name="Profesores"
-                  id="menu_school_teachers"
-                  parent="menu_school"
-                  sequence="10"
-                  groups="ps_colegio.group_school_teacher,ps_colegio.group_school_manager"/>
-
-        <menuitem name="Alumnos"
-                  id="menu_school_students"
-                  parent="menu_school"
-                  sequence="20"
-                  groups="ps_colegio.group_school_teacher,ps_colegio.group_school_manager"/>
-
-        <menuitem name="Cursos"
-                  id="menu_school_courses"
-                  parent="menu_school"
-                  sequence="30"
-                  groups="ps_colegio.group_school_teacher,ps_colegio.group_school_manager"/>
-
-<!--        Submenu for courses schedule-->
-        <menuitem name="Horarios"
-                  id="menu_school_schedule_category"
-                  parent="menu_school_courses"
-                  groups="ps_colegio.group_school_teacher,ps_colegio.group_school_manager"
-                  sequence="20"/>
 
 
-        <menuitem name="Notas"
-                  id="assessment_menu"
-                  parent="menu_school"
-                  action="assessment_action"
-                  sequence="50"
-                  groups="ps_colegio.group_school_teacher,ps_colegio.group_school_manager"/>
 
         <menuitem name="Materiales"
                   id="menu_school_materials"

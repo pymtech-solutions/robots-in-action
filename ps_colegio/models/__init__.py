@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
 
-from . import courses
-from . import oe_assessment
-from . import oe_attendance
-from . import oe_boxes
-from . import product
-from . import resource_calendar
+from . import school_course
+from . import school_course_line
+from . import school_attendance
+from . import school_box
+from . import product_template
 from . import schools
-from . import section
+from . import school_section
 from . import student
 from . import teacher
-from . import oe_material_movement
-from . import oe_program
-from . import oe_attendance_line
+from . import school_material_movement
+from . import school_program
+from . import school_attendance_line
+from . import school_schedule
+from . import res_users

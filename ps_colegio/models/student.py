@@ -17,14 +17,9 @@ class ResPartner(models.Model):
     is_parent = fields.Boolean('Es padre/madre')
 
     # Related school
-    school_id = fields.Many2one(
-        'res.partner',
-        string='Colegio',
-        domain="[('is_school', '=', True)]",
-    )
-
+    school_id = fields.Many2one(comodel_name='res.partner', string='Colegio', domain="[('is_school', '=', True)]")
     student_course_line_ids = fields.Many2many(
-        'oe.school.course.line',
+        'school.course.line',
         'course_line_student_rel',  # Misma tabla intermedia
         'student_id',  # Columna para student
         'course_line_id',  # Columna para course_line
@@ -41,13 +36,6 @@ class ResPartner(models.Model):
         ('inactive', 'Baja'),
     ],
         string='Estado', default='active'
-    )
-
-    # Student assessment
-    assessment_ids = fields.One2many(
-        'oe.assessment.line',
-        'student_id',
-        string='Evaluaciones1'
     )
 
     # Demographic Info
@@ -69,12 +57,6 @@ class ResPartner(models.Model):
     student_emergency_contact = fields.Char('Emergency Contact Name')
     student_emergency_phone = fields.Char('Emergency Contact Number')
 
-    def _compute_enrollment_count(self):
-        enrollment_ids = self.env['oe.school.student.enrollment']
-        for record in self:
-            record.enrollment_count = len(
-                enrollment_ids.search([('model', '=', self._name), ('res_id', '=', record.id)]))
-
     @api.depends('parent_id')
     def _compute_parent(self):
         for record in self:
@@ -85,31 +67,3 @@ class ResPartner(models.Model):
 
     def attach_document(self, **kwargs):
         pass
-
-    def open_assessment_info(self):
-        action = self.env.ref('ps_colegio.assessment_action').read()[0]
-        action.update({
-            'name': 'Assessment History',
-            'view_mode': 'list',
-            'res_model': 'oe.assessment.line',
-            'type': 'ir.actions.act_window',
-            'domain': [('student_id', '=', self.id)],
-            'context': {
-                'default_student_id': self.id,
-            }
-        })
-        return action
-
-    def open_medical_info(self):
-        action = self.env.ref('ps_colegio.action_medical_history').read()[0]
-        action.update({
-            'name': 'Medical History',
-            'view_mode': 'list',
-            'res_model': 'oe.school.student.medical',
-            'type': 'ir.actions.act_window',
-            'domain': [('student_id', '=', self.id)],
-            'context': {
-                'default_student_id': self.id,
-            },
-        })
-        return action
