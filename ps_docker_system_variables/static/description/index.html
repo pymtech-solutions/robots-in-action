@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+
+<div style="display: flex; flex-direction: column; align-items: center; padding: 20px; font-family: Arial, sans-serif;">
+    <img src="icon.png" style="width: 100px; height: 100px; margin-bottom: 20px;">
+    <h1 style="color: #2c3e50; margin-bottom: 20px;">Modulo creado por Pymtech Solutions</h1>
+    
+    <div style="width: 90%; max-width: 800px; margin: 20px 0;">
+        <h4 style="color: #34495e; margin-bottom: 15px; text-align: left;">
+            Este módulo añade las variables necesarias del sistema para el correcto funcionamiento de Odoo en docker:
+        </h4>
+        
+        <table style="width: 100%; border-collapse: collapse; margin-top: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+            <thead>
+                <tr style="background-color: #3498db;">
+                    <th style="border: 1px solid #2980b9; padding: 12px 15px; text-align: left; color: white; font-weight: bold;">Clave</th>
+                    <th style="border: 1px solid #2980b9; padding: 12px 15px; text-align: left; color: white; font-weight: bold;">Valor</th>
+                    <th style="border: 1px solid #2980b9; padding: 12px 15px; text-align: left; color: white; font-weight: bold;">Descripción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="background-color: #ecf0f1;">
+                    <td style="border: 1px solid #bdc3c7; padding: 12px 15px; color: #2c3e50; font-family: 'Courier New', monospace; font-weight: bold;">report.url</td>
+                    <td style="border: 1px solid #bdc3c7; padding: 12px 15px; color: #2c3e50;">http://localhost:8069</td>
+                    <td style="border: 1px solid #bdc3c7; padding: 12px 15px; color: #2c3e50;">Url interna utilizada por wkhtmltopdf para generar los reportes pdf</td>
+                </tr>
+                <tr style="background-color: #ffffff;">
+                    <td style="border: 1px solid #bdc3c7; padding: 12px 15px; color: #2c3e50; font-family: 'Courier New', monospace; font-weight: bold;">web.base.url.freeze</td>
+                    <td style="border: 1px solid #bdc3c7; padding: 12px 15px; color: #2c3e50;">True</td>
+                    <td style="border: 1px solid #bdc3c7; padding: 12px 15px; color: #2c3e50;">Necesario usar en conjunción con report.url para que wkhtmltopdf funcione correctamente</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
