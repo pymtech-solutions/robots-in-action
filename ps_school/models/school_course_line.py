@@ -16,6 +16,13 @@ class SchoolCourseLine(models.Model):
     name = fields.Char(string='Línea de Curso', compute='_compute_name', store=False)
     display_name = fields.Char(string='Display Name', compute='_compute_display_name', store=False)
     program_id = fields.Many2one(comodel_name='school.program', string='Programa')
+    school_id = fields.Many2one(
+        comodel_name='res.partner',
+        string='Escuela',
+        required=True,
+        domain=[('is_school', '=', True)],
+        ondelete='cascade'
+    )
     course_id = fields.Many2one(
         comodel_name='school.course',
         string='Grupo',
@@ -28,22 +35,6 @@ class SchoolCourseLine(models.Model):
         compute='_compute_related_program_ids',
         store=False,
     )
-
-    @api.depends('course_id')
-    def _compute_related_program_ids(self):
-        for record in self:
-            record.related_program_ids = record.course_id.program_ids
-
-    # School related to this course line
-    school_id = fields.Many2one(
-        'res.partner',
-        string='Escuela',
-        required=True,
-        domain=[('is_school', '=', True)],
-        ondelete='cascade'
-    )
-
-    # Students related to this course line
     student_ids = fields.Many2many(
         'res.partner',
         'course_line_student_rel',
@@ -53,40 +44,38 @@ class SchoolCourseLine(models.Model):
         domain=[('is_student', '=', True)],
     )
     student_qty = fields.Integer(string='Students', compute='_compute_student_qty', store=True)
-
-    # Profesores asociados a la línea de curso
+    active_student_qty = fields.Integer(string='Active Students', compute='_compute_student_qty', store=True)
+    inactive_student_qty = fields.Integer(string='Inactive Students', compute='_compute_student_qty', store=True)
     teacher_ids = fields.Many2many(
         'hr.employee',
         'course_line_teacher_rel',
         'course_line_id',
         'teacher_id',
         string="Profesores",
-        domain=[('is_teacher', '=', True)]
+        domain=[('is_teacher', '=',True)]
     )
-
-    # Horarios asociados a la línea de curso
     schedule_ids = fields.Many2many(comodel_name='school.schedule', string='Horarios', )
     attendance_ids = fields.One2many(
         comodel_name='school.attendance',
         inverse_name='course_line_id',
         string='Asistencias'
     )
-    # Fechas del curso
     start_date = fields.Date(string='Start', required=True)
     end_date = fields.Date(string='End', required=True)
     academic_period = fields.Char(string="Periodo académico")
+    box_ids = fields.Many2many(comodel_name='school.box', string='Caja de materiales', help="Caja de materiales")
 
-    # This course material box
-    box_ids = fields.Many2many(
-        comodel_name='school.box',
-        string='Caja de materiales',
-        help="Caja de materiales"
-    )
+    @api.depends('course_id')
+    def _compute_related_program_ids(self):
+        for record in self:
+            record.related_program_ids = record.course_id.program_ids
 
     @api.depends('student_ids')
     def _compute_student_qty(self):
         for record in self:
             record.student_qty = len(record.student_ids)
+            record.active_student_qty = len(record.student_ids.filtered(lambda s: s.enrollment_state == 'active'))
+            record.inactive_student_qty = len(record.student_ids.filtered(lambda s: s.enrollment_state == 'inactive'))
 
     @api.constrains('start_date', 'end_date')
     def _check_dates(self):
