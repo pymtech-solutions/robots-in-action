@@ -105,6 +105,6 @@
               id="menu_school_schools"
               parent="menu_school"
               action="action_school_setup"
-              groups="ps_colegio.group_school_teacher,ps_colegio.group_school_manager"
+              groups="ps_school.group_school_teacher,ps_school.group_school_manager"
               sequence="90"/>
 </odoo>

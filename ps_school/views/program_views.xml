@@ -15,6 +15,16 @@
                     <group>
                         <field name="course_id" widget="many2many_tags"/>
                     </group>
+                    <notebook>
+                        <page string="Materias">
+                            <field name="subject_ids">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="code"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>
@@ -46,10 +56,10 @@
     </record>
 
     <!--Menuitem-->
-    <menuitem name="Programs"
+    <menuitem name="Programas"
               id="menu_school_programs"
               parent="menu_school_courses"
               action="action_school_program"
-              groups="ps_colegio.group_school_teacher,ps_colegio.group_school_manager"
+              groups="ps_school.group_school_teacher,ps_school.group_school_manager"
               sequence="3"/>
 </odoo>

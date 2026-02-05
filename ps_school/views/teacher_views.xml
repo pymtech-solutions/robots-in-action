@@ -104,13 +104,19 @@
                 (0, 0, {'view_mode': 'form', 'view_id': ref('hr.view_employee_form')})]"/>
         </record>
 
+        <!--Main school menu-->
+        <menuitem name="School"
+                  id="menu_school"
+                  web_icon="ps_school,static/description/icon.png"
+                  sequence="55"
+                  groups="ps_school.group_school_teacher,ps_school.group_school_manager"/>
 
         <!--Menu item-->
         <menuitem name="Profesores"
                   id="menu_school_teachers_list"
                   parent="menu_school"
                   action="action_hr_employees_teachers"
-                  groups="ps_colegio.group_school_teacher,ps_colegio.group_school_manager"
+                  groups="ps_school.group_school_teacher,ps_school.group_school_manager"
                   sequence="1"/>
     </data>
 </odoo>

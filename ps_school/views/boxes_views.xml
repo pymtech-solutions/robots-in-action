@@ -96,6 +96,12 @@
         <field name="context">{'search_default_differences': 1}</field>
     </record>
 
+    <!--Father menu for materials-->
+    <menuitem name="Materiales"
+              id="menu_school_materials"
+              parent="menu_school"
+              sequence="60"
+              groups="ps_school.group_school_teacher,ps_school.group_school_manager"/>
 
     <!-- Menu for material boxes -->
     <menuitem name="Cajas de Materiales"

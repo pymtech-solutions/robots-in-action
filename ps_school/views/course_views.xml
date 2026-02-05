@@ -91,14 +91,14 @@
                   id="menu_school_courses"
                   parent="menu_school"
                   sequence="30"
-                  groups="ps_colegio.group_school_teacher,ps_colegio.group_school_manager"/>
+                  groups="ps_school.group_school_teacher,ps_school.group_school_manager"/>
 
         <!--Child menuitem-->
         <menuitem name="Cursos"
                   id="menu_school_courses_list"
                   parent="menu_school_courses"
                   action="action_school_course"
-                  groups="ps_colegio.group_school_teacher,ps_colegio.group_school_manager"
+                  groups="ps_school.group_school_teacher,ps_school.group_school_manager"
                   sequence="1"/>
     </data>
 </odoo>

@@ -14,3 +14,4 @@ from . import school_program
 from . import school_attendance_line
 from . import school_schedule
 from . import res_users
+from . import school_subject

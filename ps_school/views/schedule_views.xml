@@ -37,10 +37,10 @@
     </record>
 
     <!--Menuitem-->
-    <menuitem name="Schedules"
+    <menuitem name="Horarios"
               id="menu_school_schedule_list"
               parent="menu_school_courses"
               action="action_school_schedule"
-              groups="ps_colegio.group_school_teacher,ps_colegio.group_school_manager"
+              groups="ps_school.group_school_teacher,ps_school.group_school_manager"
               sequence="20"/>
 </odoo>

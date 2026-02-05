@@ -32,11 +32,11 @@ class SchoolAttendance(models.Model):
     )
 
     school_id = fields.Many2one(related='course_line_id.school_id', string='Colegio', )
-    box_ids = fields.Many2many(
-        related='course_line_id.box_ids',
-        string='Caja de materiales',
-        help="Caja de materiales"
-    )
+    program_id = fields.Many2one(related='course_line_id.program_id', string='Programa')
+    program_subject_ids = fields.Many2many(comodel_name='school.subject', string='Materias del programa',
+                                           compute='_compute_program_subjects', store=True)
+    subject_id = fields.Many2one(comodel_name='school.subject', string='Materia')
+    box_ids = fields.Many2many(related='course_line_id.box_ids', string='Caja de materiales')
     material_movement_ids = fields.One2many(
         comodel_name='school.material.movement',
         inverse_name='attendance_id',
@@ -47,6 +47,11 @@ class SchoolAttendance(models.Model):
         ('review', 'Borrador'),
         ('closed', 'Cerrado'),
     ], string='Estado', default='review')
+
+    @api.depends('program_id')
+    def _compute_program_subjects(self):
+        for record in self:
+            record.program_subject_ids = record.course_line_id.program_id.subject_ids
 
     def action_adjust_materials(self):
         self.ensure_one()

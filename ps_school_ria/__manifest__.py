@@ -10,7 +10,7 @@
     'author': 'Pymtech solutions',
     'company': 'Pymtech solutions',
     'maintainer': 'Pymtech solutions',
-    'depends': ['base', 'hr', 'contacts', 'product', 'mail', 'calendar', 'web', 'ps_colegio'],
+    'depends': ['base', 'hr', 'contacts', 'product', 'mail', 'calendar', 'web', 'ps_school'],
     'data': [
         'security/ir.model.access.csv',
         'security/school_security.xml',

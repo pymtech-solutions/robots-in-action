@@ -21,7 +21,7 @@
         <record id="student_primary_form_view" model="ir.ui.view">
             <field name="name">student.form.view</field>
             <field name="model">res.partner</field>
-            <field name="inherit_id" ref="ps_colegio.view_partner_form_inherit_student"/>
+            <field name="inherit_id" ref="ps_school.view_partner_form_inherit_student"/>
             <field name="mode">primary</field>
             <field name="priority">0</field>
             <field name="arch" type="xml">
@@ -275,6 +275,6 @@
               id="menu_school_students_list"
               parent="menu_school"
               action="action_res_partner_student"
-              groups="ps_colegio.group_school_teacher,ps_colegio.group_school_manager"
+              groups="ps_school.group_school_teacher,ps_school.group_school_manager"
               sequence="20"/>
 </odoo>

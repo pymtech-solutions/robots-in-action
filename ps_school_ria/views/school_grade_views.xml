@@ -4,7 +4,7 @@
     <record id="student_form_view_grade_button" model="ir.ui.view">
         <field name="name">res.partner.form.grade.button</field>
         <field name="model">res.partner</field>
-        <field name="inherit_id" ref="ps_colegio.student_primary_form_view"/>
+        <field name="inherit_id" ref="ps_school.student_primary_form_view"/>
         <field name="arch" type="xml">
             <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
                 <button name="open_grade_info"
@@ -106,8 +106,8 @@
     <!--Menu-->
     <menuitem name="Notas"
               id="grade_menu"
-              parent="ps_colegio.menu_school"
+              parent="ps_school.menu_school"
               action="grade_action"
               sequence="50"
-              groups="ps_colegio.group_school_teacher,ps_colegio.group_school_manager"/>
+              groups="ps_school.group_school_teacher,ps_school.group_school_manager"/>
 </odoo>
