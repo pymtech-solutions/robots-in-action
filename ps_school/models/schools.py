@@ -3,7 +3,6 @@ import logging
 
 from odoo import api, fields, models, tools, _
 from odoo.exceptions import ValidationError, UserError
-from odoo.modules.module import get_resource_path
 
 _logger = logging.getLogger(__name__)
 
@@ -30,3 +29,28 @@ class School(models.Model):
                 school.course_line_ids.mapped('student_ids').filtered(lambda s: s.enrollment_state == 'active'))
             school.inactive_student_qty = len(
                 school.course_line_ids.mapped('student_ids').filtered(lambda s: s.enrollment_state == 'inactive'))
+
+    def action_create_school_invoice(self):
+        for record in self:
+            # Get the product
+            product = self.env.ref('ps_school.active_student_product')
+            invoice = record.env['account.move'].create({
+                'move_type': 'out_invoice',
+                'partner_id': record.id,
+                'invoice_date': fields.Date.today(),
+                'invoice_line_ids': [(0, 0, {
+                    'product_id': product.id,
+                    'quantity': record.active_student_qty,
+                    'tax_ids': [(6, 0, product.taxes_id.ids)],
+                    'price_unit': product.list_price
+                })],
+            })
+
+            return {
+                'type': 'ir.actions.act_window',
+                'name': 'Factura',
+                'res_model': 'account.move',
+                'view_mode': 'form',
+                'res_id': invoice.id,
+                'target': 'current',
+            }

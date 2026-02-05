@@ -14,6 +14,7 @@
     'data': [
         'security/school_security.xml',
         'security/ir.model.access.csv',
+        'data/product_template.xml',
         'views/teacher_views.xml',
         'views/school_views.xml',
         'views/course_views.xml',
