@@ -8,7 +8,7 @@ from . import product_template
 from . import schools
 from . import school_section
 from . import student
-from . import teacher
+from . import hr_employee
 from . import school_material_movement
 from . import school_program
 from . import school_attendance_line
