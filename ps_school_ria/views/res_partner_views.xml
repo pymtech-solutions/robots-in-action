@@ -6,7 +6,7 @@
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='is_school']" position="after">
+            <xpath expr="//field[@name='student_qty']" position="before">
                 <field name="logo_in_grade" widget="boolean_toggle" invisible="not is_school"/>
             </xpath>
         </field>
