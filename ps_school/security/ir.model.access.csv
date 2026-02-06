@@ -27,3 +27,5 @@ attendance_adjust_box_material_manager,attendance.adjust.box.material.manager,mo
 attendance_adjust_box_material_teacher,attendance.adjust.box.material.teacher,model_attendance_adjust_box_material,group_school_teacher,1,1,1,1
 access_school_subject_manager,access.school.subject.manager,model_school_subject,ps_school.group_school_manager,1,1,1,1
 access_school_subject_teacher,access.school.subject.teacher,model_school_subject,ps_school.group_school_teacher,1,1,1,1
+access_school_legal_guardian_manager,access.school.legal.guardian.manager,model_school_legal_guardian,ps_school.group_school_manager,1,1,1,1
+access_school_legal_guardian_teacher,access.school.legal.guardian.teacher,model_school_legal_guardian,ps_school.group_school_teacher,1,1,1,1
