@@ -13,10 +13,19 @@ class ResPartner(models.Model):
     _rec_names_search = ['display_name', 'email', 'ref', 'vat', 'company_registry']
 
     # Is it parent or student?
-    is_student = fields.Boolean('Es estudiante')
-    is_parent = fields.Boolean('Es padre/madre')
+    is_student = fields.Boolean('Es estudiante', compute='_compute_school_role', store=True)
+    is_parent = fields.Boolean('Es padre/madre', compute='_compute_school_role', store=True)
+    is_teacher = fields.Boolean('Es profesor', compute='_compute_school_role', store=True)
+    is_school = fields.Boolean(string='Es colegio', compute='_compute_school_role', store=True)
+    school_role = fields.Selection([
+        ('teacher', 'Profesor'),
+        ('student', 'Estudiante'),
+        ('parent', 'Padre/Madre'),
+        ('school', 'Colegio')
+    ],
+        string='Rol escolar'
+    )
 
-    # Related school
     school_id = fields.Many2one(comodel_name='res.partner', string='Colegio', domain="[('is_school', '=', True)]")
     student_course_line_ids = fields.Many2many(
         'school.course.line',
@@ -65,5 +74,19 @@ class ResPartner(models.Model):
             else:
                 record.is_parent_student = False
 
-    def attach_document(self, **kwargs):
-        pass
+    @api.depends('school_role')
+    def _compute_school_role(self):
+        for record in self:
+            record.is_school = False
+            record.is_student = False
+            record.is_parent = False
+            record.is_teacher = False
+
+            if record.school_role == 'teacher':
+                record.is_teacher = True
+            elif record.school_role == 'student':
+                record.is_student = True
+            elif record.school_role == 'parent':
+                record.is_parent = True
+            elif record.school_role == 'school':
+                record.is_school = True
