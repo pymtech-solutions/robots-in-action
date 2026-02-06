@@ -35,6 +35,8 @@ class ResPartner(models.Model):
         string="Líneas de Curso del Estudiante",
         help="Líneas de curso donde este estudiante está inscrito"
     )
+    guardian_ids = fields.One2many(comodel_name='school.legal.guardian', string='Tutores Legales',
+                                   inverse_name='student_id')
 
     # Inscription dates and state
     start_date = fields.Date(string='Fecha de alta')
@@ -66,13 +68,13 @@ class ResPartner(models.Model):
     student_emergency_contact = fields.Char('Emergency Contact Name')
     student_emergency_phone = fields.Char('Emergency Contact Number')
 
-    @api.depends('parent_id')
-    def _compute_parent(self):
+    @api.constrains('guardian_ids')
+    def _check_dates(self):
         for record in self:
-            if record.parent_id.is_student:
-                record.is_parent_student = True
-            else:
-                record.is_parent_student = False
+            if record.guardian_ids:
+                # Only one guardian can be marked for invoice
+                if len(record.guardian_ids.filtered(lambda g: g.invoice)) > 1:
+                    raise ValidationError("Solo se puede marcar un padre para facturar.")
 
     @api.depends('school_role')
     def _compute_school_role(self):

@@ -15,3 +15,4 @@ from . import school_attendance_line
 from . import school_schedule
 from . import res_users
 from . import school_subject
+from . import school_legal_guardian
