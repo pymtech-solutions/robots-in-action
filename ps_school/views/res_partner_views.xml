@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-	<data>
+    <data>
         <record id="view_partner_form_inherit_student" model="ir.ui.view">
             <field name="name">view.partner.form.inherit.student</field>
             <field name="model">res.partner</field>
-            <field name="inherit_id" ref="base.view_partner_form" />
+            <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
-                
-                <xpath expr="//group[1]/group[2]" position='inside'>
+                <xpath expr="//group[1]/group[1]" position='inside'>
+                    <field name="school_role"/>
                     <field name="is_student" invisible="1"/>
                     <field name="is_parent" invisible="1"/>
+                    <field name="is_school" invisible="1"/>
+                    <field name="is_teacher" invisible="1"/>
                 </xpath>
             </field>
         </record>
@@ -17,14 +19,16 @@
         <record id="view_partner_tree_inherit_student" model="ir.ui.view">
             <field name="name">view.partner.tree.inherit.student</field>
             <field name="model">res.partner</field>
-            <field name="inherit_id" ref="base.view_partner_tree" />
+            <field name="inherit_id" ref="base.view_partner_tree"/>
             <field name="arch" type="xml">
                 <xpath expr="//list" position='inside'>
-                    <field name="is_student" invisible="1"/>
-                    <field name="is_parent" invisible="1"/>
+                    <field name="is_student" invisible="is_school or is_parent or is_teacher"/>
+                    <field name="is_parent" invisible="is_school or is_student or is_teacher"/>
+                    <field name="is_school" invisible="is_parent or is_student or is_teacher"/>
+                    <field name="is_teacher" invisible="is_school or is_parent or is_student"/>
                 </xpath>
             </field>
         </record>
-        
+
     </data>
 </odoo>
