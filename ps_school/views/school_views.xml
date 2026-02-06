@@ -20,25 +20,21 @@
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//group[1]/group[1]" position="inside">
-                <field name="is_school"/>
-                <field name="student_qty" invisible="not is_school"/>
-                <field name="active_student_qty" invisible="not is_school"/>
-                <field name="inactive_student_qty" invisible="not is_school"/>
-            </xpath>
-            <!-- Ocultar página de Contacts & Addresses -->
-            <xpath expr="//page[@name='contact_addresses']" position="attributes">
-                <attribute name="invisible">1</attribute>
-            </xpath>
-
-            <!-- Ocultar página de Sales & Purchase -->
-            <xpath expr="//page[@name='sales_purchases']" position="attributes">
-                <attribute name="invisible">1</attribute>
+            <xpath expr="//notebook[@colspan='4']" position="before">
+                <group string="Escuela" invisible="not is_school">
+                    <field name="invoice_type" invisible="not is_school"/>
+                    <field name="school_invoice_date" invisible="not is_school"/>
+                    <field name="student_qty" invisible="not is_school"/>
+                    <field name="active_student_qty" invisible="not is_school"/>
+                    <field name="inactive_student_qty" invisible="not is_school"/>
+                </group>
             </xpath>
 
-            <!-- Ocultar página de Internal Notes -->
-            <xpath expr="//page[@name='internal_notes']" position="attributes">
-                <attribute name="invisible">1</attribute>
+            <xpath expr="//sheet" position="before">
+                <header>
+                    <button name="action_create_school_invoice" type="object" string="Facturar Escuela"
+                            class="btn-primary" invisible="not is_school"/>
+                </header>
             </xpath>
 
             <xpath expr="//notebook" position="inside">
@@ -51,6 +47,8 @@
                             <field name="schedule_ids" widget="many2many_tags"/>
                             <field name="start_date"/>
                             <field name="student_qty"/>
+                            <field name="active_student_qty"/>
+                            <field name="inactive_student_qty"/>
                             <field name="end_date"/>
                             <field name="academic_period"/>
                         </list>
@@ -67,7 +65,7 @@
         <field name="arch" type="xml">
             <search string="Timetable">
                 <field name="name" string="Company"/>
-                <filter string="Institutes" name="institutes" domain="[('is_school', '=', True)]"/>
+                <filter string="Institutes" name="institutes" domain="[('is_school', '=',True)]"/>
             </search>
         </field>
     </record>
