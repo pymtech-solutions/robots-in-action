@@ -25,11 +25,15 @@
         <field name="arch" type="xml">
             <form string="Assessment">
                 <header>
-                     <button name="action_open_grade" string="Reabrir"
+                    <button name="action_open_grade" string="Reabrir"
                             type="object" class="btn-primary" invisible="state == 'draft'"/>
-                     <button name="action_close_grade" string="Cerrar"
+                    <button name="action_close_grade" string="Cerrar"
                             type="object" class="btn-primary" invisible="state == 'closed'"/>
                     <button name="action_download_all_reports" string="Descargar todas las evaluaciones (ZIP)"
+                            type="object" class="btn-primary"/>
+                    <button name="action_mail_unsent_grades" string="Enviar notas por correo (solo no enviados)"
+                            type="object" class="btn-primary"/>
+                    <button name="action_mail_grades" string="Enviar notas por correo (todas)"
                             type="object" class="btn-primary"/>
                     <field name="state" widget="statusbar"/>
                 </header>
@@ -40,6 +44,7 @@
                         <field name="trimester" readonly="state == 'closed'"/>
                         <field name="academic_period"/>
                         <field name="teacher_ids" widget="many2many_tags"/>
+                        <field name="outgoing_mail_id"/>
                         <notebook>
                             <page string="Calificaciones">
                                 <field name="grade_line_ids" readonly="state == 'closed'">
@@ -60,10 +65,16 @@
                                                 icon="fa-external-link"
                                                 title="Abrir formulario"/>
                                         <button name="action_download_grade_report"
-                                                string="Descargar PDF"
+                                                string=""
                                                 type="object"
                                                 icon="fa-download"
                                                 title="Descargar evaluación en PDF"/>
+                                        <button name="action_mail_grade_report"
+                                                string=""
+                                                type="object"
+                                                icon="fa-envelope"
+                                                title="Enviar por correo"/>
+                                        <field name="mail_sent_date"/>
                                     </list>
                                 </field>
                             </page>

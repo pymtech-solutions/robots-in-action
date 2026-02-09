@@ -39,6 +39,8 @@ class SchoolGrade(models.Model):
         store=True,
         readonly=False,
     )
+    outgoing_mail_id = fields.Many2one(comodel_name='ir.mail_server', string='Correo saliente',
+                                   default=lambda self: self.env['ir.mail_server'].search([], limit=1))
 
     @api.depends('trimester')
     def _compute_trimester_value(self):
@@ -119,6 +121,17 @@ class SchoolGrade(models.Model):
 
         if commands:
             self.grade_line_ids = commands
+
+    def action_mail_unsent_grades(self):
+        self.ensure_one()
+        for line in self.grade_line_ids:
+            if not line.mail_sent_date:
+                line.action_mail_grade_report()
+
+    def action_mail_grades(self):
+        self.ensure_one()
+        for line in self.grade_line_ids:
+            line.action_mail_grade_report()
 
     def action_download_all_reports(self):
         """ Download all grade reports as a ZIP file """

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from odoo import api, fields, models
-
+from odoo.exceptions import UserError
+import base64
 
 class SchoolGradeLine(models.Model):
     _name = 'school.grade.line'
@@ -12,6 +13,8 @@ class SchoolGradeLine(models.Model):
         required=True,
         ondelete='cascade'
     )
+    outgoing_mail_id = fields.Many2one(related='grade_id.outgoing_mail_id', readonly=True)
+    mail_sent_date = fields.Date(string='Enviado', readonly=True)
 
     student_id = fields.Many2one(
         comodel_name='res.partner',
@@ -93,3 +96,53 @@ class SchoolGradeLine(models.Model):
         """ Download individual grade report as PDF """
         self.ensure_one()
         return self.env.ref('ps_school_ria.school_grade_report_action_report').report_action(self)
+
+    def action_mail_grade_report(self):
+        """ Send individual grade report as email """
+        self.ensure_one()
+        if not self.outgoing_mail_id:
+            raise UserError(
+                'No se ha configurado un servidor de correo saliente para enviar el reporte de calificaciones.')
+        elif not self.student_id.email:
+            raise UserError('El estudiante no tiene correo electrónico configurado.')
+        # Generate PDF report
+        pdf_content, _ = self.env['ir.actions.report']._render_qweb_pdf(
+            'ps_school_ria.school_grade_report_action_report',
+            self.ids
+        )
+
+        # Create attachment
+        attachment = self.env['ir.attachment'].create({
+            'name': f'Reporte_Calificaciones_{self.student_id.name}.pdf',
+            'type': 'binary',
+            'datas': base64.b64encode(pdf_content),
+            'res_model': self._name,
+            'res_id': self.id,
+            'mimetype': 'application/pdf'
+        })
+
+        # Create and send email
+        mail_values = {
+            'subject': f'Reporte de Calificaciones - {self.student_id.name}',
+            'body_html': f'<p>Estimado/a,</p><p>Adjunto encontrará el reporte de calificaciones.</p>',
+            'email_to': self.student_id.email or self.student_id.parent_id.email,
+            'email_from': self.outgoing_mail_id.smtp_user,
+            'attachment_ids': [(6, 0, [attachment.id])],
+            'mail_server_id': self.outgoing_mail_id.id,
+        }
+
+        mail = self.env['mail.mail'].create(mail_values)
+        mail.send()
+
+        self.mail_sent_date = fields.Date.today()
+
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'display_notification',
+            'params': {
+                'title': 'Correo enviado',
+                'message': 'El reporte de calificaciones ha sido enviado exitosamente.',
+                'type': 'success',
+                'sticky': False,
+            }
+        }
