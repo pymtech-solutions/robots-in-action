@@ -22,6 +22,18 @@ class School(models.Model):
                                     default='0')
     school_invoice_date = fields.Date(string='Ultima facturación de la escuela', readonly=True)
 
+    def action_change_old_to_new(self):
+        all_contacts = self.env['res.partner'].search([])
+        for contact in all_contacts:
+            if contact.is_school:
+                contact.school_role = 'school'
+            elif contact.employee_ids and contact.employee_ids[0].is_teacher:
+                contact.school_role = 'teacher'
+            elif contact.is_student:
+                contact.is_student = 'student'
+            elif contact.is_parent:
+                contact.school_role = 'parent'
+
     @api.depends('course_line_ids.student_ids', 'course_line_ids.student_ids.enrollment_state')
     def _compute_student_qty(self):
         for school in self:

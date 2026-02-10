@@ -42,6 +42,7 @@ class SchoolCourseLine(models.Model):
         'student_id',
         string="Alumnos",
         domain=[('is_student', '=', True)],
+        context={'default_school_role': 'student', 'default_company_type': 'person'}
     )
     student_qty = fields.Integer(string='Students', compute='_compute_student_qty', store=True)
     active_student_qty = fields.Integer(string='Active Students', compute='_compute_student_qty', store=True)
@@ -52,7 +53,8 @@ class SchoolCourseLine(models.Model):
         'course_line_id',
         'teacher_id',
         string="Profesores",
-        domain=[('is_teacher', '=',True)]
+        domain=[('is_teacher', '=',True)],
+        context={'default_is_teacher': True}
     )
     schedule_ids = fields.Many2many(comodel_name='school.schedule', string='Horarios', )
     attendance_ids = fields.One2many(

@@ -23,6 +23,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//list" position='inside'>
                     <field name="school_role"/>
+                    <button name="action_change_old_to_new" type="object" string="transformar" class="btn-primary"/>
                 </xpath>
             </field>
         </record>

@@ -81,6 +81,8 @@
             {
                 'search_default_institutes': 1,
                 'default_is_school': 1,
+                'default_school_role': 'school',
+                'default_company_type': 'company',
             }
         </field>
         <field name="view_ids"
