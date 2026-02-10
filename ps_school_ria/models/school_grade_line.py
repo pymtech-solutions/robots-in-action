@@ -13,6 +13,7 @@ class SchoolGradeLine(models.Model):
         required=True,
         ondelete='cascade'
     )
+    print_record = fields.Boolean(related='grade_id.can_print_grades')
     outgoing_mail_id = fields.Many2one(related='grade_id.outgoing_mail_id', readonly=True)
     mail_sent_date = fields.Date(string='Enviado', readonly=True)
 
@@ -79,6 +80,14 @@ class SchoolGradeLine(models.Model):
         default='3'
     )
     comments = fields.Text(string='Observaciones')
+
+    @api.depends('grade_id')
+    def _compute_print_record(self):
+        for record in self:
+            if record.grade_id.show_school_logo and not record.grade_id.school_logo:
+                record.print_record = False
+            else:
+                record.print_record = True
 
     def action_open_form(self):
         """ Opens the form view of the model."""

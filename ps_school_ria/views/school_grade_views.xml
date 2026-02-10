@@ -24,23 +24,28 @@
         <field name="model">school.grade</field>
         <field name="arch" type="xml">
             <form string="Assessment">
+                <div class="alert alert-warning oe_edit_only" role="alert" name="warning_tax"
+                     invisible="can_print_grades">
+                    Atención, no se pueden generar las notas, la escuela tiene marcada la opinion de mostrar el logo, pero no tiene un logo asignado.
+                </div>
                 <header>
                     <button name="action_open_grade" string="Reabrir"
                             type="object" class="btn-primary" invisible="state == 'draft'"/>
                     <button name="action_close_grade" string="Cerrar"
                             type="object" class="btn-primary" invisible="state == 'closed'"/>
                     <button name="action_download_all_reports" string="Descargar todas las evaluaciones (ZIP)"
-                            type="object" class="btn-primary"/>
+                            type="object" class="btn-primary" invisible="not can_print_grades"/>
                     <button name="action_mail_unsent_grades" string="Enviar notas por correo (solo no enviados)"
-                            type="object" class="btn-primary"/>
+                            type="object" class="btn-primary" invisible="not can_print_grades"/>
                     <button name="action_mail_grades" string="Enviar notas por correo (todas)"
-                            type="object" class="btn-primary"/>
+                            type="object" class="btn-primary" invisible="not can_print_grades"/>
                     <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>
                     <group>
                         <field name="course_line_id" widget="many2one" readonly="state == 'closed'"/>
                         <field name="school_id"/>
+                        <field name="show_school_logo" string="Mostrar logo de la escuela"/>
                         <field name="trimester" readonly="state == 'closed'"/>
                         <field name="academic_period"/>
                         <field name="teacher_ids" widget="many2many_tags"/>
@@ -68,12 +73,14 @@
                                                 string=""
                                                 type="object"
                                                 icon="fa-download"
-                                                title="Descargar evaluación en PDF"/>
+                                                title="Descargar evaluación en PDF"
+                                        invisible="not print_record"/>
                                         <button name="action_mail_grade_report"
                                                 string=""
                                                 type="object"
                                                 icon="fa-envelope"
-                                                title="Enviar por correo"/>
+                                                title="Enviar por correo"
+                                        invisible="not print_record"/>
                                         <field name="mail_sent_date"/>
                                     </list>
                                 </field>

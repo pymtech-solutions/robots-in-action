@@ -30,6 +30,7 @@ class SchoolGrade(models.Model):
     school_id = fields.Many2one(related='course_line_id.school_id', string='Escuela')
     school_logo = fields.Binary(related='school_id.image_1920', string='Logo de la escuela')
     show_school_logo = fields.Boolean(related='school_id.logo_in_grade', string='Mostrar logo de la escuela')
+    can_print_grades = fields.Boolean(compute='_compute_can_print_grades', string='Puede imprimir notas', default=True)
     program_id = fields.Many2one(related='course_line_id.program_id', string='Programa', required=True)
     state = fields.Selection([('draft', 'Borrador'), ('closed', 'Cerrado')], string='Estado', default='draft')
     student_ids = fields.Many2many(
@@ -40,7 +41,15 @@ class SchoolGrade(models.Model):
         readonly=False,
     )
     outgoing_mail_id = fields.Many2one(comodel_name='ir.mail_server', string='Correo saliente',
-                                   default=lambda self: self.env['ir.mail_server'].search([], limit=1))
+                                       default=lambda self: self.env['ir.mail_server'].search([], limit=1))
+
+    @api.depends('school_id.image_1920', 'school_id.logo_in_grade')
+    def _compute_can_print_grades(self):
+        for record in self:
+            if record.school_id.logo_in_grade and not record.school_id.image_1920:
+                record.can_print_grades = False
+            else:
+                record.can_print_grades = True
 
     @api.depends('trimester')
     def _compute_trimester_value(self):
