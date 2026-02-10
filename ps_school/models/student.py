@@ -76,13 +76,18 @@ class ResPartner(models.Model):
                 if len(record.guardian_ids.filtered(lambda g: g.invoice)) > 1:
                     raise ValidationError("Solo se puede marcar un padre para facturar.")
 
-    @api.depends('school_role')
+    @api.depends('school_role', 'employee_ids', 'employee_ids.is_teacher')
     def _compute_school_role(self):
         for record in self:
             record.is_school = False
             record.is_student = False
             record.is_parent = False
             record.is_teacher = False
+
+            if record.employee_ids and record.employee_ids[0].is_teacher:
+                record.school_role = 'teacher'
+            elif record.employee_ids and not record.employee_ids[0].is_teacher:
+                record.school_role = None
 
             if record.school_role == 'teacher':
                 record.is_teacher = True

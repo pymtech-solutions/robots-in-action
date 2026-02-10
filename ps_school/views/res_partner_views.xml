@@ -22,10 +22,7 @@
             <field name="inherit_id" ref="base.view_partner_tree"/>
             <field name="arch" type="xml">
                 <xpath expr="//list" position='inside'>
-                    <field name="is_student" invisible="is_school or is_parent or is_teacher"/>
-                    <field name="is_parent" invisible="is_school or is_student or is_teacher"/>
-                    <field name="is_school" invisible="is_parent or is_student or is_teacher"/>
-                    <field name="is_teacher" invisible="is_school or is_parent or is_student"/>
+                    <field name="school_role"/>
                 </xpath>
             </field>
         </record>
