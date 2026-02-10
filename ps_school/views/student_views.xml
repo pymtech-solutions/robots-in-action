@@ -253,7 +253,7 @@
             <field name="view_mode">kanban,list,form</field>
             <field name="search_view_id" ref="student_search_view"/>
             <field name="context">
-                {'default_is_student': 'True', 'default_company_type': 'person', 'default_type': 'contact'}
+                {'default_is_student': 'True', 'default_company_type': 'person', 'default_type': 'contact', 'default_school_role': 'student'}
             </field>
             <field name="domain">[('is_student', '=', 'True'), ('is_parent', '=', False), ('parent_id', '=', False)]
             </field>
