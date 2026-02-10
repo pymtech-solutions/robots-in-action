@@ -7,15 +7,27 @@ class SchoolLegalGuardian(models.Model):
     _name = 'school.legal.guardian'
     _description = 'SchoolLegalGuardian'
 
-    partner_id = fields.Many2one(comodel_name='res.partner', string='Tutor', domain=[('is_parent', '=', True)])
+    partner_id = fields.Many2one(
+        comodel_name='res.partner',
+        string='Tutor',
+        domain=[('is_parent', '=', True)],
+        context={'default_school_role': 'parent', 'default_company_type': 'person'},
+        required=True
+    )
     type = fields.Selection(
         selection = [
             ('father', 'Padre'),
             ('mother', 'Madre'),
-            ('guardian', 'Tutor'),
+            ('guardian', 'Tutor Legal'),
+            ('grandfather', 'Abuelo'),
+            ('grandmother', 'Abuela'),
+            ('uncle', 'Tío'),
+            ('aunt', 'Tía'),
+            ('sibling', 'Hermano/a'),
             ('other', 'Otro')
         ],
-        string='Tipo de tutor'
+        string='Tipo de tutor',
+        required=True
     )
     invoice = fields.Boolean(string='Facturar')
     student_id = fields.Many2one(comodel_name='res.partner', string='Estudiante', ondelete='cascade')
