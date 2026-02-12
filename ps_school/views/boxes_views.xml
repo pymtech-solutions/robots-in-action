@@ -62,6 +62,10 @@
         <field name="model">school.box</field>
         <field name="arch" type="xml">
             <list string="Materiales">
+                <header>
+                    <button name="action_initial_replenisment_all" string="Rellenar Todas las Cajas" type="object"
+                            class="btn-primary" display="always"/>
+                </header>
                 <field name="name"/>
                 <field name="alert_icon" widget="html" string=""/>
             </list>

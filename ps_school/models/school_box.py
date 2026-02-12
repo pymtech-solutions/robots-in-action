@@ -46,6 +46,11 @@ class SchoolBox(models.Model):
         for record in self:
             record.total_material_movement = len(record.material_movement_ids)
 
+    def action_initial_replenisment_all(self):
+        unreplenished_boxes = self.env['school.box'].search([('material_movement_ids', '=', False)])
+        for box in unreplenished_boxes:
+            box.action_initial_replenishment()
+
     def action_initial_replenishment(self):
         if not self.material_movement_ids:
             return self.env['school.material.movement'].create([{
