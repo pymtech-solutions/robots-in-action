@@ -86,7 +86,7 @@
         </record>
 
         <!--Main school menu-->
-        <menuitem name="School"
+        <menuitem name="Escuela"
                   id="menu_school"
                   web_icon="ps_school,static/description/icon.png"
                   sequence="55"
