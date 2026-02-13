@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.school.grade</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//app[@name='general_settings']" position="inside">
+                <div class="app_settings_block" data-string="School Grade Settings">
+                    <block title="Plantilla de Correo para Evaluaciones">
+                        <setting id="school_grade_mail_subject" 
+                                 string="Asunto del correo">
+                            <field name="school_grade_mail_subject" 
+                                   placeholder="Ej: Reporte de Calificaciones - Juan Pérez"
+                                   class="w-100"/>
+                        </setting>
+                        <setting id="school_grade_mail_body" 
+                                 string="Cuerpo del correo">
+                            <field name="school_grade_mail_body" 
+                                   widget="html"
+                                   placeholder="Escribe aquí el contenido del correo..."
+                                   class="w-100"/>
+                        </setting>
+                        <div class="alert alert-info mt16">
+                            <strong>Variable disponible:</strong> <code>{student_name}</code><br/>
+                            <strong>Formato HTML:</strong> Puedes usar &lt;b&gt;negrita&lt;/b&gt;, &lt;i&gt;cursiva&lt;/i&gt;, etc.
+                        </div>
+                    </block>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

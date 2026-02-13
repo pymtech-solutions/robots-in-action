@@ -107,13 +107,22 @@ class SchoolGradeLine(models.Model):
         return self.env.ref('ps_school_ria.school_grade_report_action_report').report_action(self)
 
     def action_mail_grade_report(self):
-        """ Send individual grade report as email """
+        """ Send individual grade report as email with customizable template """
         self.ensure_one()
+        
         if not self.outgoing_mail_id:
-            raise UserError(
-                'No se ha configurado un servidor de correo saliente para enviar el reporte de calificaciones.')
-        elif not self.student_id.email:
+            raise UserError('No se ha configurado un servidor de correo saliente para enviar el reporte de calificaciones.')
+        elif not self.student_id.email and not self.student_id.parent_id.email:
             raise UserError('El estudiante no tiene correo electrónico configurado.')
+
+        # Get mail templates from configuration
+        subject_template, body_template = self.grade_id._get_mail_template_values()
+        
+        # Replace placeholders in templates
+        student_name = self.student_id.name or 'Estudiante'
+        subject = subject_template.replace('{student_name}', student_name)
+        body = body_template.replace('{student_name}', student_name)
+        
         # Generate PDF report
         pdf_content, _ = self.env['ir.actions.report']._render_qweb_pdf(
             'ps_school_ria.school_grade_report_action_report',
@@ -122,7 +131,7 @@ class SchoolGradeLine(models.Model):
 
         # Create attachment
         attachment = self.env['ir.attachment'].create({
-            'name': f'Reporte_Calificaciones_{self.student_id.name}.pdf',
+            'name': f'Reporte_Calificaciones_{student_name}.pdf',
             'type': 'binary',
             'datas': base64.b64encode(pdf_content),
             'res_model': self._name,
@@ -130,10 +139,9 @@ class SchoolGradeLine(models.Model):
             'mimetype': 'application/pdf'
         })
 
-        # Create and send email
         mail_values = {
-            'subject': f'Reporte de Calificaciones - {self.student_id.name}',
-            'body_html': f'<p>Estimado/a,</p><p>Adjunto encontrará el reporte de calificaciones.</p>',
+            'subject': subject,
+            'body_html': body,
             'email_to': self.student_id.email or self.student_id.parent_id.email,
             'email_from': self.outgoing_mail_id.smtp_user,
             'attachment_ids': [(6, 0, [attachment.id])],

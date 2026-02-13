@@ -200,3 +200,20 @@ class SchoolGrade(models.Model):
             'url': f'/web/content/{attachment.id}?download=true',
             'target': 'self',
         }
+        
+    # Get mail templates from configuration
+    def _get_mail_template_values(self):
+        """Obtiene la plantilla de correo desde la configuración"""
+        ConfigParameter = self.env['ir.config_parameter'].sudo()
+        
+        subject_template = ConfigParameter.get_param(
+            'ps_school_ria.school_grade_mail_subject',
+            'Reporte de Calificaciones - {student_name}'
+        )
+        
+        body_template = ConfigParameter.get_param(
+            'ps_school_ria.school_grade_mail_body',
+            '<p>Estimado/a,</p><p>Adjunto encontrará el reporte de calificaciones de {student_name}.</p><br/><p>Saludos cordiales,</p>'
+        )
+        
+        return subject_template, body_template
