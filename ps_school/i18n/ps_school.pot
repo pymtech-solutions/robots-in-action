@@ -18,1321 +18,1321 @@ msgstr ""
 #. module: ps_school
 #: model:ir.model,name:ps_school.model_adjust_box_material
 msgid "Wizard para reponer productos"
-msgstr ""
+msgstr "Wizard para reponer productos"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_adjust_box_material__box_id
 msgid "Caja"
-msgstr ""
+msgstr "Caja"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_adjust_box_material__box_product_ids
 msgid "Productos de la caja"
-msgstr ""
+msgstr "Productos de la caja"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_adjust_box_material__product_id
 msgid "Producto"
-msgstr ""
+msgstr "Producto"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_adjust_box_material__qty
 msgid "Cantitad"
-msgstr ""
+msgstr "Cantitad"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_adjust_box_material__movement_type
 #: model:ir.model.fields.selection,name:ps_school.selection__adjust_box_material__movement_type__loss
 #: model:ir.model.fields.selection,name:ps_school.selection__school_material_movement__movement_type__loss
 msgid "Pérdida"
-msgstr ""
+msgstr "Pérdida"
 
 #. module: ps_school
 #: model:ir.model.fields.selection,name:ps_school.selection__adjust_box_material__movement_type__increment
 #: model:ir.model.fields.selection,name:ps_school.selection__school_material_movement__movement_type__increment
 msgid "Reposición"
-msgstr ""
+msgstr "Reposición"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_adjust_box_material__notes
 #: model:ir.model.fields,field_description:ps_school.field_school_attendance_material_line__notes
 #: model:ir.model.fields,field_description:ps_school.field_school_material_movement__notes
 msgid "Notas"
-msgstr ""
+msgstr "Notas"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_adjust_box_material__movement_type
 #: model:ir.model.fields,field_description:ps_school.field_school_material_movement__movement_type
 msgid "Tipo de movimiento"
-msgstr ""
+msgstr "Tipo de movimiento"
 
 #. module: ps_school
 #: code:addons/ps_school/models/adjust_box_material.py:0
 #: code:addons/ps_school/models/attendance_adjust_box_material.py:0
 msgid "La cantidad debe ser mayor a cero."
-msgstr ""
+msgstr "La cantidad debe ser mayor a cero."
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.view_reponer_wizard_form_attendance
 #: model_terms:ir.ui.view,arch_db:ps_school.view_reponer_wizard_form
 msgid "Ajuste de Material"
-msgstr ""
+msgstr "Ajuste de Material"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.view_reponer_wizard_form_attendance
 #: model_terms:ir.ui.view,arch_db:ps_school.view_reponer_wizard_form
 msgid "Confirmar"
-msgstr ""
+msgstr "Confirmar"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.view_reponer_wizard_form_attendance
 #: model_terms:ir.ui.view,arch_db:ps_school.view_reponer_wizard_form
 msgid "Cancelar"
-msgstr ""
+msgstr "Cancelar"
 
 #. module: ps_school
 #: model:ir.actions.act_window,name:ps_school.action_reponer_wizard_attendance
 #: model:ir.actions.act_window,name:ps_school.action_reponer_wizard
 msgid "Reponer Producto"
-msgstr ""
+msgstr "Reponer Producto"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.employee_subjects_line_tree_view
 msgid "Subjects"
-msgstr ""
+msgstr "Materias"
 
 #. module: ps_school
 #: model:ir.actions.act_window,name:ps_school.action_teacher_subjects
 #: model_terms:ir.ui.view,arch_db:ps_school.employee_subjects_line_tree_view
 msgid "Teacher Subjects"
-msgstr ""
+msgstr "Materias del Profesor"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.action_teacher_subjects
 msgid "Add Subjects for Teacher"
-msgstr ""
+msgstr "Añadir Materias para el Profesor"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.view_employee_form_inherit_teacher
 msgid "Clases"
-msgstr ""
+msgstr "Clases"
 
 #. module: ps_school
 #: model:ir.actions.act_window,name:ps_school.action_hr_employees_teachers
 #: model_terms:ir.ui.view,arch_db:ps_school.view_employee_form_inherit_teacher
 msgid "Teacher"
-msgstr ""
+msgstr "Profesor"
 
 #. module: ps_school
 #: model:ir.ui.menu,name:ps_school.menu_school
 msgid "Escuela"
-msgstr ""
+msgstr "Escuela"
 
 #. module: ps_school
 #: model:ir.ui.menu,name:ps_school.menu_school_teachers_list
 msgid "Profesores"
-msgstr ""
+msgstr "Profesores"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.student_primary_form_view
 msgid "Dirección"
-msgstr ""
+msgstr "Dirección"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.student_primary_form_view
 msgid "Información de contacto"
-msgstr ""
+msgstr "Información de contacto"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.student_primary_form_view
 msgid "Inscripción"
-msgstr ""
+msgstr "Inscripción"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.student_primary_form_view
 msgid "Tutores"
-msgstr ""
+msgstr "Tutores"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.student_primary_form_view
 msgid "Cursos"
-msgstr ""
+msgstr "Cursos"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.student_primary_form_view
 msgid "Información Adicional"
-msgstr ""
+msgstr "Información Adicional"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.student_primary_form_view
 msgid "Demographics"
-msgstr ""
+msgstr "Datos Demográficos"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.student_primary_form_view
 msgid "Medical"
-msgstr ""
+msgstr "Datos Médicos"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.student_primary_form_view
 msgid "Emergency Contact"
-msgstr ""
+msgstr "Contacto de Emergencia"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.student_primary_form_view
 msgid "Contact Name"
-msgstr ""
+msgstr "Nombre de Contacto"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.student_primary_form_view
 msgid "Contact No."
-msgstr ""
+msgstr "Teléfono de Contacto"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.partner_student_tree_view
 #: model_terms:ir.ui.view,arch_db:ps_school.partner_parent_tree_view
 msgid "Students"
-msgstr ""
+msgstr "Estudiantes"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.partner_student_tree_view
 #: model_terms:ir.ui.view,arch_db:ps_school.partner_parent_tree_view
 msgid "Name"
-msgstr ""
+msgstr "Nombre"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.partner_student_tree_view
 #: model_terms:ir.ui.view,arch_db:ps_school.partner_parent_tree_view
 msgid "School"
-msgstr ""
+msgstr "Escuela"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.partner_student_kanban_view
 msgid "Estado:"
-msgstr ""
+msgstr "Estado:"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.student_search_view
 msgid "Filters"
-msgstr ""
+msgstr "Filtros"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.student_search_view
 msgid "Alta"
-msgstr ""
+msgstr "Alta"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.student_search_view
 msgid "Baja"
-msgstr ""
+msgstr "Baja"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.student_search_view
 msgid "Group By"
-msgstr ""
+msgstr "Agrupar Por"
 
 #. module: ps_school
 #: model:ir.actions.act_window,name:ps_school.action_res_partner_student
 msgid "Students"
-msgstr ""
+msgstr "Estudiantes"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.action_res_partner_student
 msgid "Añade el primer estudiante"
-msgstr ""
+msgstr "Añade el primer estudiante"
 
 #. module: ps_school
 #: model:ir.ui.menu,name:ps_school.menu_school_students_list
 msgid "Alumnos"
-msgstr ""
+msgstr "Alumnos"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.school_form_view_inherit
 #: model_terms:ir.ui.view,arch_db:ps_school.view_company_search_form
 msgid "Escuela"
-msgstr ""
+msgstr "Escuela"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.school_form_view_inherit
 msgid "Facturar Escuela"
-msgstr ""
+msgstr "Facturar Escuela"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.school_form_view_inherit
 msgid "Cursos"
-msgstr ""
+msgstr "Cursos"
 
 #. module: ps_school
 #: model:ir.actions.act_window,name:ps_school.action_school_setup
 msgid "Institute Setup"
-msgstr ""
+msgstr "Configuración de Instituto"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.action_school_setup
 msgid "Create a new institute"
-msgstr ""
+msgstr "Crear un nuevo instituto"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.action_school_setup
 msgid "Create and manage the institutes/colleges/schools."
-msgstr ""
+msgstr "Crear y gestionar institutos/colegios/escuelas."
 
 #. module: ps_school
 #: model:ir.ui.menu,name:ps_school.menu_school_schools
 msgid "Escuelas"
-msgstr ""
+msgstr "Escuelas"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.course_section_tree_view
 #: model:ir.actions.act_window,name:ps_school.action_school_seciton
 msgid "Section"
-msgstr ""
+msgstr "Sección"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.course_section_tree_view
 msgid "Course Section"
-msgstr ""
+msgstr "Sección de Curso"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.action_school_seciton
 msgid "Create a new section"
-msgstr ""
+msgstr "Crear una nueva sección"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_school_subject__name
 #: model_terms:ir.ui.view,arch_db:ps_school.school_subject_view_form
 msgid "Nombre"
-msgstr ""
+msgstr "Nombre"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_school_subject__code
 #: model_terms:ir.ui.view,arch_db:ps_school.school_subject_view_search
 msgid "Código"
-msgstr ""
+msgstr "Código"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.school_subject_view_form
 msgid "e.g Marc Demo"
-msgstr ""
+msgstr "ej. Marc Demo"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.school_subject_view_search
 msgid "Nombre"
-msgstr ""
+msgstr "Nombre"
 
 #. module: ps_school
 #: model:ir.actions.act_window,name:ps_school.school_subject_action
 msgid "school subject"
-msgstr ""
+msgstr "materia escolar"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.schedule_view_form
 msgid "Form Title"
-msgstr ""
+msgstr "Título del Formulario"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.schedule_view_form
 msgid "Horario"
-msgstr ""
+msgstr "Horario"
 
 #. module: ps_school
 #: model:ir.actions.act_window,name:ps_school.action_school_schedule
 #: model:ir.ui.menu,name:ps_school.menu_school_schedule_list
 msgid "Horarios"
-msgstr ""
+msgstr "Horarios"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.action_school_schedule
 msgid "No existen horarios"
-msgstr ""
+msgstr "No existen horarios"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.product_product_tree_view_inherit
 msgid "Imagen"
-msgstr ""
+msgstr "Imagen"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.program_view_form
 #: model:ir.actions.act_window,name:ps_school.action_school_program
 msgid "Programa"
-msgstr ""
+msgstr "Programa"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.program_view_form
 msgid "Materias"
-msgstr ""
+msgstr "Materias"
 
 #. module: ps_school
 #: model:ir.actions.act_window,name:ps_school.action_school_program
 msgid "Programas"
-msgstr ""
+msgstr "Programas"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.action_school_program
 msgid "No existe ningún programa todavía"
-msgstr ""
+msgstr "No existe ningún programa todavía"
 
 #. module: ps_school
 #: model:ir.ui.menu,name:ps_school.menu_school_programs
 msgid "Programas"
-msgstr ""
+msgstr "Programas"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.partner_parent_tree_view
 msgid "Parents"
-msgstr ""
+msgstr "Padres"
 
 #. module: ps_school
 #: model:ir.actions.act_window,name:ps_school.action_res_partner_parent
 #: model:ir.ui.menu,name:ps_school.menu_school_parents
 msgid "Parents"
-msgstr ""
+msgstr "Padres"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.action_res_partner_parent
 msgid "Create a parent"
-msgstr ""
+msgstr "Crear un padre/madre"
 
 #. module: ps_school
 #: model:ir.ui.menu,name:ps_school.menu_school_parents
 msgid "Padres"
-msgstr ""
+msgstr "Padres"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.school_course_form_view
 msgid "Courses"
-msgstr ""
+msgstr "Cursos"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.school_course_form_view
 msgid "Programas"
-msgstr ""
+msgstr "Programas"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.school_course_form_view
 msgid "Cursos activos"
-msgstr ""
+msgstr "Cursos activos"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.view_course_filter
 msgid "Nombre"
-msgstr ""
+msgstr "Nombre"
 
 #. module: ps_school
 #: model:ir.actions.act_window,name:ps_school.action_school_course
 #: model:ir.ui.menu,name:ps_school.menu_school_courses_list
 msgid "Cursos"
-msgstr ""
+msgstr "Cursos"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.action_school_course
 msgid "No hay cursos disponibles"
-msgstr ""
+msgstr "No hay cursos disponibles"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.action_school_course
 msgid "Crea un nuevo curso"
-msgstr ""
+msgstr "Crea un nuevo curso"
 
 #. module: ps_school
 #: model:ir.ui.menu,name:ps_school.menu_school_courses
 msgid "Cursos"
-msgstr ""
+msgstr "Cursos"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.material_movement_form_view
 msgid "Movimiento de Material"
-msgstr ""
+msgstr "Movimiento de Material"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.material_movement_form_view
 msgid "Observaciones sobre el movimiento..."
-msgstr ""
+msgstr "Observaciones sobre el movimiento..."
 
 #. module: ps_school
 #: model:ir.actions.act_window,name:ps_school.material_movement_action
 msgid "Movimientos de Materiales"
-msgstr ""
+msgstr "Movimientos de Materiales"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.school_box_view_form
 msgid "Cajas"
-msgstr ""
+msgstr "Cajas"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.school_box_view_form
 msgid "Modificar Materiales"
-msgstr ""
+msgstr "Modificar Materiales"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.school_box_view_form
 msgid "Reposición Inicial"
-msgstr ""
+msgstr "Reposición Inicial"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.school_box_view_form
 msgid "Movimientos"
-msgstr ""
+msgstr "Movimientos"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.school_box_view_form
 msgid "Materiales dentro de esta caja"
-msgstr ""
+msgstr "Materiales dentro de esta caja"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.school_box_view_form
 msgid "Historial de Movimientos"
-msgstr ""
+msgstr "Historial de Movimientos"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.school_boxes_view_list
 msgid "Materiales"
-msgstr ""
+msgstr "Materiales"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.school_boxes_view_list
 msgid "Rellenar Todas las Cajas"
-msgstr ""
+msgstr "Rellenar Todas las Cajas"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.boxes_view_search
 msgid "Search Title"
-msgstr ""
+msgstr "Buscar Título"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.boxes_view_search
 msgid "Name"
-msgstr ""
+msgstr "Nombre"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.boxes_view_search
 msgid "Con Diferencias"
-msgstr ""
+msgstr "Con Diferencias"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.boxes_view_search
 msgid "Group By"
-msgstr ""
+msgstr "Agrupar Por"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.boxes_view_search
 msgid "Agrupar por Diferencias"
-msgstr ""
+msgstr "Agrupar por Diferencias"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.boxes_view_search
 msgid "Agrupar por Profesor"
-msgstr ""
+msgstr "Agrupar por Profesor"
 
 #. module: ps_school
 #: model:ir.actions.act_window,name:ps_school.boxes_action
 msgid "Cajas de materiales"
-msgstr ""
+msgstr "Cajas de materiales"
 
 #. module: ps_school
 #: model:ir.ui.menu,name:ps_school.menu_school_materials
 msgid "Materiales"
-msgstr ""
+msgstr "Materiales"
 
 #. module: ps_school
 #: model:ir.ui.menu,name:ps_school.boxes_menu
 msgid "Cajas de Materiales"
-msgstr ""
+msgstr "Cajas de Materiales"
 
 #. module: ps_school
 #: model:ir.ui.menu,name:ps_school.material_movements_menu
 msgid "Movimientos de Materiales"
-msgstr ""
+msgstr "Movimientos de Materiales"
 
 #. module: ps_school
 #: model:ir.ui.menu,name:ps_school.product_template_menu
 msgid "Productos"
-msgstr ""
+msgstr "Productos"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.course_line_form_view
 msgid "Línea de Curso"
-msgstr ""
+msgstr "Línea de Curso"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.course_line_form_view
 msgid "Información Básica"
-msgstr ""
+msgstr "Información Básica"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.course_line_form_view
 msgid "Fechas del Curso"
-msgstr ""
+msgstr "Fechas del Curso"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.course_line_form_view
 msgid "Profesores"
-msgstr ""
+msgstr "Profesores"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.course_line_form_view
 msgid "Estudiantes"
-msgstr ""
+msgstr "Estudiantes"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.course_line_form_view
 msgid "Horarios"
-msgstr ""
+msgstr "Horarios"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.course_line_form_view
 msgid "Define los horarios semanales para esta línea de curso."
-msgstr ""
+msgstr "Define los horarios semanales para esta línea de curso."
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.course_line_form_view
 msgid "Cajas"
-msgstr ""
+msgstr "Cajas"
 
 #. module: ps_school
 #: model:ir.actions.act_window,name:ps_school.action_school_course_line
 msgid "Lineas de curso"
-msgstr ""
+msgstr "Líneas de curso"
 
 #. module: ps_school
 #: model:ir.ui.menu,name:ps_school.menu_school_courses_line
 msgid "Lineas de cursos"
-msgstr ""
+msgstr "Líneas de cursos"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.course_line_attendance_form_view
 msgid "Attendance"
-msgstr ""
+msgstr "Asistencia"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.course_line_attendance_form_view
 msgid "Modificar material"
-msgstr ""
+msgstr "Modificar material"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.course_line_attendance_form_view
 msgid "Cerrar asistencia"
-msgstr ""
+msgstr "Cerrar asistencia"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.course_line_attendance_form_view
 msgid "Reabrir asistencia"
-msgstr ""
+msgstr "Reabrir asistencia"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.course_line_attendance_form_view
 msgid "Registros de Asistencia"
-msgstr ""
+msgstr "Registros de Asistencia"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.course_line_attendance_form_view
 msgid "Historial de Movimientos"
-msgstr ""
+msgstr "Historial de Movimientos"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.course_line_attendance_form_view
 msgid "Deshacer movimientos de materiales"
-msgstr ""
+msgstr "Deshacer movimientos de materiales"
 
 #. module: ps_school
 #: model:ir.actions.act_window,name:ps_school.action_school_attendance
 msgid "Assistance"
-msgstr ""
+msgstr "Asistencia"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.action_school_attendance
 msgid "No hay ninguna asistencia que mostrar."
-msgstr ""
+msgstr "No hay ninguna asistencia que mostrar."
 
 #. module: ps_school
 #: model:ir.ui.menu,name:ps_school.menu_school_attendance
 msgid "Asistencia"
-msgstr ""
+msgstr "Asistencia"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.school_attendance_line_view_search
 msgid "Escuela"
-msgstr ""
+msgstr "Escuela"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.school_attendance_line_view_search
 msgid "Alumno"
-msgstr ""
+msgstr "Alumno"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.school_attendance_line_view_search
 msgid "Presente"
-msgstr ""
+msgstr "Presente"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_school_attendance_line__attended
 #: model_terms:ir.ui.view,arch_db:ps_school.school_attendance_line_view_search
 msgid "Attended"
-msgstr ""
+msgstr "Asistió"
 
 #. module: ps_school
 #: model:ir.actions.act_window,name:ps_school.school_attendance_line_action
 msgid "Attendance"
-msgstr ""
+msgstr "Asistencia"
 
 #. module: ps_school
 #: model:ir.ui.menu,name:ps_school.menu_school_attendance_line
 msgid "Lineas de asistencia"
-msgstr ""
+msgstr "Líneas de asistencia"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_school_subject__name
 #: model:ir.model.fields,field_description:ps_school.field_school_subject__code
 msgid "Nombre"
-msgstr ""
+msgstr "Nombre"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_school_program__name
 msgid "Nombre del programa"
-msgstr ""
+msgstr "Nombre del programa"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_school_schedule__start_hour
 msgid "Hora de inicio"
-msgstr ""
+msgstr "Hora de inicio"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_school_schedule__end_hour
 msgid "Hora de fin"
-msgstr ""
+msgstr "Hora de fin"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_school_schedule__weekday_name
 msgid "Weekday Name"
-msgstr ""
+msgstr "Nombre del Día"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_school_schedule__weekday
 msgid "Día de la semana"
-msgstr ""
+msgstr "Día de la semana"
 
 #. module: ps_school
 #: model:ir.model.fields.selection,name:ps_school.selection__school_schedule__weekday__0
 msgid "Lunes"
-msgstr ""
+msgstr "Lunes"
 
 #. module: ps_school
 #: model:ir.model.fields.selection,name:ps_school.selection__school_schedule__weekday__1
 msgid "Martes"
-msgstr ""
+msgstr "Martes"
 
 #. module: ps_school
 #: model:ir.model.fields.selection,name:ps_school.selection__school_schedule__weekday__2
 msgid "Miércoles"
-msgstr ""
+msgstr "Miércoles"
 
 #. module: ps_school
 #: model:ir.model.fields.selection,name:ps_school.selection__school_schedule__weekday__3
 msgid "Jueves"
-msgstr ""
+msgstr "Jueves"
 
 #. module: ps_school
 #: model:ir.model.fields.selection,name:ps_school.selection__school_schedule__weekday__4
 msgid "Viernes"
-msgstr ""
+msgstr "Viernes"
 
 #. module: ps_school
 #: model:ir.model.fields.selection,name:ps_school.selection__school_schedule__weekday__5
 msgid "Sábado"
-msgstr ""
+msgstr "Sábado"
 
 #. module: ps_school
 #: model:ir.model.fields.selection,name:ps_school.selection__school_schedule__weekday__6
 msgid "Domingo"
-msgstr ""
+msgstr "Domingo"
 
 #. module: ps_school
 #: code:addons/ps_school/models/school_schedule.py:0
 msgid "End hour must be after start hour."
-msgstr ""
+msgstr "La hora de fin debe ser posterior a la hora de inicio."
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_school_material_movement__box_id
 msgid "Caja"
-msgstr ""
+msgstr "Caja"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_school_material_movement__attendance_id
 msgid "Asistencia"
-msgstr ""
+msgstr "Asistencia"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_school_material_movement__product_id
 msgid "Producto"
-msgstr ""
+msgstr "Producto"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_school_material_movement__qty
 msgid "Cambio"
-msgstr ""
+msgstr "Cambio"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_school_material_movement__date
 msgid "Fecha"
-msgstr ""
+msgstr "Fecha"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_school_box__name
 #: model:ir.model.fields,field_description:ps_school.field_school_course__name
 msgid "Nombre"
-msgstr ""
+msgstr "Nombre"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_school_box_line__image
 msgid "Imagen del producto"
-msgstr ""
+msgstr "Imagen del producto"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_school_box_line__expected_quantity
 msgid "Cantidad esperada"
-msgstr ""
+msgstr "Cantidad esperada"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_school_box_line__real_quantity
 msgid "Cantidad real"
-msgstr ""
+msgstr "Cantidad real"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_school_box_line__quantity_difference
 msgid "Diferencia"
-msgstr ""
+msgstr "Diferencia"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.school_box_view_form
 msgid "Diferencia de cantidades⚠️"
-msgstr ""
+msgstr "Diferencia de cantidades⚠️"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_school_attendance_material_line__lost_quantity
 msgid "Cantidad perdida"
-msgstr ""
+msgstr "Cantidad perdida"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_school_attendance_material_line__damaged_quantity
 msgid "Cantidad dañada"
-msgstr ""
+msgstr "Cantidad dañada"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_school_course_line__name
 msgid "Línea de Curso"
-msgstr ""
+msgstr "Línea de Curso"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_school_course_line__program_id
 msgid "Programa"
-msgstr ""
+msgstr "Programa"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_school_course_line__school_id
 msgid "Escuela"
-msgstr ""
+msgstr "Escuela"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_school_course_line__course_id
 msgid "Grupo"
-msgstr ""
+msgstr "Grupo"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_school_course_line__related_program_ids
 msgid "Programas relacionados"
-msgstr ""
+msgstr "Programas relacionados"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_school_course_line__student_ids
 msgid "Alumnos"
-msgstr ""
+msgstr "Alumnos"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_school_course_line__student_qty
 msgid "Students"
-msgstr ""
+msgstr "Estudiantes"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_school_course_line__active_student_qty
 msgid "Active Students"
-msgstr ""
+msgstr "Estudiantes Activos"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_school_course_line__inactive_student_qty
 msgid "Inactive Students"
-msgstr ""
+msgstr "Estudiantes Inactivos"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_school_course_line__teacher_ids
 msgid "Profesores"
-msgstr ""
+msgstr "Profesores"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_school_course_line__schedule_ids
 msgid "Horarios"
-msgstr ""
+msgstr "Horarios"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_school_course_line__attendance_ids
 msgid "Asistencias"
-msgstr ""
+msgstr "Asistencias"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_school_course_line__start_date
 msgid "Start"
-msgstr ""
+msgstr "Inicio"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_school_course_line__end_date
 msgid "End"
-msgstr ""
+msgstr "Fin"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_school_course_line__academic_period
 msgid "Periodo académico"
-msgstr ""
+msgstr "Periodo académico"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_school_course_line__box_ids
 msgid "Caja de materiales"
-msgstr ""
+msgstr "Caja de materiales"
 
 #. module: ps_school
 #: code:addons/ps_school/models/school_course_line.py:0
 msgid "End date of program %s must be after start date."
-msgstr ""
+msgstr "La fecha de fin del programa %s debe ser posterior a la fecha de inicio."
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_school_attendance__name
 msgid "Asistencia"
-msgstr ""
+msgstr "Asistencia"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_school_attendance__date
 msgid "Fecha"
-msgstr ""
+msgstr "Fecha"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_school_attendance__course_schedule_ids
 msgid "Horario"
-msgstr ""
+msgstr "Horario"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_school_attendance__substitute_teacher_ids
 msgid "Profesores sustitutos"
-msgstr ""
+msgstr "Profesores sustitutos"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_school_attendance__program_id
 msgid "Programa"
-msgstr ""
+msgstr "Programa"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_school_attendance__program_subject_ids
 msgid "Materias del programa"
-msgstr ""
+msgstr "Materias del programa"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_school_attendance__subject_id
 msgid "Materia"
-msgstr ""
+msgstr "Materia"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_school_attendance__materials_status
 #: model:ir.model.fields.selection,name:ps_school.selection__school_attendance__materials_status__review
 msgid "Borrador"
-msgstr ""
+msgstr "Borrador"
 
 #. module: ps_school
 #: model:ir.model.fields.selection,name:ps_school.selection__school_attendance__materials_status__closed
 msgid "Cerrado"
-msgstr ""
+msgstr "Cerrado"
 
 #. module: ps_school
 #: code:addons/ps_school/models/school_attendance.py:0
 msgid "Modificar Materiales"
-msgstr ""
+msgstr "Modificar Materiales"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_school_attendance_line__attendance_id
 msgid "Attendance"
-msgstr ""
+msgstr "Asistencia"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_school_attendance_line__student_id
 msgid "Student"
-msgstr ""
+msgstr "Estudiante"
 
 #. module: ps_school
 #: model_terms:ir.ui.view,arch_db:ps_school.teacher_kanban_view_inherit
 msgid "Colegios"
-msgstr ""
+msgstr "Colegios"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_hr_employee__student_ids
 msgid "Estudiantes"
-msgstr ""
+msgstr "Estudiantes"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_hr_employee__school_ids
 msgid "Colegios"
-msgstr ""
+msgstr "Colegios"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_hr_employee__subject_line_ids
 msgid "Líneas de Curso"
-msgstr ""
+msgstr "Líneas de Curso"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_hr_employee__schedule_ids
 msgid "Horarios"
-msgstr ""
+msgstr "Horarios"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_hr_employee__schedule_text
 msgid "Resumen de horarios"
-msgstr ""
+msgstr "Resumen de horarios"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_product_template__fee_invoice_policy
 msgid "Invoicing Policy"
-msgstr ""
+msgstr "Política de Facturación"
 
 #. module: ps_school
 #: model:ir.model.fields.selection,name:ps_school.selection__product_template__fee_invoice_policy__prepaid
 msgid "Prepaid/Fixed Price"
-msgstr ""
+msgstr "Prepago/Precio Fijo"
 
 #. module: ps_school
 #: model:ir.model.fields.selection,name:ps_school.selection__product_template__fee_invoice_policy__recurr
 msgid "Recurring"
-msgstr ""
+msgstr "Recurrente"
 
 #. module: ps_school
 #: model:ir.model.fields.selection,name:ps_school.selection__product_template__fee_invoice_policy__delivery
 msgid "Delivery"
-msgstr ""
+msgstr "Entrega"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_product_template__refundable_fee
 msgid "Refundable"
-msgstr ""
+msgstr "Reembolsable"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_res_partner__is_student
 #: model:ir.model.fields,field_description:ps_school.field_res_users__is_student
 msgid "Es estudiante"
-msgstr ""
+msgstr "Es estudiante"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_res_partner__is_parent
 #: model:ir.model.fields,field_description:ps_school.field_res_users__is_parent
 msgid "Es padre/madre"
-msgstr ""
+msgstr "Es padre/madre"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_res_partner__is_teacher
 #: model:ir.model.fields,field_description:ps_school.field_res_users__is_teacher
 msgid "Es profesor"
-msgstr ""
+msgstr "Es profesor"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_res_partner__is_school
 #: model:ir.model.fields,field_description:ps_school.field_res_users__is_school
 msgid "Es colegio"
-msgstr ""
+msgstr "Es colegio"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_res_partner__school_role
 #: model:ir.model.fields,field_description:ps_school.field_res_users__school_role
 #: model:ir.model.fields.selection,name:ps_school.selection__res_partner__school_role__teacher
 msgid "Profesor"
-msgstr ""
+msgstr "Profesor"
 
 #. module: ps_school
 #: model:ir.model.fields.selection,name:ps_school.selection__res_partner__school_role__student
 msgid "Estudiante"
-msgstr ""
+msgstr "Estudiante"
 
 #. module: ps_school
 #: model:ir.model.fields.selection,name:ps_school.selection__res_partner__school_role__parent
 msgid "Padre/Madre"
-msgstr ""
+msgstr "Padre/Madre"
 
 #. module: ps_school
 #: model:ir.model.fields.selection,name:ps_school.selection__res_partner__school_role__school
 msgid "Colegio"
-msgstr ""
+msgstr "Colegio"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_res_partner__school_id
 #: model:ir.model.fields,field_description:ps_school.field_res_users__school_id
 msgid "Colegio"
-msgstr ""
+msgstr "Colegio"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_res_partner__student_course_line_ids
 #: model:ir.model.fields,field_description:ps_school.field_res_users__student_course_line_ids
 msgid "Líneas de Curso del Estudiante"
-msgstr ""
+msgstr "Líneas de Curso del Estudiante"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_res_partner__guardian_ids
 #: model:ir.model.fields,field_description:ps_school.field_res_users__guardian_ids
 msgid "Tutores Legales"
-msgstr ""
+msgstr "Tutores Legales"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_res_partner__start_date
 #: model:ir.model.fields,field_description:ps_school.field_res_users__start_date
 msgid "Fecha de alta"
-msgstr ""
+msgstr "Fecha de alta"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_res_partner__finish_date
 #: model:ir.model.fields,field_description:ps_school.field_res_users__finish_date
 msgid "Fecha de baja"
-msgstr ""
+msgstr "Fecha de baja"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_res_partner__enrollment_state
 #: model:ir.model.fields,field_description:ps_school.field_res_users__enrollment_state
 #: model:ir.model.fields.selection,name:ps_school.selection__res_partner__enrollment_state__active
 msgid "Alta"
-msgstr ""
+msgstr "Alta"
 
 #. module: ps_school
 #: model:ir.model.fields.selection,name:ps_school.selection__res_partner__enrollment_state__inactive
 msgid "Baja"
-msgstr ""
+msgstr "Baja"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_res_partner__date_birth
 #: model:ir.model.fields,field_description:ps_school.field_res_users__date_birth
 msgid "Fecha de nacimiento"
-msgstr ""
+msgstr "Fecha de nacimiento"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_res_partner__gender
 #: model:ir.model.fields,field_description:ps_school.field_res_users__gender
 #: model:ir.model.fields.selection,name:ps_school.selection__res_partner__gender__male
 msgid "Male"
-msgstr ""
+msgstr "Masculino"
 
 #. module: ps_school
 #: model:ir.model.fields.selection,name:ps_school.selection__res_partner__gender__female
 msgid "Female"
-msgstr ""
+msgstr "Femenino"
 
 #. module: ps_school
 #: model:ir.model.fields.selection,name:ps_school.selection__res_partner__gender__other
 msgid "Other"
-msgstr ""
+msgstr "Otro"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_res_partner__country_birth
 #: model:ir.model.fields,field_description:ps_school.field_res_users__country_birth
 msgid "Country of Birth"
-msgstr ""
+msgstr "País de Nacimiento"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_res_partner__country_nationality
 #: model:ir.model.fields,field_description:ps_school.field_res_users__country_nationality
 msgid "Nationality"
-msgstr ""
+msgstr "Nacionalidad"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_res_partner__student_complexion
 #: model:ir.model.fields,field_description:ps_school.field_res_users__student_complexion
 msgid "Complexion"
-msgstr ""
+msgstr "Complexión"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_res_partner__student_weight
 #: model:ir.model.fields,field_description:ps_school.field_res_users__student_weight
 msgid "Weight (in kg)"
-msgstr ""
+msgstr "Peso (en kg)"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_res_partner__student_height
 #: model:ir.model.fields,field_description:ps_school.field_res_users__student_height
 msgid "Height (in cm)"
-msgstr ""
+msgstr "Altura (en cm)"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_res_partner__student_mark_identify
 #: model:ir.model.fields,field_description:ps_school.field_res_users__student_mark_identify
 msgid "Mark for Identity"
-msgstr ""
+msgstr "Seña de Identidad"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_res_partner__student_emergency_contact
 #: model:ir.model.fields,field_description:ps_school.field_res_users__student_emergency_contact
 msgid "Emergency Contact Name"
-msgstr ""
+msgstr "Nombre de Contacto de Emergencia"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_res_partner__student_emergency_phone
 #: model:ir.model.fields,field_description:ps_school.field_res_users__student_emergency_phone
 msgid "Emergency Contact Number"
-msgstr ""
+msgstr "Teléfono de Contacto de Emergencia"
 
 #. module: ps_school
 #: code:addons/ps_school/models/student.py:0
 msgid "Solo se puede marcar un padre para facturar."
-msgstr ""
+msgstr "Solo se puede marcar un padre para facturar."
 
 #. module: ps_school
 #: model:ir.model,name:ps_school.model_attendance_adjust_box_material
 msgid "Wizard para reponer productos"
-msgstr ""
+msgstr "Wizard para reponer productos"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_attendance_adjust_box_material__attendance_id
 msgid "Asistencia"
-msgstr ""
+msgstr "Asistencia"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_attendance_adjust_box_material__attendance_box_ids
 msgid "Cajas de asistencia"
-msgstr ""
+msgstr "Cajas de asistencia"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_attendance_adjust_box_material__box_id
 msgid "Caja"
-msgstr ""
+msgstr "Caja"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_attendance_adjust_box_material__box_product_ids
 msgid "Productos de la caja"
-msgstr ""
+msgstr "Productos de la caja"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_attendance_adjust_box_material__product_id
 msgid "Producto"
-msgstr ""
+msgstr "Producto"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_attendance_adjust_box_material__qty
 msgid "Cantitad"
-msgstr ""
+msgstr "Cantitad"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_attendance_adjust_box_material__movement_type
 msgid "Tipo de movimiento"
-msgstr ""
+msgstr "Tipo de movimiento"
 
 #. module: ps_school
 #: model:ir.model.fields.selection,name:ps_school.selection__attendance_adjust_box_material__movement_type__loss
 msgid "Pérdida"
-msgstr ""
+msgstr "Pérdida"
 
 #. module: ps_school
 #: model:ir.model.fields.selection,name:ps_school.selection__attendance_adjust_box_material__movement_type__increment
 msgid "Reposición"
-msgstr ""
+msgstr "Reposición"
 
 #. module: ps_school
 #: model:ir.model.fields,field_description:ps_school.field_attendance_adjust_box_material__notes
 msgid "Notas"
-msgstr ""
+msgstr "Notas"
 
 #. module: ps_school
 #: code:addons/ps_school/models/attendance_adjust_box_material.py:0
 msgid "La cantidad debe ser mayor a cero."
-msgstr ""
+msgstr "La cantidad debe ser mayor a cero."
 
 #. module: ps_school
 #: model:ir.model,name:ps_school.model_res_users
 msgid "Users"
-msgstr ""
+msgstr "Usuarios"
 
 #. module: ps_school
 #: model:ir.model,name:ps_school.model_hr_employee
 msgid "Employee"
-msgstr ""
+msgstr "Empleado"
 
 #. module: ps_school
 #: model:ir.model,name:ps_school.model_product_template
 msgid "Product Template"
-msgstr ""
+msgstr "Plantilla de Producto"
 
 #. module: ps_school
 #: model:ir.model,name:ps_school.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "Contacto"
 
 #. module: ps_school
 #: model:ir.model,name:ps_school.model_school_attendance
 msgid "Attendance tracking"
-msgstr ""
+msgstr "Seguimiento de Asistencia"
 
 #. module: ps_school
 #: model:ir.model,name:ps_school.model_school_attendance_line
 msgid "Attendance Line"
-msgstr ""
+msgstr "Línea de Asistencia"
 
 #. module: ps_school
 #: model:ir.model,name:ps_school.model_school_box
 msgid "Boxes"
-msgstr ""
+msgstr "Cajas"
 
 #. module: ps_school
 #: model:ir.model,name:ps_school.model_school_box_line
 msgid "Material line inside a box"
-msgstr ""
+msgstr "Línea de material dentro de una caja"
 
 #. module: ps_school
 #: model:ir.model,name:ps_school.model_school_attendance_material_line
 msgid "Attendance Material Line"
-msgstr ""
+msgstr "Línea de Material de Asistencia"
 
 #. module: ps_school
 #: model:ir.model,name:ps_school.model_school_course
 msgid "Course"
-msgstr ""
+msgstr "Curso"
 
 #. module: ps_school
 #: model:ir.model,name:ps_school.model_school_course_line
 msgid "Course Line"
-msgstr ""
+msgstr "Línea de Curso"
 
 #. module: ps_school
 #: model:ir.model,name:ps_school.model_school_course_section
 msgid "Course Section"
-msgstr ""
+msgstr "Sección de Curso"
 
 #. module: ps_school
 #: model:ir.model,name:ps_school.model_school_legal_guardian
 msgid "SchoolLegalGuardian"
-msgstr ""
+msgstr "Tutor Legal Escolar"
 
 #. module: ps_school
 #: model:ir.model,name:ps_school.model_school_material_movement
 msgid "Material Movement"
-msgstr ""
+msgstr "Movimiento de Material"
 
 #. module: ps_school
 #: model:ir.model,name:ps_school.model_school_program
 msgid "Program"
-msgstr ""
+msgstr "Programa"
 
 #. module: ps_school
 #: model:ir.model,name:ps_school.model_school_schedule
 msgid "Schedule"
-msgstr ""
+msgstr "Horario"
 
 #. module: ps_school
 #: model:ir.model,name:ps_school.model_school_subject
 msgid "SchoolSubject"
-msgstr ""
+msgstr "Materia Escolar"
 
 #. module: ps_school
 #: model:ir.model,name:ps_school.model_adjust_box_material
 msgid "adjust.box.material"
-msgstr ""
+msgstr "adjust.box.material"
 
 #. module: ps_school
 #: model:ir.model,name:ps_school.model_attendance_adjust_box_material
 msgid "attendance.adjust.box.material"
-msgstr ""
+msgstr "attendance.adjust.box.material"
