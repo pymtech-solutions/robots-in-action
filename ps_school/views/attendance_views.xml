@@ -23,7 +23,7 @@
             <field name="name">course.line.attendance.form.view</field>
             <field name="model">school.attendance</field>
             <field name="arch" type="xml">
-                <form string="Attendance">
+                <form string="Asistencia">
                     <header>
                         <button name="action_adjust_materials" string="Modificar material"
                                 type="object" class="btn-primary" invisible="materials_status == 'closed'"/>
@@ -88,7 +88,7 @@
 
         <!-- Attendance action-->
         <record id="action_school_attendance" model="ir.actions.act_window">
-            <field name="name">Assistance</field>
+            <field name="name">Asistencia</field>
             <field name="res_model">school.attendance</field>
             <field name="view_mode">list,form</field>
             <field name="context">

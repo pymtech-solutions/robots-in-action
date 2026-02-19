@@ -22,7 +22,7 @@
                     <div class="oe_title">
                         <label for="name"/>
                         <h1>
-                            <field name="name" placeholder="e.g Marc Demo"/>
+                            <field name="name" placeholder="ej. Marc Demo"/>
                         </h1>
                     </div>
                     <group>
@@ -47,7 +47,7 @@
 
     <!--Action-->
     <record id="school_subject_action" model="ir.actions.act_window">
-        <field name="name">school subject</field>
+        <field name="name">Asignaturas</field>
         <field name="res_model">school.subject</field>
         <field name="view_mode">list,form</field>
     </record>
@@ -57,7 +57,7 @@
     <menuitem action="school_subject_action"
               id="menu_school_subject"
               parent="menu_school_courses"
-              name="school subject"
+              name="Asignaturas"
               sequence="4"
     />
 </odoo>

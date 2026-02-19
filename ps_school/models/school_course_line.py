@@ -10,11 +10,11 @@ _logger = logging.getLogger(__name__)
 
 class SchoolCourseLine(models.Model):
     _name = 'school.course.line'
-    _description = 'Course Line'
+    _description = 'Línea de curso'
     _rec_name = 'name'
 
-    name = fields.Char(string='Línea de Curso', compute='_compute_name', store=False)
-    display_name = fields.Char(string='Display Name', compute='_compute_display_name', store=False)
+    name = fields.Char(string='Línea de curso', compute='_compute_name', store=False)
+    display_name = fields.Char(string='Nombre a mostrar', compute='_compute_display_name', store=False)
     program_id = fields.Many2one(comodel_name='school.program', string='Programa')
     school_id = fields.Many2one(
         comodel_name='res.partner',
@@ -44,9 +44,9 @@ class SchoolCourseLine(models.Model):
         domain=[('is_student', '=', True)],
         context={'default_school_role': 'student', 'default_company_type': 'person'}
     )
-    student_qty = fields.Integer(string='Students', compute='_compute_student_qty', store=True)
-    active_student_qty = fields.Integer(string='Active Students', compute='_compute_student_qty', store=True)
-    inactive_student_qty = fields.Integer(string='Inactive Students', compute='_compute_student_qty', store=True)
+    student_qty = fields.Integer(string='Estudiantes', compute='_compute_student_qty', store=True)
+    active_student_qty = fields.Integer(string='Estudiantes activos', compute='_compute_student_qty', store=True)
+    inactive_student_qty = fields.Integer(string='Estudiantes inactivos', compute='_compute_student_qty', store=True)
     teacher_ids = fields.Many2many(
         'hr.employee',
         'course_line_teacher_rel',
@@ -62,8 +62,8 @@ class SchoolCourseLine(models.Model):
         inverse_name='course_line_id',
         string='Asistencias'
     )
-    start_date = fields.Date(string='Start', required=True)
-    end_date = fields.Date(string='End', required=True)
+    start_date = fields.Date(string='Inicio', required=True)
+    end_date = fields.Date(string='Fin', required=True)
     academic_period = fields.Char(string="Periodo académico")
     box_ids = fields.Many2many(comodel_name='school.box', string='Caja de materiales', help="Caja de materiales")
 
@@ -84,7 +84,7 @@ class SchoolCourseLine(models.Model):
         """ Verify that the end date is after the start date """
         for record in self:
             if record.start_date and record.end_date and record.end_date <= record.start_date:
-                raise ValidationError(f"End date of program {record.program_id.name} must be after start date.")
+                raise ValidationError(f"La fecha de fin del programa {record.program_id.name} debe ser posterior a la fecha de inicio.")
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -178,7 +178,7 @@ class SchoolCourseLine(models.Model):
                 if name_parts:
                     record.name = ' - '.join(name_parts)
                 else:
-                    record.name = f'Línea #{record.id}' if record.id else 'Nueva Línea'
+                    record.name = f'Línea #{record.id}' if record.id else 'Nueva línea'
             except Exception as e:
                 _logger.error(f"Error computing name for course line {record.id}: {str(e)}")
                 record.name = f'Error #{record.id}' if record.id else 'Error'
@@ -193,7 +193,7 @@ class SchoolCourseLine(models.Model):
                 if name_parts:
                     record.display_name = ' - '.join(name_parts)
                 else:
-                    record.display_name = f'Línea #{record.id}' if record.id else 'Nueva Línea'
+                    record.display_name = f'Línea #{record.id}' if record.id else 'Nueva línea'
             except Exception as e:
                 import logging
                 _logger = logging.getLogger(__name__)
@@ -209,7 +209,7 @@ class SchoolCourseLine(models.Model):
                 if name_parts:
                     name = ' - '.join(name_parts)
                 else:
-                    name = f'Línea #{record.id}' if record.id else 'Nueva Línea'
+                    name = f'Línea #{record.id}' if record.id else 'Nueva línea'
                 result.append((record.id, name))
             except Exception as e:
                 import logging

@@ -4,13 +4,13 @@ from odoo import api, fields, models
 
 class SchoolAttendanceLine(models.Model):
     _name = 'school.attendance.line'
-    _description = 'Attendance Line'
+    _description = 'Línea de Asistencia'
 
-    attendance_id = fields.Many2one(comodel_name='school.attendance', string='Attendance')
+    attendance_id = fields.Many2one(comodel_name='school.attendance', string='Asistencia')
     school_id = fields.Many2one(related='attendance_id.school_id', string='Escuela')
     date = fields.Date(related='attendance_id.date', string='Fecha')
     course_id = fields.Many2one(related='attendance_id.course_line_id', string='Curso')
-    student_id = fields.Many2one(comodel_name='res.partner', string='Student')
+    student_id = fields.Many2one(comodel_name='res.partner', string='Estudiante')
     attended = fields.Boolean(string='Presente', default=False)
     student_domain_ids = fields.Many2many(
         comodel_name='res.partner',

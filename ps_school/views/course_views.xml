@@ -6,7 +6,7 @@
             <field name="name">school.course.tree.view</field>
             <field name="model">school.course</field>
             <field name="arch" type="xml">
-                <list string="Courses">
+                <list string="Cursos">
                     <field name="display_name"/>
                     <field name="color" widget="color_picker"/>
                 </list>
@@ -18,7 +18,7 @@
             <field name="name">school.course.form.view</field>
             <field name="model">school.course</field>
             <field name="arch" type="xml">
-                <form string="Courses">
+                <form string="Cursos">
                     <sheet>
                         <div class="oe_title">
                             <label for="name"/>
@@ -63,7 +63,7 @@
             <field name="name">school.course.search</field>
             <field name="model">school.course</field>
             <field name="arch" type="xml">
-                <search string="Courses">
+                <search string="Cursos">
                     <field name="name" string="Nombre"/>
                     <separator/>
                 </search>

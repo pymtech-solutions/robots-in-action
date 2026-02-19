@@ -4,7 +4,7 @@ from odoo import api, fields, models
 
 class SchoolProgram(models.Model):
     _name = 'school.program'
-    _description = 'Program'
+    _description = 'Programa'
     _order = 'name'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 

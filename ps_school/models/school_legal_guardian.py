@@ -5,7 +5,7 @@ from odoo import api, fields, models
 class SchoolLegalGuardian(models.Model):
     """ This model represents school.legal.tutor."""
     _name = 'school.legal.guardian'
-    _description = 'SchoolLegalGuardian'
+    _description = 'Tutor legal'
 
     partner_id = fields.Many2one(
         comodel_name='res.partner',
@@ -18,7 +18,7 @@ class SchoolLegalGuardian(models.Model):
         selection = [
             ('father', 'Padre'),
             ('mother', 'Madre'),
-            ('guardian', 'Tutor Legal'),
+            ('guardian', 'Tutor legal'),
             ('grandfather', 'Abuelo'),
             ('grandmother', 'Abuela'),
             ('uncle', 'Tío'),

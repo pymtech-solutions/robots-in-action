@@ -5,7 +5,7 @@
 			<field name="name">course.section.tree.view</field>
 			<field name="model">school.course.section</field>
 			<field name="arch" type="xml">
-				<list string="Section" editable="bottom" edit="1">
+				<list string="Sección" editable="bottom" edit="1">
                     <field name="name"/>
                     <field name="course_id" 
                         options="{'no_create': True,'no_edit': True}" 
@@ -18,21 +18,21 @@
             <field name="name">school.year.search</field>
             <field name="model">school.course.section</field>
             <field name="arch" type="xml">
-                <search string="Sections">
-                    <field name="name" string="Section"/>
+                <search string="Secciones">
+                    <field name="name" string="Sección"/>
                     <separator/>
                 </search>
              </field>
         </record>
         
         <record id="action_school_seciton" model="ir.actions.act_window">
-            <field name="name">Course Section</field>
+            <field name="name">Sección de Curso</field>
             <field name="res_model">school.course.section</field>
             <field name="search_view_id" ref="section_search_view"/>
             <field name="view_mode">list,form</field>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">
-                    Create a new section
+                    Crear una nueva sección
                 </p>
             </field>
         </record>

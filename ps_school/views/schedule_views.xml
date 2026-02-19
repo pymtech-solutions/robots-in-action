@@ -4,7 +4,7 @@
         <field name="name">schedule.view.form</field>
         <field name="model">school.schedule</field>
         <field name="arch" type="xml">
-            <form string="Form Title">
+            <form string="Horario">
                 <sheet>
                     <div class="oe_title">
                         <h1>

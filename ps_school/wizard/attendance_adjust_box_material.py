@@ -12,7 +12,7 @@ class AttendanceRefillBoxMaterial(models.TransientModel):
     box_id = fields.Many2one(comodel_name='school.box', string='Caja')
     box_product_ids = fields.Many2many(related='box_id.products_ids', string='Productos de la caja')
     product_id = fields.Many2one(comodel_name='product.product', string='Producto', required=True)
-    qty = fields.Integer(string='Cantitad', required=True)
+    qty = fields.Integer(string='Cantidad', required=True)
     movement_type = fields.Selection([
         ('loss', 'Pérdida'),
         ('increment', 'Reposición'),

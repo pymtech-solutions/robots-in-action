@@ -10,17 +10,17 @@ _logger = logging.getLogger(__name__)
 class SchoolBox(models.Model):
     """ This model represents the material boxes that can be used in a specific class."""
     _name = 'school.box'
-    _description = 'Boxes'
+    _description = 'Cajas'
 
     name = fields.Char(string='Nombre', required=True)
-    teacher_ids = (fields.Many2many(comodel_name='hr.employee', string='Profesores asignado',
+    teacher_ids = (fields.Many2many(comodel_name='hr.employee', string='Profesores asignados',
                                     domain=[('is_teacher', '=', True)]))
 
     box_line_ids = fields.One2many(
         comodel_name='school.box.line',
         inverse_name='box_id',
         copy=True,
-        string='Box lines',
+        string='Líneas de caja',
     )
 
     products_ids = fields.Many2many(comodel_name='product.product', string='Productos en caja',
@@ -38,7 +38,7 @@ class SchoolBox(models.Model):
         store=True
     )
 
-    alert_icon = fields.Html(compute='_compute_alert_icon', string="Alert", store=True)
+    alert_icon = fields.Html(compute='_compute_alert_icon', string="Alerta", store=True)
     differences = fields.Boolean(string='Diferencias de materiales', compute='_compute_alert_icon', store=True)
 
     @api.depends('material_movement_ids')
@@ -83,7 +83,7 @@ class SchoolBox(models.Model):
         """
         self.ensure_one()
         action = {
-            'name': f'Movimientos de Materiales - {self.name}',
+            'name': f'Movimientos de materiales - {self.name}',
             'type': 'ir.actions.act_window',
             'res_model': 'school.material.movement',
             'view_mode': 'list,form',
@@ -98,7 +98,7 @@ class SchoolBox(models.Model):
         self.ensure_one()
         return {
             'type': 'ir.actions.act_window',
-            'name': 'Modificar Materiales',
+            'name': 'Reponer materiales',
             'res_model': 'adjust.box.material',
             'view_mode': 'form',
             'target': 'new',
@@ -111,15 +111,15 @@ class SchoolBox(models.Model):
 class SchoolBoxLine(models.Model):
     """ This model represents the materials inside of a school box"""
     _name = 'school.box.line'
-    _description = 'Material line inside a box'
+    _description = 'Línea de material en caja'
 
     # Box
-    box_id = fields.Many2one(comodel_name='school.box', string='Boxes')
+    box_id = fields.Many2one(comodel_name='school.box', string='Caja')
     box_material_movement_ids = fields.One2many(related='box_id.material_movement_ids',
                                                 string='Historial de movimientos')
 
     # Product
-    product_id = fields.Many2one(comodel_name='product.product', string='Products')
+    product_id = fields.Many2one(comodel_name='product.product', string='Productos')
     image = fields.Binary(related='product_id.image_128', string='Imagen del producto')
 
     # Expected quantity of product a box should have
@@ -149,7 +149,7 @@ class SchoolBoxLine(models.Model):
 # Nuevo modelo para líneas de materiales específicas de asistencia
 class AttendanceMaterialLine(models.Model):
     _name = 'school.attendance.material.line'
-    _description = 'Attendance Material Line'
+    _description = 'Línea de material de asistencia'
 
     attendance_id = fields.Many2one(
         comodel_name='school.attendance',

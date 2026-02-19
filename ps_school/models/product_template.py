@@ -13,8 +13,8 @@ class ProductTemplate(models.Model):
     - On Demand: it will charge on the basis of quantity. in case of product it will consume on issuance, on both cases a resident request will generate for processing.
     """
     fee_invoice_policy = fields.Selection([
-        ('prepaid', 'Prepaid/Fixed Price'),
-        ('recurr', 'Recurring'),
-        ('delivery', 'Delivery'),
-    ], string="Invoicing Policy", default="prepaid", copy=False)
-    refundable_fee = fields.Boolean(string='Refundable', default=False)
+        ('prepaid', 'Prepago/Precio Fijo'),
+        ('recurr', 'Periódico'),
+        ('delivery', 'Entrega'),
+    ], string="Política de Facturación", default="prepaid", copy=False)
+    refundable_fee = fields.Boolean(string='Reembolsable', default=False)

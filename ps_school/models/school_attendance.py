@@ -10,37 +10,37 @@ _logger = logging.getLogger(__name__)
 
 class SchoolAttendance(models.Model):
     _name = 'school.attendance'
-    _description = 'Attendance tracking'
+    _description = 'Registro de Asistencia'
     _order = 'date desc, id desc'
 
     name = fields.Char(string='Asistencia', compute='_compute_name', store=True)
     date = fields.Date(string='Fecha', required=True, default=fields.Date.today)
     course_line_id = fields.Many2one(
         comodel_name='school.course.line',
-        string='Course',
+        string='Curso',
         required=True,
         ondelete='cascade',
     )
     course_schedule_ids = fields.Many2many(related='course_line_id.schedule_ids', string='Horario')
     teacher_ids = fields.Many2many(related='course_line_id.teacher_ids', string='Profesores')
-    substitute_teacher_ids = fields.Many2many(comodel_name='hr.employee', string="Profesores sustitutos")
+    substitute_teacher_ids = fields.Many2many(comodel_name='hr.employee', string="Profesores Sustitutos")
     attendance_line_ids = fields.One2many(
         comodel_name='school.attendance.line',
         inverse_name='attendance_id',
-        string='Registros de asistencia',
+        string='Líneas de Asistencia',
         store=True
     )
 
     school_id = fields.Many2one(related='course_line_id.school_id', string='Colegio', )
     program_id = fields.Many2one(related='course_line_id.program_id', string='Programa')
-    program_subject_ids = fields.Many2many(comodel_name='school.subject', string='Materias del programa',
+    program_subject_ids = fields.Many2many(comodel_name='school.subject', string='Materias del Programa',
                                            compute='_compute_program_subjects', store=True)
     subject_id = fields.Many2one(comodel_name='school.subject', string='Materia')
-    box_ids = fields.Many2many(related='course_line_id.box_ids', string='Caja de materiales')
+    box_ids = fields.Many2many(related='course_line_id.box_ids', string='Caja de Materiales')
     material_movement_ids = fields.One2many(
         comodel_name='school.material.movement',
         inverse_name='attendance_id',
-        string='Movimientos de materiales'
+        string='Movimientos de Materiales'
     )
 
     materials_status = fields.Selection([
@@ -57,7 +57,7 @@ class SchoolAttendance(models.Model):
         self.ensure_one()
         return {
             'type': 'ir.actions.act_window',
-            'name': 'Modificar Materiales',
+            'name': 'Ajustar Materiales',
             'res_model': 'attendance.adjust.box.material',
             'view_mode': 'form',
             'target': 'new',

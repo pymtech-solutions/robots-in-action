@@ -77,7 +77,7 @@
         <field name="name">boxes.view.search</field>
         <field name="model">school.box</field>
         <field name="arch" type="xml">
-            <search string="Search Title">
+            <search string="Buscar">
                 <field name="name" string="Name"/>
                 <field name="teacher_ids"/>
                 <filter string="Con Diferencias" name="differences" domain="[('differences','=',True)]"/>

@@ -35,7 +35,7 @@
 
     <!--Action-->
     <record id="school_attendance_line_action" model="ir.actions.act_window">
-        <field name="name">Attendance</field>
+        <field name="name">Asistencia</field>
         <field name="res_model">school.attendance.line</field>
         <field name="view_mode">list,form</field>
     </record>

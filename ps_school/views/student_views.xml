@@ -109,7 +109,7 @@
                                 <field name="teacher_ids" widget="many2many_tags"/>
                                 <field name="schedule_ids" widget="many2many_tags"/>
                                 <field name="start_date"/>
-                                <field name="student_ids" string="N Alumnos"/>
+                                <field name="student_ids" string="Nº Alumnos"/>
                                 <field name="end_date"/>
                                 <field name="academic_period"/>
                             </list>
@@ -121,23 +121,23 @@
                     <page name='additional_info' string="Información Adicional"
                           invisible="is_student != True or is_parent == True">
                         <group>
-                            <group string="Demographics" name="demographics">
+                            <group string="Datos demográficos" name="demographics">
                                 <field name="date_birth"/>
                                 <field name="gender"/>
-                                <field name="country_birth" placeholder="Country of Birth" class="o_address_country"
+                                <field name="country_birth" placeholder="País de nacimiento" class="o_address_country"
                                        options='{"no_open": True, "no_create": True}'/>
-                                <field name="country_nationality" placeholder="Nationality" class="o_address_country"
+                                <field name="country_nationality" placeholder="Nacionalidad" class="o_address_country"
                                        options='{"no_open": True, "no_create": True}'/>
                             </group>
-                            <group string="Medical" name="medical">
+                            <group string="Datos médicos" name="medical">
                                 <field name="student_complexion"/>
                                 <field name="student_weight"/>
                                 <field name="student_height"/>
                                 <field name="student_mark_identify"/>
                             </group>
-                            <group string="Emergency Contact">
-                                <field name="student_emergency_contact" string="Contact Name"/>
-                                <field name="student_emergency_phone" string="Contact No."/>
+                            <group string="Contacto de emergencia">
+                                <field name="student_emergency_contact" string="Nombre del contacto"/>
+                                <field name="student_emergency_phone" string="Teléfono de contacto"/>
                             </group>
                         </group>
                     </page>
@@ -151,8 +151,8 @@
             <field name="model">res.partner</field>
             <field eval="8" name="priority"/>
             <field name="arch" type="xml">
-                <list string="Students" sample="1" multi_edit="1">
-                    <field name="display_name" string="Name"/>
+                <list string="Estudiantes" sample="1" multi_edit="1">
+                    <field name="display_name" string="Nombre"/>
                     <field name="function" invisible="1"/>
                     <field name="ref" optional="hide"/>
                     <field name="phone" class="o_force_ltr" optional="show"/>
@@ -164,7 +164,7 @@
                     <field name="country_id" optional="show" readonly="1"/>
                     <field name="category_id" optional="hide" widget="many2many_tags"
                            options="{'color_field': 'color'}"/>
-                    <field name="school_id" string="School" readonly="1"/>
+                    <field name="school_id" string="Colegio" readonly="1"/>
                     <field name="is_company" invisible="1"/>
                     <field name="parent_id" invisible="1" readonly="1"/>
                     <field name="active" invisible="1"/>
@@ -189,7 +189,7 @@
                             <div class="oe_kanban_card oe_kanban_global_click">
                                 <div class="o_kanban_image">
                                     <img t-att-src="kanban_image('res.partner', 'image_128', record.id.raw_value)"
-                                         alt="Student" class="o_kanban_image_fill_left"/>
+                                         alt="Estudiante" class="o_kanban_image_fill_left"/>
                                 </div>
                                 <div class="oe_kanban_details">
                                     <div class="o_kanban_record_top">
@@ -207,12 +207,12 @@
                                     </div>
                                     <div class="o_kanban_record_body">
                                         <div t-if="record.school_id.value" class="text-muted">
-                                            <i class="fa fa-graduation-cap" role="img" aria-label="School"
-                                               title="School"/>
+                                            <i class="fa fa-graduation-cap" role="img" aria-label="Colegio"
+                                               title="Colegio"/>
                                             <field name="school_id"/>
                                         </div>
                                         <div class="text-muted">
-                                            <i class="fa fa-book" role="img" aria-label="Courses" title="Courses"/>
+                                            <i class="fa fa-book" role="img" aria-label="Cursos" title="Cursos"/>
                                             <t t-esc="record.student_course_line_ids.raw_value.length"/>
                                             Cursos
                                         </div>
@@ -229,15 +229,15 @@
             <field name="name">student.view.search</field>
             <field name="model">res.partner</field>
             <field name="arch" type="xml">
-                <search string="Search Title">
-                    <field name="name" string="Name" filter_domain="[('name','ilike',self)]"/>
+                <search string="Buscar">
+                    <field name="name" string="Nombre" filter_domain="[('name','ilike',self)]"/>
                     <field name="school_id" string="Escuela" filter_domain="[('school_id.name','ilike',self)]"/>
-                    <group string="Filters">
+                    <group string="Filtros">
                         <filter string="Alta" name="active" domain="[('enrollment_state','=','active')]"/>
                         <filter string="Baja" name="inactive" domain="[('enrollment_state','=','inactive')]"/>
                     </group>
                     <separator/>
-                    <group string="Group By">
+                    <group string="Agrupar por">
                         <filter string="Escuela" name="escuela" context="{'group_by':'school_id'}"/>
                         <filter string="Cursos" name="cursos" context="{'group_by':'student_course_line_ids'}"/>
                     </group>
@@ -247,7 +247,7 @@
 
         <!-- Acción para abrir sección de alumnos -->
         <record id="action_res_partner_student" model="ir.actions.act_window">
-            <field name="name">Students</field>
+            <field name="name">Estudiantes</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">res.partner</field>
             <field name="view_mode">kanban,list,form</field>

@@ -5,7 +5,7 @@ from random import randint
 
 class SchoolCourse(models.Model):
     _name = 'school.course'
-    _description = 'Course'
+    _description = 'Curso'
     _order = 'name'
 
     name = fields.Char(string='Nombre del curso', required=True, index=True)
@@ -13,6 +13,6 @@ class SchoolCourse(models.Model):
     course_line_ids = fields.One2many(
         comodel_name='school.course.line',
         inverse_name='course_id',
-        string="Líneas de Curso"
+        string="Líneas de curso"
     )
     color = fields.Integer(default=lambda self: randint(1, 11))

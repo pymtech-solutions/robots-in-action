@@ -32,10 +32,10 @@ class ResPartner(models.Model):
         'course_line_student_rel',  # Misma tabla intermedia
         'student_id',  # Columna para student
         'course_line_id',  # Columna para course_line
-        string="Líneas de Curso del Estudiante",
+        string="Líneas de curso del estudiante",
         help="Líneas de curso donde este estudiante está inscrito"
     )
-    guardian_ids = fields.One2many(comodel_name='school.legal.guardian', string='Tutores Legales',
+    guardian_ids = fields.One2many(comodel_name='school.legal.guardian', string='Tutores legales',
                                    inverse_name='student_id')
 
     # Inscription dates and state
@@ -52,21 +52,21 @@ class ResPartner(models.Model):
     # Demographic Info
     date_birth = fields.Date(string='Fecha de nacimiento')
     gender = fields.Selection([
-        ('male', 'Male'),
-        ('female', 'Female'),
-        ('other', 'Other'),
+        ('male', 'Masculino'),
+        ('female', 'Femenino'),
+        ('other', 'Otro'),
     ], string='Género')
 
-    country_birth = fields.Many2one('res.country', 'Country of Birth')
-    country_nationality = fields.Many2one('res.country', 'Nationality')
+    country_birth = fields.Many2one('res.country', string='País de nacimiento')
+    country_nationality = fields.Many2one('res.country', string='Nacionalidad')
 
     # Medical Info
-    student_complexion = fields.Char('Complexion')
-    student_weight = fields.Float('Weight (in kg)')
-    student_height = fields.Float('Height (in cm)')
-    student_mark_identify = fields.Text('Mark for Identity')
-    student_emergency_contact = fields.Char('Emergency Contact Name')
-    student_emergency_phone = fields.Char('Emergency Contact Number')
+    student_complexion = fields.Char(string='Complexión')
+    student_weight = fields.Float(string='Peso (en kg)')
+    student_height = fields.Float(string='Altura (en cm)')
+    student_mark_identify = fields.Text(string='Señas particulares')
+    student_emergency_contact = fields.Char(string='Contacto de emergencia')
+    student_emergency_phone = fields.Char(string='Teléfono de emergencia')
 
     @api.constrains('guardian_ids')
     def _check_dates(self):

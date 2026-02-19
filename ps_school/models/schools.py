@@ -13,14 +13,14 @@ class School(models.Model):
     course_line_ids = fields.One2many(
         comodel_name='school.course.line',
         inverse_name='school_id',
-        string="Líneas de Curso",
+        string="Líneas de curso",
     )
     student_qty = fields.Integer(string='Alumnos totales', compute='_compute_student_qty', store=True)
     active_student_qty = fields.Integer(string='Alumnos de alta', compute='_compute_student_qty', store=True)
     inactive_student_qty = fields.Integer(string='Alumnos de baja', compute='_compute_student_qty', store=True)
     invoice_type = fields.Selection([('0', 'A la escuela'), ('1', 'A los alumnos')], string='Tipo de facturación',
                                     default='0')
-    school_invoice_date = fields.Date(string='Ultima facturación de la escuela', readonly=True)
+    school_invoice_date = fields.Date(string='Última facturación de la escuela', readonly=True)
 
     @api.depends('course_line_ids.student_ids', 'course_line_ids.student_ids.enrollment_state')
     def _compute_student_qty(self):
@@ -70,7 +70,7 @@ class School(models.Model):
                     invoice_parent = student.guardian_ids.filtered(lambda g: g.invoice)[0].partner_id.id,
 
                     if not invoice_parent:
-                        raise UserError(f'El alumno {student.name} no tiene un padre al que facturar. {student.id}')
+                        raise UserError(f'El alumno {student.name} no tiene un tutor al que facturar. {student.id}')
                     elif student.enrollment_state == 'active':
                         invoices.append({
                             'move_type': 'out_invoice',

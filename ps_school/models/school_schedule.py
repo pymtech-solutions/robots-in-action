@@ -5,7 +5,7 @@ from odoo.exceptions import ValidationError
 
 class Schedule(models.Model):
     _name = 'school.schedule'
-    _description = 'Schedule'
+    _description = 'Horario'
     _order = 'name'
 
     name = fields.Char(string='Horario', compute='_compute_name', store=True)
@@ -27,7 +27,7 @@ class Schedule(models.Model):
         """ Verify that the end hour is after the start hour """
         for record in self:
             if record.start_hour and record.end_hour and record.end_hour <= record.start_hour:
-                raise ValidationError(f"End hour must be after start hour.")
+                raise ValidationError(f"La hora de fin debe ser posterior a la hora de inicio.")
 
     @api.depends('weekday')
     def _compute_weekday_name(self):

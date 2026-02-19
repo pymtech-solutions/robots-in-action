@@ -5,7 +5,7 @@ from odoo import api, fields, models
 # Nuevo modelo para gestionar movimientos de materiales
 class SchoolMaterialMovement(models.Model):
     _name = 'school.material.movement'
-    _description = 'Material Movement'
+    _description = 'Movimiento de materiales'
     _order = 'date desc, id desc'
 
     box_id = fields.Many2one(
@@ -23,7 +23,7 @@ class SchoolMaterialMovement(models.Model):
         ondelete='cascade'
     )
 
-    qty = fields.Integer(string='Cambio')
+    qty = fields.Integer(string='Cantidad')
     date = fields.Datetime(string='Fecha', default=fields.Datetime.now)
     notes = fields.Text(string='Observaciones')
 
